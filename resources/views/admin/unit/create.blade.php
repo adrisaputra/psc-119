@@ -68,8 +68,8 @@
 											<label for="address">{{ __('Peta Lokasi') }}</label>
 											<input id="pac-input" class="form-control"  style="width: 70%" type="text" placeholder="Search Box"/>
 											<div id="xmap3"></div>
-											<input type="text" name="lat" id="latclicked" class="form-control" value="{{ $lat }}" readonly>
-											<input type="text" name="long" id="longclicked" class="form-control" value="{{ $long }}" readonly>
+											<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat }}" readonly>
+											<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $long }}" readonly>
 										</div>
 										
 									</div>

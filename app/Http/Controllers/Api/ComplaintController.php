@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\BaseController;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class ComplaintController extends BaseController
@@ -77,19 +78,14 @@ class ComplaintController extends BaseController
         $complaint->status = 'request';
         $complaint->report_type = $report_type;
          
-        if ($request->file('image')) {
-            $complaint->image = time() . '.' . $request->file('image')->getClientOriginalExtension();
-
-            $request->file('image')->storeAs('public/upload/image_citizen',  $complaint->image);
-            $request->file('image')->storeAs('public/upload/image_citizen/thumbnail',  $complaint->image);
-
-            $thumbnailpath = public_path('storage/upload/image_citizen/thumbnail/' .  $complaint->image);
-            $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save($thumbnailpath);
-        }
-
+        // if($request->image){
+            $image = $request->image;  // your base64 encoded
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = Str::random(40) . '.png';
+            $complaint->image = $imageName;
+            Storage::disk('image_citizen')->put($imageName, base64_decode($image));
+        // }
 
         $complaint->coordinate_citizen = $request->coordinate_citizen;
         $complaint->save();

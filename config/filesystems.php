@@ -42,6 +42,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'image_citizen' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/image_citizen'),
+            'url' => env('APP_URL').'/storage/upload/image_citizen',
+            'visibility' => 'public',
+        ],
+
+        'photo_citizen' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/photo_citizen'),
+            'url' => env('APP_URL').'/storage/upload/photo_citizen',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

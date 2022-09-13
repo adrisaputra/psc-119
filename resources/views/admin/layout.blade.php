@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
-
 @php
-$setting = DB::table('settings')->find(1);
+$setting = SiteHelpers::setting();
 @endphp
 <!-- BEGIN: Head-->
 
@@ -136,6 +135,7 @@ $setting = DB::table('settings')->find(1);
                 <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
                     <i class="{{ $v->attribute }}"></i>
                     <span class="menu-title" data-i18n="Dashboard">{{ $v->menu_name }}</span>
+                    @if($v->menu_name == "Data Aduan")<span id="count_all"></span>@endif
                 </a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -143,7 +143,11 @@ $setting = DB::table('settings')->find(1);
                         <li>
                             <a class="{{ request()->is($x->link . '*') ? 'active' : '' }}" href="{{ url($x->link) }}">
                                 <i class="material-icons">radio_button_unchecked</i>
-                                <span data-i18n="Modern">{{ $x->sub_menu_name }}</span></a>
+                                <span data-i18n="Modern">{{ $x->sub_menu_name }}</span>
+                                @if($x->sub_menu_name == "Masuk")<span id="count_request"></span>@endif
+                                @if($x->sub_menu_name == "Proses")<span id="count_process"></span>@endif
+                                @if($x->sub_menu_name == "Terima")<span id="count_accept"></span>@endif
+                            </a>
                         </li>
                         @endforeach
                     </ul>
@@ -257,4 +261,79 @@ $setting = DB::table('settings')->find(1);
 
 </body>
 
+<script type="text/javascript">
+    function cek(){
+        
+        $.ajax({
+            url:"{{ url('/count_complaint/all') }}",
+            cache: false,
+            success: function(msg){
+                $("#count_all").html(msg);
+            }
+        });
+        var waktu = setTimeout("cek()",3000);
+    }
+
+    $(document).ready(function(){
+        cek();
+    });
+
+    function cek2(){
+        
+        $.ajax({
+            url:"{{ url('/count_complaint/request') }}",
+            cache: false,
+            success: function(msg){
+                $("#count_request").html(msg);
+                // var audio = new Audio('{{ asset("sound/audio_file.mp3") }}');
+				// audio.play();
+            }
+        });
+        var waktu = setTimeout("cek2()",3000);
+    }
+
+    $(document).ready(function(){
+        cek2();
+    });
+
+    function cek3(){
+        
+        $.ajax({
+            url:"{{ url('/count_complaint/process') }}",
+            cache: false,
+            success: function(msg){
+                $("#count_process").html(msg);
+            }
+        });
+        var waktu = setTimeout("cek3()",3000);
+    }
+
+    $(document).ready(function(){
+        cek3();
+    });
+
+    function cek4(){
+        
+        $.ajax({
+            url:"{{ url('/count_complaint/accept') }}",
+            cache: false,
+            success: function(msg){
+                $("#count_accept").html(msg);
+            }
+        });
+        var waktu = setTimeout("cek4()",3000);
+    }
+
+    $(document).ready(function(){
+        cek4();
+    });
+
+    // function play_sound() {
+    //     var audioElement = document.createElement('audio');
+    //     audioElement.setAttribute('src', '{{ asset("sound/audio_file.mp3") }}');
+    //     audioElement.setAttribute('autoplay', 'autoplay');
+    //     audioElement.load();
+    //     audioElement.play();
+    // }
+</script>
 </html>

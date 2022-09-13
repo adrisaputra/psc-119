@@ -72,8 +72,8 @@
 											@php 
 												$lat_long = explode(", ", $unit->coordinate); 
 											@endphp
-											<input type="text" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
-											<input type="text" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
+											<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
+											<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
 										</div>
 										
 									</div>

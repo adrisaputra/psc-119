@@ -50,6 +50,11 @@
 										</div>
 
 										<div class="input-field col s12">
+											<label for="email">{{ __('Email') }}</label>
+											<input type="text" id="email" name="email" value="{{ $officer->user->email }}" readonly>
+										</div>
+
+										<div class="input-field col s12">
 											<label for="phone_number">{{ __('No. HP') }} <span class="required" style="color: #dd4b39;">*</span></label>
 											<input type="text" id="phone_number" name="phone_number" value="{{ $officer->phone_number }}" style="@if ($errors->has('phone_number'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
 											@if ($errors->has('phone_number'))<small><div class="error">{{ $errors->first('phone_number') }}</div></small>@endif

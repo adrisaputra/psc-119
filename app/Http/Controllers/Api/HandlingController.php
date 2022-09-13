@@ -149,19 +149,15 @@ class HandlingController extends BaseController
             }
             $complaint->status = 'done';
             
-            if ($request->file('photo_citizen')) {
-                $complaint->photo_citizen = time() . '.' . $request->file('photo_citizen')->getClientOriginalExtension();
-
-                $request->file('photo_citizen')->storeAs('public/upload/photo_citizen',  $complaint->photo_citizen);
-                $request->file('photo_citizen')->storeAs('public/upload/photo_citizen/thumbnail',  $complaint->photo_citizen);
-
-                $thumbnailpath = public_path('storage/upload/photo_citizen/thumbnail/' .  $complaint->photo_citizen);
-                $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $img->save($thumbnailpath);
+            if($request->image){
+                $image = $request->image;  // your base64 encoded
+                $image = str_replace('data:image/png;base64,', '', $image);
+                $image = str_replace(' ', '+', $image);
+                $imageName = Str::random(40) . '.png';
+                $complaint->image = $imageName;
+                Storage::disk('photo_citizen')->put($imageName, base64_decode($image));
             }
-
+           
             $complaint->save();
 
             $handling = Handling::where('complaint_id',$request->id)->first();

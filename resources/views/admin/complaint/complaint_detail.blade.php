@@ -179,7 +179,7 @@
     
 
 <!-- Menyisipkan library Google Maps -->
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ&callback=initMap"></script>
 
 <script type="text/javascript">
 

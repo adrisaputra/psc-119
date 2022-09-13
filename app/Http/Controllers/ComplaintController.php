@@ -153,9 +153,10 @@ class ComplaintController extends Controller
 		$complaint->coordinate_citizen = $request->lat.', '.$request->long;
         $complaint->save();
 		
+        $officer = Officer::where('unit_id',$request->unit_id)->first();
         $handling = new Handling();
 		$handling->complaint_id = $uuid;
-		$handling->user_id = Auth::user()->id;
+		$handling->user_id = $officer->user_id;
         $handling->save();
 		
         activity()->log('Tambah Data Aduan');
@@ -289,5 +290,40 @@ class ComplaintController extends Controller
 
         activity()->log('Hapus Data Complaint dengan ID = '.$complaint->id);
         return redirect('/incoming_complaint')->with('status', 'Data Berhasil Dihapus');
+    }
+
+    
+	## Jumlah Data
+    public function count_data(Request $request)
+    {
+        if($request->segment(2)=="all"){
+            $complaint = Complaint::where(function($query) {
+                                $query->where('status', 'request')
+                                        ->orWhere('status', 'process')
+                                        ->orWhere('status', 'dispatch')
+                                        ->orWhere('status', 'accept');
+                            })
+                        ->count();
+        } else if($request->segment(2)=="request"){
+            $complaint = Complaint::where(function($query) {
+                                $query->where('status', 'request');
+                            })
+                        ->count();
+        } else if($request->segment(2)=="process"){
+            $complaint = Complaint::where(function($query) {
+                                $query->where('status', 'process')
+                                ->orWhere('status', 'dispatch');
+                            })
+                        ->count();
+        } else if($request->segment(2)=="accept"){
+            $complaint = Complaint::where(function($query) {
+                                $query->where('status', 'accept');
+                            })
+                        ->count();
+        }
+       
+		if($complaint>0){
+			echo "<span class='badge badge pill red float-right mr-10'>".$complaint."</span>";
+		}
     }
 }

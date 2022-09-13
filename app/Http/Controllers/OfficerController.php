@@ -54,6 +54,7 @@ class OfficerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
             'unit_id' => 'required',
@@ -61,6 +62,7 @@ class OfficerController extends Controller
 
         $user = new User();
         $user->name = $request->name;
+        $user->email = $request->email;
         $user->password = Hash::make('pass1234');
         $user->group_id = 3;
         $user->status = 'active';
