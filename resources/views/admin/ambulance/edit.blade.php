@@ -44,9 +44,9 @@
 									<div class="col s12">
 										
 										<div class="input-field col s12">
-											<label for="name">{{ __('Nama') }} <span class="required" style="color: #dd4b39;">*</span></label>
-											<input type="text" id="name" name="name" value="{{ $ambulance->name }}" style="@if ($errors->has('name'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
-											@if ($errors->has('name'))<small><div class="error">{{ $errors->first('name') }}</div></small>@endif
+											<label for="police_number">{{ __('No. Plat') }} <span class="required" style="color: #dd4b39;">*</span></label>
+											<input type="text" id="police_number" name="police_number" value="{{ $ambulance->police_number }}" style="@if ($errors->has('police_number'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
+											@if ($errors->has('police_number'))<small><div class="error">{{ $errors->first('police_number') }}</div></small>@endif
 										</div>
 
 										<div class="input-field col s12">

@@ -46,7 +46,7 @@
 												<th style="background-color: #2196f3;color:white;width: 20%" colspan=3><center>DETAIL PETUGAS</center></th>
 											</tr>
 											<tr>
-												<th style="background-color: #9e9e9e;color:white;width: 20%";>Fayankes</th>
+												<th style="background-color: #9e9e9e;color:white;width: 20%";>Petugas/Unit</th>
 												<th style="background-color: #9e9e9e;color:white;width: 20%";>Status</th>
 												<th style="background-color: #9e9e9e;color:white;width: 60%";>Keterangan</th>
 											</tr>
@@ -161,15 +161,37 @@
 				<div class="modal-footer">
 					<button type="submit" class="mb-12 btn waves-effect waves-light green darken-1 btn-small ">Beri Penugasan</button>
 				</div>
+				</form>
                </div>
+		
+			<div id="modal2" class="modal">
+				<form action="{{ url('/'.Request::segment(1).'/reject/'.Crypt::encrypt($complaint->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+				{{ csrf_field() }}
+					<input type="hidden" name="_method" value="PUT">
+
+					<div class="modal-content">
+
+						<div class="input-field col s12">
+							<span>Masukkan Alasan</span>
+							<textarea class="materialize-textarea" name="reason" required></textarea>
+						</div><br><br><br><br>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="mb-12 btn waves-effect waves-light green darken-1 btn-small ">Kirim</button>
+						<a href="#!" class="mb-12 btn waves-effect waves-light red darken-1 btn-small modal-close">Batal</a>
+					</div>
+				</form>
+			</div>
 
 			<div style="bottom: 90px; right: 19px;" class="fixed-action-btn direction-top">
 				<a href="#modal1" class="btn-floating btn-large waves-effect waves-light green darken-2 btn modal-trigger">Proses</a>
-				<button type="submit" class="btn-floating btn-large waves-effect waves-light red darken-2">Tolak</button>
+				<a href="#modal2" class="btn-floating btn-large waves-effect waves-light red darken-2 btn modal-trigger">Tolak</button>
 				<a href="{{ url('/'.Request::segment(1)) }}" class="btn-floating btn-large waves-effect waves-light yellow darken-2"><i class="material-icons">arrow_back</i></a>
 			</div>
           </div>
-		</form>
+		
+
+
           <div class="content-overlay"></div>
         </div>
       </div>

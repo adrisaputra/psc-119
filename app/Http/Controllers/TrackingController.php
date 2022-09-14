@@ -25,4 +25,14 @@ class TrackingController extends Controller
         $complaint = Complaint::orderBy('id','DESC')->get();
         return view('admin.tracking.index',compact('title','complaint'));
     }
+
+    ## Tampikan Data
+    public function detail($complaint)
+    {
+        
+        $title = "Detail Traking Lokasi";
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+        return view('admin.tracking.detail',compact('title','complaint'));
+    }
 }

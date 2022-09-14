@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Village;
+use App\Models\Subdistrict;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VillageController extends BaseController
+class SubdistrictController extends BaseController
 {
     // public function __construct()
     // {
@@ -23,7 +23,7 @@ class VillageController extends BaseController
     
     public function index(Request $request)
     {
-        $village   = Village::where('subdistrict_id', $request->subdistrict_id)->get();
-        return $this->sendResponse($village, 'Data Kelurahan', $request->lang);
+        $subdistrict   = Subdistrict::get();
+        return $this->sendResponse($subdistrict, 'Data Kecamatan', $request->lang);
     }
 }

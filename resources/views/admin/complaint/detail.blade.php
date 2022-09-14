@@ -46,7 +46,7 @@
 												<th style="background-color: #2196f3;color:white;width: 20%" colspan=3><center>DETAIL PETUGAS</center></th>
 											</tr>
 											<tr>
-												<th style="background-color: #9e9e9e;color:white;width: 20%";>Fayankes</th>
+												<th style="background-color: #9e9e9e;color:white;width: 20%";>Petugas/Unit</th>
 												<th style="background-color: #9e9e9e;color:white;width: 20%";>Status</th>
 												<th style="background-color: #9e9e9e;color:white;width: 60%";>Keterangan</th>
 											</tr>
@@ -135,6 +135,12 @@
 											<tr>
 												<th style="background-color: #2196f3;color:white;width: 20%" colspan=2><center>DETAIL PENGADUAN</center></th>
 											</tr>
+											@if($complaint->status=="reject" )
+											<tr>
+												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Alasan Ditolak</th>
+												<th style="width: 80%">{{ $complaint->reason }}</th>
+											</tr>
+											@endif
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Jenis Aduan</th>
 												<th style="width: 80%">
@@ -212,7 +218,7 @@
 
 	function initialize_map() {
 
-	var myLatlng = new google.maps.LatLng(-5.458301015235267, 122.615936364176);
+	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
 	var myOptions = {
 		zoom: 14,
 		center: myLatlng,
@@ -220,7 +226,7 @@
 	map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
 		
 	// Marker 1	
-	var myLatlng = new google.maps.LatLng(-5.458301015235267, 122.615936364176);
+	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
 
 	var pinColor = "#4caf50";
     var pinLabel = "A";
@@ -257,8 +263,8 @@
             {
                url: "{{ url('/detail_peta/') }}", 
                success: function(result){
-				      $("#detail-modal").html(result);
-			      }
+				$("#detail-modal").html(result);
+			}
             })
 		});
 

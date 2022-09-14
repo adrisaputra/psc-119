@@ -12,7 +12,7 @@
      @csrf
     
       <div class="row margin">
-      <center><img src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Chris Wood" class="img-fluid" style="height: 90px;max-width: 110%;max-height: 100%;margin-top:15px;pxmargin-bottom:15px" ></center>
+      <center><img src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Chris Wood" class="img-fluid" style="height: 90px;max-width: 110%;max-height: 100%;margin-top:40px;margin-bottom:15px" ></center>
           
         @if ($message = Session::get('status'))
             <div class="card-alert card green">

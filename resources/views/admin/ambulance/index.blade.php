@@ -64,7 +64,7 @@
 									<thead>
 										<tr style="background-color: gray;color:white;border: 1px solid #f4f4f4;">
 											<th style="width: 60px">No</th>
-											<th>Nama</th>
+											<th>No. Plat</th>
 											<th>Petugas</th>
 											<th>Puskesmas</th>
 											<th style="width: 25%">#Aksi</th>
@@ -74,7 +74,7 @@
 										@foreach($ambulance as $v)
 										<tr>
 											<td>{{ ($ambulance ->currentpage()-1) * $ambulance ->perpage() + $loop->index + 1 }}</td>
-											<td>{{ $v->name }}</td>
+											<td>{{ $v->police_number }}</td>
 											<td>{{ $v->officer->name }}</td>
 											<td>{{ $v->unit->name }}</td>
 											<td>

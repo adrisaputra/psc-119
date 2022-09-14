@@ -89,16 +89,16 @@ $setting = SiteHelpers::setting();
 
 	function initialize_map() {
 
-	var myLatlng = new google.maps.LatLng(-5.4856429306487176, 122.58496969552637);
+	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_officer }});
 	var myOptions = {
-		zoom: 13,
+		zoom: 16,
 		center: myLatlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP }
 	map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
 		
-	@foreach($complaint as $v)
+	//
 	// Marker 1	
-	var myLatlng = new google.maps.LatLng({{ $v->coordinate_citizen }});
+	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
 
 	var pinColor = "#63cbf2";
     var pinLabel = "A";
@@ -122,19 +122,19 @@ $setting = SiteHelpers::setting();
 		
 	};
 
-	@if($v->report_type=='emergency')
+	@if($complaint->report_type=='emergency')
 
-		@if($v->status=='process' || $v->status=='dispatch' || $v->status=='accept')
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Kuning).png') }}',
 				scaledSize : new google.maps.Size(30, 50),
 			};
-		@elseif($v->status=='done')
+		@elseif($complaint->status=='done')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Hijau).png') }}',
 				scaledSize : new google.maps.Size(30, 50),
 			};
-		@elseif($v->status=='request')
+		@elseif($complaint->status=='request')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Merah).png') }}',
 				scaledSize : new google.maps.Size(30, 50),
@@ -143,18 +143,18 @@ $setting = SiteHelpers::setting();
 
 	@endif
 
-	@if($v->report_type=='complaint')
-		@if($v->status=='process' || $v->status=='dispatch' || $v->status=='accept')
+	@if($complaint->report_type=='complaint')
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Kuning).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
 			};
-		@elseif($v->status=='done')
+		@elseif($complaint->status=='done')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Hijau).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
 			};
-		@elseif($v->status=='request')
+		@elseif($complaint->status=='request')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Merah).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
@@ -162,18 +162,18 @@ $setting = SiteHelpers::setting();
 		@endif
 	@endif
 
-	@if($v->report_type=='phone')
-		@if($v->status=='process' || $v->status=='dispatch' || $v->status=='accept')
+	@if($complaint->report_type=='phone')
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Kuning).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
 			};
-		@elseif($v->status=='done')
+		@elseif($complaint->status=='done')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Hijau).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
 			};
-		@elseif($v->status=='request')
+		@elseif($complaint->status=='request')
 			var image = {
 				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Merah Baru).png') }}',
 				scaledSize : new google.maps.Size(30, 30),
@@ -189,15 +189,118 @@ $setting = SiteHelpers::setting();
 		//icon: markerImage,
 		icon: image,
 		scaledSize: new google.maps.Size(50, 50), // scaled size
-       	 animation: google.maps.Animation.BOUNCE,
+       	//  animation: google.maps.Animation.BOUNCE,
 	};
 	marker_0 = createMarker_map(markerOptions);
 
 		google.maps.event.addListener(marker_0, "click", function(event) {
-			window.location.href = "{{ url('/detail_tracking/') }}/{{ Crypt::encrypt($v->id) }}";
+			window.location.href = "{{ url('/detail_tracking/') }}/{{ Crypt::encrypt($complaint->id) }}";
 		});
 
-	@endforeach
+	//	
+	//
+
+	// Marker 2	
+	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_officer }});
+
+	var pinColor = "#63cbf2";
+    var pinLabel = "A";
+
+    // Pick your pin (hole or no hole)
+    var pinSVGHole = "M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z";
+    var labelOriginHole = new google.maps.Point(12,15);
+    var pinSVGFilled = "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z";
+    var labelOriginFilled =  new google.maps.Point(12,9);
+
+
+	var markerImage = {  // https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerLabel
+		path: pinSVGHole,
+		anchor: new google.maps.Point(12,25),
+		fillOpacity: 1,
+		fillColor: pinColor,
+		strokeWeight: 2,
+		strokeColor: "white",
+		scale: 2,
+		labelOrigin: new google.maps.Point(12,30),
+		
+	};
+
+	@if($complaint->report_type=='emergency')
+
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Kuning).png') }}',
+				scaledSize : new google.maps.Size(30, 50),
+			};
+		@elseif($complaint->status=='done')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Hijau).png') }}',
+				scaledSize : new google.maps.Size(30, 50),
+			};
+		@elseif($complaint->status=='request')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Button Emergency (Merah).png') }}',
+				scaledSize : new google.maps.Size(30, 50),
+			};
+		@endif
+
+	@endif
+
+	@if($complaint->report_type=='complaint')
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Kuning).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@elseif($complaint->status=='done')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Hijau).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@elseif($complaint->status=='request')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Laporan Aduan (Merah).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@endif
+	@endif
+
+	@if($complaint->report_type=='phone')
+		@if($complaint->status=='process' || $complaint->status=='dispatch' || $complaint->status=='accept')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Kuning).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@elseif($complaint->status=='done')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Hijau).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@elseif($complaint->status=='request')
+			var image = {
+				url: '{{ asset('images/icon_aduan/Icon Telpon Langsung (Merah Baru).png') }}',
+				scaledSize : new google.maps.Size(30, 30),
+			};
+		@endif
+	@endif
+
+    	
+    
+	var markerOptions = {
+		map: map,
+		position: myLatlng,
+		//icon: markerImage,
+		icon: image,
+		scaledSize: new google.maps.Size(50, 50), // scaled size
+       	//  animation: google.maps.Animation.BOUNCE,
+	};
+	marker_0 = createMarker_map(markerOptions);
+
+		google.maps.event.addListener(marker_0, "click", function(event) {
+			window.location.href = "{{ url('/detail_tracking/') }}/{{ Crypt::encrypt($complaint->id) }}";
+		});
+
+	//
 
 	}
 

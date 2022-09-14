@@ -192,6 +192,7 @@ class ComplaintController extends Controller
         ]);
 
         $complaint->fill($request->all());
+		$complaint->coordinate_citizen = $request->lat.', '.$request->long;
     	$complaint->save();
 		
         activity()->log('Ubah Data Aduan dengan ID = '.$complaint->id);
@@ -218,10 +219,14 @@ class ComplaintController extends Controller
                 $view=view('admin.complaint.complaint_detail', compact('title','complaint','category','unit','get_unit','officer','handling','switch_officer'));
             } else if($complaint->report_type=="emergency"){
                 $view=view('admin.complaint.emergency_detail', compact('title','complaint','category','unit','lat', 'long','get_unit','officer','handling','switch_officer'));
+            }else if($complaint->report_type=="phone"){
+                $view=view('admin.complaint.emergency_detail', compact('title','complaint','category','unit','lat', 'long','get_unit','officer','handling','switch_officer'));
             }
         }else if($request->segment(1)=="process_complaint"){
             $view=view('admin.complaint.detail', compact('title','complaint','category','get_unit','officer','handling','switch_officer'));
         }else if($request->segment(1)=="accept_complaint"){
+            $view=view('admin.complaint.detail', compact('title','complaint','category','get_unit','officer','handling','switch_officer'));
+        }else if($request->segment(1)=="reject_complaint"){
             $view=view('admin.complaint.detail', compact('title','complaint','category','get_unit','officer','handling','switch_officer'));
         }else if($request->segment(1)=="done_complaint"){
             $view=view('admin.complaint.detail', compact('title','complaint','category','get_unit','officer','handling','switch_officer'));
@@ -255,7 +260,7 @@ class ComplaintController extends Controller
             activity()->log('Proses Data Aduan dengan ID = '.$complaint->id);
             return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
 
-        } else if($complaint->report_type=="emergency"){
+        } else if($complaint->report_type=="emergency" || $complaint->report_type=="phone"){
             
             $this->validate($request, [
                 'incident_area' => 'required',
@@ -281,6 +286,22 @@ class ComplaintController extends Controller
         
     }
 
+    ## Edit Data
+    public function reject(Request $request, $complaint)
+    {
+        
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+
+        $complaint->fill($request->all());
+        $complaint->status = 'reject';
+        $complaint->reason = $request->reason;
+    	$complaint->save();
+		
+        activity()->log('Ubah Data Aduan dengan ID = '.$complaint->id);
+		return redirect('/incoming_complaint')->with('status', 'Data Berhasil Ditolak');
+    }
+
     ## Hapus Data
     public function delete($complaint)
     {
@@ -297,22 +318,37 @@ class ComplaintController extends Controller
     public function count_data(Request $request)
     {
         if($request->segment(2)=="all"){
-            $complaint = Complaint::where(function($query) {
-                                $query->where('status', 'request')
-                                        ->orWhere('status', 'process')
-                                        ->orWhere('status', 'dispatch')
-                                        ->orWhere('status', 'accept');
+            // $complaint = Complaint::where(function($query) {
+            //                     $query->where('status', 'request')
+            //                             ->orWhere('status', 'process')
+            //                             ->orWhere('status', 'dispatch')
+            //                             ->orWhere('status', 'accept');
+            //                 })
+            //             ->count();
+            $complaint1 = Complaint::where(function($query) {
+                                $query->where('status', 'request');
                             })
                         ->count();
+            $complaint2 = Complaint::where(function($query) {
+                                $query->where('status', 'process')
+                                ->orWhere('status', 'dispatch');
+                            })
+                        ->count();
+            $complaint3 = Complaint::where(function($query) {
+                                $query->where('status', 'accept');
+                            })
+                        ->count();
+            $complaint = $complaint1 +$complaint2 +$complaint3;
+
         } else if($request->segment(2)=="request"){
             $complaint = Complaint::where(function($query) {
-                                $query->where('status', 'request');
+                                $query->where('status', 'request')
+                                ->orWhere('status', 'dispatch');
                             })
                         ->count();
         } else if($request->segment(2)=="process"){
             $complaint = Complaint::where(function($query) {
-                                $query->where('status', 'process')
-                                ->orWhere('status', 'dispatch');
+                                $query->where('status', 'process');
                             })
                         ->count();
         } else if($request->segment(2)=="accept"){
@@ -322,8 +358,19 @@ class ComplaintController extends Controller
                         ->count();
         }
        
-		if($complaint>0){
-			echo "<span class='badge badge pill red float-right mr-10'>".$complaint."</span>";
-		}
+		// if($complaint>0){
+        //     if($request->segment(2)=="request"){
+        //         echo "<span class='badge badge pill red float-right mr-10 pulse'>".$complaint."</span>";
+        //     }else if($request->segment(2)=="all"){
+        //         if($complaint1 > 0){
+        //             echo "<span class='badge badge pill red float-right mr-10 pulse'>".$complaint."</span>";
+        //         } else {
+        //             echo "<span class='badge badge pill red float-right mr-10'>".$complaint."</span>";
+        //         }
+        //     } else {
+        //         echo "<span class='badge badge pill red float-right mr-10'>".$complaint."</span>";
+        //     }
+		// }
+        return $complaint;
     }
 }

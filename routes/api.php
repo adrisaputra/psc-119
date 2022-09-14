@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ResourceController;
 use App\Http\Controllers\Api\ComplaintController;
 use App\Http\Controllers\Api\HandlingController;
 use App\Http\Controllers\Api\AnnouncementController;
+use App\Http\Controllers\Api\SubdistrictController;
 use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
@@ -78,6 +79,10 @@ Route::controller(AnnouncementController::class)->group(function() {
 
 Route::controller(VillageController::class)->group(function() {
     Route::get('village', 'index');
+});
+
+Route::controller(SubdistrictController::class)->group(function() {
+    Route::get('subdistrict', 'index');
 });
 
 Route::controller(UnitController::class)->group(function() {

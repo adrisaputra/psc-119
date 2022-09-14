@@ -111,12 +111,31 @@
 														<a class="mb-12 btn waves-effect waves-light orange darken-1 btn-small btn-block" href="{{ url('/'.Request::segment(1).'/edit/'.Crypt::encrypt($v->id) ) }}"style="margin-top:5px">Edit</a>
 													@endcan
 													@can('hapus-data')
-														<a class="mb-12 btn waves-effect waves-light red darken-1 btn-small btn-block" href="{{ url('/'.Request::segment(1).'/hapus/'.Crypt::encrypt($v->id) ) }}" style="margin-top:5px" onclick="return confirm('Apakah anda yakin akan menghapus data ini ?');">Hapus</a>
+														<a class="mb-12 btn waves-effect waves-light red darken-1 btn-small btn-block modal-trigger" href="#modal{{ $v->id }}" style="margin-top:5px">Tolak</a>
 													@endcan
 												</div>
 											</td>
 										</tr>
 	
+										
+										<div id="modal{{ $v->id }}" class="modal">
+											<form action="{{ url('/'.Request::segment(1).'/reject/'.Crypt::encrypt($v->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+											{{ csrf_field() }}
+											<input type="hidden" name="_method" value="PUT">
+
+											<div class="modal-content">
+
+												<div class="input-field col s12">
+													<span>Masukkan Alasan</span>
+													<textarea class="materialize-textarea" name="reason" required></textarea>
+												</div><br><br><br><br>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="mb-12 btn waves-effect waves-light green darken-1 btn-small ">Kirim</button>
+												<a href="#!" class="mb-12 btn waves-effect waves-light red darken-1 btn-small modal-close">Batal</a>
+											</div>
+											</form>
+										</div>
 	
 										@endforeach
 									</tbody>

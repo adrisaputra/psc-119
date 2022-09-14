@@ -9,6 +9,8 @@ use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HandlingController;
 use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\SettingController;
@@ -58,9 +60,11 @@ if (file_exists(app_path('Http/Controllers/LocalizationController.php')))
     Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class , 'lang']);
 }
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
+Route::get('/', [LoginController::class, 'index']);
 
 Route::get('phpmyinfo', function () {
     phpinfo(); 
@@ -96,25 +100,30 @@ Route::middleware(['user_access'])->group(function () {
     Route::put('/incoming_complaint/process/{complaint}', [ComplaintController::class, 'process']);
     Route::get('/incoming_complaint/edit/{complaint}', [ComplaintController::class, 'edit']);
     Route::put('/incoming_complaint/edit/{complaint}', [ComplaintController::class, 'update']);
+    Route::put('/incoming_complaint/reject/{complaint}', [ComplaintController::class, 'reject']);
     Route::get('/incoming_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
 
     ## Aduan diproses
     Route::get('/process_complaint', [ComplaintController::class, 'index']);
     Route::get('/process_complaint/search', [ComplaintController::class, 'search']);
+    // Route::get('/process_complaint/edit/{complaint}', [ComplaintController::class, 'edit']);
+    // Route::put('/process_complaint/edit/{complaint}', [ComplaintController::class, 'update']);
     Route::get('/process_complaint/detail/{complaint}', [ComplaintController::class, 'detail']);
-    Route::get('/process_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
+    // Route::get('/process_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
 
     ## Aduan diterima
     Route::get('/accept_complaint', [ComplaintController::class, 'index']);
     Route::get('/accept_complaint/search', [ComplaintController::class, 'search']);
+    // Route::get('/accept_complaint/edit/{complaint}', [ComplaintController::class, 'edit']);
+    // Route::put('/accept_complaint/edit/{complaint}', [ComplaintController::class, 'update']);
     Route::get('/accept_complaint/detail/{complaint}', [ComplaintController::class, 'detail']);
-    Route::get('/accept_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
+    // Route::get('/accept_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
 
     ## Aduan ditolak
     Route::get('/reject_complaint', [ComplaintController::class, 'index']);
     Route::get('/reject_complaint/search', [ComplaintController::class, 'search']);
     Route::get('/reject_complaint/detail/{complaint}', [ComplaintController::class, 'detail']);
-    Route::get('/reject_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
+    // Route::get('/reject_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
 
     ## Aduan diselesai
     Route::get('/done_complaint', [ComplaintController::class, 'index']);
@@ -124,6 +133,13 @@ Route::middleware(['user_access'])->group(function () {
 
     ## Tracking
     Route::get('/tracking', [TrackingController::class, 'index']);
+
+    ## Grafik
+    Route::get('/chart', [ChartController::class, 'index']);
+    Route::get('/chart/search', [ChartController::class, 'search']);
+
+    ## Report
+    Route::get('/report', [ReportController::class, 'index']);
 
     ## Kecamatan
     Route::get('/subdistrict', [SubdistrictController::class, 'index']);
@@ -234,6 +250,9 @@ Route::middleware(['cek_status'])->group(function () {
     ## Penanganan
     Route::get('/handling/{complaint}', [HandlingController::class, 'edit']);
     Route::put('/handling/{complaint}', [HandlingController::class, 'update']);
+
+    ## Detail Tracking
+    Route::get('/detail_tracking/{complaint}', [TrackingController::class, 'detail']);
 
     ## Kelurahan
     Route::get('/village/{subdistrict}', [VillageController::class, 'index']);

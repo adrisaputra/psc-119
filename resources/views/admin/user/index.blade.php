@@ -91,7 +91,7 @@
 																@endif
 															</td>
 															<td>
-																@if ($v->status==1)
+																@if ($v->status=="active")
 																<span class="new badge green" data-badge-caption="Aktif"></span>
 																@else
 																<span class="new badge red" data-badge-caption="TidakAktif"></span>

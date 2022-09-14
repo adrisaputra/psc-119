@@ -57,7 +57,7 @@ class OfficerController extends Controller
             'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
-            'unit_id' => 'required',
+            'unit_id' => 'required|unique:officers',
         ]);
 
         $user = new User();
@@ -104,7 +104,7 @@ class OfficerController extends Controller
             'name' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
-            'unit_id' => 'required',
+            'unit_id' => 'required|unique:officers',
         ]);
 
 
@@ -127,7 +127,8 @@ class OfficerController extends Controller
         $officer = Officer::where('id',$officer)->first();
     	$officer->delete();
         
-        $user = User::where('id',$officer->user_id)->first();
+        // $user = User::where('id',$officer->user_id)->first();
+        $user = User::find($officer->user_id);
     	$user->delete();
 
         activity()->log('Hapus Data Officer dengan ID = '.$officer->id);

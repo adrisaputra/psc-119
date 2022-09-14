@@ -24,6 +24,7 @@ class Complaint extends Model
         'image',
         'photo_citizen',
         'description',
+        'reason',
         'report_type',
         'handling_status',
         'reference_place'

@@ -9,7 +9,7 @@ class Ambulance extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'name',
+        'police_number',
         'officer_id',
         'unit_id'
     ];

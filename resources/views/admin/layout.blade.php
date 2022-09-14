@@ -146,7 +146,7 @@ $setting = SiteHelpers::setting();
                                 <span data-i18n="Modern">{{ $x->sub_menu_name }}</span>
                                 @if($x->sub_menu_name == "Masuk")<span id="count_request"></span>@endif
                                 @if($x->sub_menu_name == "Proses")<span id="count_process"></span>@endif
-                                @if($x->sub_menu_name == "Terima")<span id="count_accept"></span>@endif
+                                @if($x->sub_menu_name == "Dalam Penanganan")<span id="count_accept"></span>@endif
                             </a>
                         </li>
                         @endforeach
@@ -262,71 +262,99 @@ $setting = SiteHelpers::setting();
 </body>
 
 <script type="text/javascript">
-    function cek(){
+    function cek1(){
+        url = "{{ url('/count_complaint/all') }}" ;
+        $.get(url, function(data, status){
         
-        $.ajax({
-            url:"{{ url('/count_complaint/all') }}",
-            cache: false,
-            success: function(msg){
-                $("#count_all").html(msg);
-            }
-        });
-        var waktu = setTimeout("cek()",3000);
-    }
+        data = JSON.parse(data);
+        if( data > 0 )
+            options = '<span class="badge badge pill red float-right mr-10">'+data+'</span>';
+        else
+            options = '';
+        $("#count_all").html( options );
+        setTimeout(function(){
+            cek1();
+        }, 7000);
 
-    $(document).ready(function(){
-        cek();
-    });
+        });
+    }
+    cek1();
 
     function cek2(){
+        url = "{{ url('/count_complaint/request') }}" ;
+        $.get(url, function(data, status){
         
-        $.ajax({
-            url:"{{ url('/count_complaint/request') }}",
-            cache: false,
-            success: function(msg){
-                $("#count_request").html(msg);
-                // var audio = new Audio('{{ asset("sound/audio_file.mp3") }}');
-				// audio.play();
-            }
-        });
-        var waktu = setTimeout("cek2()",3000);
-    }
+        data = JSON.parse(data);
+        if( data > 0 )
+            options = '<span class="badge badge pill red float-right mr-10 pulse">'+data+'</span>';
+        else
+            options = '';
+        $("#count_request").html( options );
+        setTimeout(function(){
+            cek2();
+        }, 7000);
 
-    $(document).ready(function(){
-        cek2();
-    });
+        });
+    }
+    cek2();
 
     function cek3(){
+        url = "{{ url('/count_complaint/process') }}" ;
+        $.get(url, function(data, status){
         
-        $.ajax({
-            url:"{{ url('/count_complaint/process') }}",
-            cache: false,
-            success: function(msg){
-                $("#count_process").html(msg);
-            }
-        });
-        var waktu = setTimeout("cek3()",3000);
-    }
+        data = JSON.parse(data);
+        if( data > 0 )
+            options = '<span class="badge badge pill red float-right mr-10">'+data+'</span>';
+        else
+            options = '';
+        $("#count_process").html( options );
+        setTimeout(function(){
+            cek3();
+        }, 7000);
 
-    $(document).ready(function(){
-        cek3();
-    });
+        });
+    }
+    cek3();
 
     function cek4(){
+        url = "{{ url('/count_complaint/accept') }}" ;
+        $.get(url, function(data, status){
         
-        $.ajax({
-            url:"{{ url('/count_complaint/accept') }}",
-            cache: false,
-            success: function(msg){
-                $("#count_accept").html(msg);
-            }
-        });
-        var waktu = setTimeout("cek4()",3000);
-    }
+        data = JSON.parse(data);
+        if( data > 0 )
+            options = '<span class="badge badge pill red float-right mr-10">'+data+'</span>';
+        else
+            options = '';
+        $("#count_accept").html( options );
+        setTimeout(function(){
+            cek4();
+        }, 7000);
 
-    $(document).ready(function(){
-        cek4();
-    });
+        });
+    }
+    cek4();
+
+    function cek5(){
+        url = "{{ url('/count_complaint/request') }}" ;
+        segment = "{{ Request::segment(1) }}";
+        $.get(url, function(data, status){
+        
+        data = JSON.parse(data);
+        if(data > 0){
+            if(segment!="incoming_complaint"){
+                var audio = new Audio("{{ asset("sound/audio_file3.mp3") }}");
+                audio.play();
+                console.log(data);
+            }
+        }
+        
+        setTimeout(function(){
+            cek5();
+        }, 16500);
+
+        });
+    }
+    cek5();
 
     // function play_sound() {
     //     var audioElement = document.createElement('audio');

@@ -33,7 +33,7 @@ class AmbulanceController extends Controller
     {
         $title = "Ambulance";
         $ambulance = $request->get('search');
-        $ambulance = Ambulance::where('name', 'LIKE', '%'.$ambulance.'%')
+        $ambulance = Ambulance::where('police_number', 'LIKE', '%'.$ambulance.'%')
                 ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         
         return view('admin.ambulance.index',compact('title','ambulance'));
@@ -53,12 +53,12 @@ class AmbulanceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'unit_id' => 'required',
+            'police_number' => 'required',
+            'unit_id' => 'required|unique:ambulances',
             'officer_id' => 'required',
         ]);
 
-		$input['name'] = $request->name;
+		$input['police_number'] = $request->police_number;
 		$input['unit_id'] = $request->unit_id;
 		$input['officer_id'] = $request->officer_id;
 		
@@ -89,12 +89,13 @@ class AmbulanceController extends Controller
         $ambulance = Ambulance::where('id',$ambulance)->first();
 
         $this->validate($request, [
-            'ambulance_name' => 'required',
+            'police_number' => 'required',
+            'unit_id' => 'required|unique:ambulances',
+            'officer_id' => 'required',
         ]);
 
+
         $ambulance->fill($request->all());
-        
-		$ambulance->user_id = Auth::user()->id;
     	$ambulance->save();
 		
         activity()->log('Ubah Data Ambulance dengan ID = '.$ambulance->id);

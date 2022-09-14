@@ -43,13 +43,13 @@
 									<p style="text-align:center;font-size:20px;font-weight:bold">Edit {{ __($title) }}</p>
 									<div class="col s12">
 
-									<div class="input-field col s12">
+									<div class="input-field col s6">
 											<label for="name">{{ __('Nama Penelepon') }} <span class="required" style="color: #dd4b39;">*</span></label>
 											<input type="text" id="name" name="name" value="{{ $complaint->name }}" style="@if ($errors->has('name'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
 											@if ($errors->has('name'))<small><div class="error">{{ $errors->first('name') }}</div></small>@endif
 										</div>
 
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<label for="phone_number">{{ __('No. Telepon') }} <span class="required" style="color: #dd4b39;">*</span></label>
 											<input type="text" id="phone_number" name="phone_number" value="{{ $complaint->phone_number }}" style="@if ($errors->has('phone_number'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
 											@if ($errors->has('phone_number'))<small><div class="error">{{ $errors->first('phone_number') }}</div></small>@endif
@@ -82,10 +82,10 @@
 											<input id="pac-input" class="form-control"  style="width: 70%" type="text" placeholder="Search Box"/>
 											<div id="xmap3"></div>
 											@php 
-												$lat_long = explode(", ", $unit->coordinate); 
+												$lat_long = explode(", ", $complaint->coordinate_citizen); 
 											@endphp
-											<input type="text" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
-											<input type="text" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
+											<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
+											<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
 										</div>
 
 									</div>
