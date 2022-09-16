@@ -16,6 +16,8 @@ class Setting extends Model
         'background_login',
         'background_sidebar',
         'gmaps_key',
+        'psc_call_number',
+        'time_refresh_tracking',
         'layout',
         'skin',
         'user_id'

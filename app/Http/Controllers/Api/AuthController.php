@@ -22,7 +22,7 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->where('status','active')->where('group_id',6)->first();
         if ($user && Hash::check($request->password, $user->password)) {
             // check if account is not active
             if ($user->status != 'active') {
@@ -32,6 +32,37 @@ class AuthController extends BaseController
             // update token if expired
             $this->updateToken($user);
 
+            $user = User::select('users.id','users.name','email','email_verified_at','phone_number','address','nik',
+                            'subdistrict_id','village_id','group_id','status','photo','api_token','api_expired','users.created_at','users.updated_at')
+                ->join('citizens', 'citizens.user_id', '=', 'users.id')
+                ->where('email' , $request->email)
+                ->first();   
+                
+            return $this->sendResponse($user, 'User Login', $request->lang);
+
+        } else {
+            return $this->sendError('Unauthorized', ['error' => 'Account Unauthorized or not registered'], 401, $request->lang);
+        }
+    }
+
+    public function login_officer(Request $request)
+    {
+        $user = User::where('email', $request->email)->where('status','active')->where('group_id',3)->first();
+        if ($user && Hash::check($request->password, $user->password)) {
+            // check if account is not active
+            if ($user->status != 'active') {
+                return $this->sendError('Unauthorized', ['error' => 'Account blocked by system'], 401, $request->lang);
+            }
+
+            // update token if expired
+            $this->updateToken($user);
+
+            $user = User::select('users.id','users.name','email','email_verified_at','phone_number','address','nik',
+                            'subdistrict_id','village_id','group_id','status','photo','api_token','api_expired','users.created_at','users.updated_at')
+                ->join('citizens', 'citizens.user_id', '=', 'users.id')
+                ->where('email' , $request->email)
+                ->first();    
+                
             return $this->sendResponse($user, 'User Login', $request->lang);
 
         } else {
@@ -55,6 +86,7 @@ class AuthController extends BaseController
             'password' => 'required|min:8',
             'nik' => 'required|unique:citizens|numeric|digits:16',
             'village_id' => 'required',
+            'subdistrict_id' => 'required',
         ]);
 
         // return message if validation not passed
@@ -97,6 +129,7 @@ class AuthController extends BaseController
         $citizen->phone_number = $request->phone_number;
         $citizen->address = $request->address;
         $citizen->nik = $request->nik;
+        $citizen->subdistrict_id = $request->subdistrict_id;
         $citizen->village_id = $request->village_id;
         $citizen->user_id = $user->id;
         $citizen->save();

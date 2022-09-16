@@ -146,9 +146,12 @@
 												<th style="width: 80%">
 													@if ($complaint->report_type=="emergency")
 														<span class="new badge red" data-badge-caption="Darurat"></span>
+													@elseif ($complaint->report_type=="phone")
+														<span class="new badge cyan" data-badge-caption="Telepon"></span>
 													@else
 														<span class="new badge green" data-badge-caption="Aduan"></span>
-													@endif</th>
+													@endif
+												</th>
 											</tr>
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Nama</th>

@@ -33,8 +33,8 @@ class ProfileController extends BaseController
     public function profile(Request $request)
     {
         $user = User::where('email' , $request->email)->where('api_token', $request->header('token'))->first();   
-        $user = DB::table('users')
-                ->select('*')
+        $user = User::select('users.id','users.name','email','email_verified_at','phone_number','address','nik',
+                            'subdistrict_id','village_id','group_id','status','photo','api_token','api_expired','users.created_at','users.updated_at')
                 ->join('citizens', 'citizens.user_id', '=', 'users.id')
                 ->where('email' , $request->email)->where('api_token', $request->header('token'))
                 ->first();   

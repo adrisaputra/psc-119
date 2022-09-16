@@ -81,9 +81,9 @@
 											<td>{{ $v->address }}</td>
 											<td>
 												@if($v->status=="available")
-													<span class="new badge green" data-badge-caption="Aktif"></span>
+													<span class="new badge green" data-badge-caption="Tersedia"></span>
 												@else
-													<span class="new badge red" data-badge-caption="TidakAktif"></span>
+													<span class="new badge red" data-badge-caption="Tidak Tersedia"></span>
 												@endif
 											</td>
 											<td>{{ $v->unit->name }}</td>

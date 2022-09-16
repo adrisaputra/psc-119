@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\SubdistrictController;
 use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
+use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function() {
     Route::post('login', 'login');
+    Route::post('login_officer', 'login_officer');
     Route::post('register', 'register');
     Route::post('reset_password', 'reset_password');
     Route::get('language', 'language');
@@ -91,4 +93,10 @@ Route::controller(UnitController::class)->group(function() {
 
 Route::controller(UnitServiceController::class)->group(function() {
     Route::get('medical_service', 'index');
+});
+
+Route::controller(SettingController::class)->group(function() {
+    Route::get('setting', 'index');
+    Route::get('psc_call_number', 'psc_call_number');
+    Route::get('time_refresh', 'time_refresh');
 });

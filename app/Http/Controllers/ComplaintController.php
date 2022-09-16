@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ComplaintController extends Controller
 {
@@ -206,7 +207,7 @@ class ComplaintController extends Controller
         $complaint = Crypt::decrypt($complaint);
         $complaint = Complaint::where('id',$complaint)->first();
         $category = Category::get();
-        $unit = Unit::get();
+        $unit = Officer::where('status','available')->get();
         $officer = Officer::where('unit_id',$complaint->unit_id)->first();
         $get_unit = Unit::where('id',$complaint->unit_id)->first();
         $handling = Handling::where('complaint_id',$complaint->id)->first();
@@ -251,8 +252,10 @@ class ComplaintController extends Controller
             $complaint->save();
             
             $officer = Officer::where('unit_id',$request->unit_id)->first();
-            $handling = Handling::where('complaint_id',$complaint->id)->first();
+            $officer->status = 'noavailable';
+            $officer->save();
 
+            $handling = Handling::where('complaint_id',$complaint->id)->first();
             $handling->status = NULL;
             $handling->user_id = $officer->user_id;
             $handling->save();
@@ -274,8 +277,10 @@ class ComplaintController extends Controller
             $complaint->save();
             
             $officer = Officer::where('unit_id',$request->unit_id)->first();
-            $handling = Handling::where('complaint_id',$complaint->id)->first();
+            $officer->status = 'noavailable';
+            $officer->save();
 
+            $handling = Handling::where('complaint_id',$complaint->id)->first();
             $handling->status = NULL;
             $handling->user_id = $officer->user_id;
             $handling->save();

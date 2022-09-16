@@ -140,6 +140,7 @@ Route::middleware(['user_access'])->group(function () {
 
     ## Report
     Route::get('/report', [ReportController::class, 'index']);
+    Route::post('/report', [ReportController::class, 'download_report']);
 
     ## Kecamatan
     Route::get('/subdistrict', [SubdistrictController::class, 'index']);

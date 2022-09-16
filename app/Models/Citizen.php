@@ -13,7 +13,8 @@ class Citizen extends Model
         'phone_number',
         'address',
         'nik',
-        'unit_id',
+        'subdistrict_id',
+        'village_id',
         'user_id'
     ];
 

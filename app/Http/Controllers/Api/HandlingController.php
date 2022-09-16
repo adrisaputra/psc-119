@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Complaint;   //nama model
 use App\Models\Handling;   //nama model
 use App\Models\SwitchOfficer;   //nama model
+use App\Models\Officer;   //nama model
 use App\Models\User;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -110,6 +111,10 @@ class HandlingController extends BaseController
             $handling->response_time = date('Y-m-d H:i:s');
             $handling->save();
 
+            $officer = Officer::where('user_id',$handling->user_id)->first();
+            $officer->status = 'available';
+            $officer->save();
+            
             return response([
                 'status' => true,
                 'message' => 'Data Aduan Diterima',
@@ -126,6 +131,10 @@ class HandlingController extends BaseController
             $handling->status = 'reject';
             $handling->save();
 
+            $officer = Officer::where('user_id',$handling->user_id)->first();
+            $officer->status = 'available';
+            $officer->save();
+            
             $switch_officer = new SwitchOfficer;
             $switch_officer->complaint_id = $request->id;
             $switch_officer->description = $request->description;
@@ -167,6 +176,10 @@ class HandlingController extends BaseController
             $handling->done_time = date('Y-m-d H:i:s');
             $handling->save();
 
+            $officer = Officer::where('user_id',$handling->user_id)->first();
+            $officer->status = 'available';
+            $officer->save();
+            
             return response([
                 'status' => true,
                 'message' => 'Data Aduan Selesai Diproses',

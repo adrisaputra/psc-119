@@ -35,7 +35,8 @@ $setting = SiteHelpers::setting();
 						<div class="card-title content-right">
 							<h5><center>CETAK LAPORAN</center></h5>
 								<div class="col s12">
-									<form action="{{ url('/'.Request::segment(1).'/search') }}" method="GET">
+									<form action="{{ url('/'.Request::segment(1)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+									{{ csrf_field() }}
 										<div class="col s12">
 											<div class="input-field col s12 m12 l12">
 												<select class="browser-default" name="month" required>
@@ -77,7 +78,7 @@ $setting = SiteHelpers::setting();
 											</div>
 											
 											<div class="input-field col s12 m12 l12">
-												<select class="browser-default" name="category_id">
+												<select class="browser-default" name="report_type">
 													<option value="">- Pilih Kategori -</option>
 													<option value="">Semua Kategori</option>
 													<option value="phone">Telepon Langsung</option>

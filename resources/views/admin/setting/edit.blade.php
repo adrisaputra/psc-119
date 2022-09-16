@@ -53,10 +53,25 @@
 															<label >{{ __('Nama Aplikasi') }}</label>
 														</div>
 													</div>
+
 													<div class="col s6">
 														<div class="input-field col s12">
 															<input value="{{ $setting->short_application_name }}" name="short_application_name" type="text" class="validate" style="color: black;">
 															<label >{{ __('Singkatan Nama Aplikasi') }}</label>
+														</div>
+													</div>
+													
+													<div class="col s6">
+														<div class="input-field col s12">
+															<input id="psc_call_number" value="{{ $setting->psc_call_number }}" name="psc_call_number" type="text" class="validate" style="color: black;">
+															<label for="psc_call_number">{{ __('No Telepon PSC') }}</label>
+														</div>
+													</div>
+
+													<div class="col s6">
+														<div class="input-field col s12">
+															<input id="time_refresh_tracking" value="{{ $setting->time_refresh_tracking }}" name="time_refresh_tracking" type="text" class="validate" style="color: black;">
+															<label for="time_refresh_tracking">{{ __('Waktu Refresh Traking') }}</label>
 														</div>
 														<div class="form-group @if ($errors->has('group')) has-error @endif">
 															<label class="col-sm-2 control-label"></label>

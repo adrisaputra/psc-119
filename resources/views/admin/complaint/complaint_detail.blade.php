@@ -89,9 +89,12 @@
 												<th style="width: 80%">
 													@if ($complaint->report_type=="emergency")
 														<span class="new badge red" data-badge-caption="Darurat"></span>
+													@elseif ($complaint->report_type=="phone")
+														<span class="new badge cyan" data-badge-caption="Telepon"></span>
 													@else
 														<span class="new badge green" data-badge-caption="Aduan"></span>
-													@endif</th>
+													@endif
+												</th>
 											</tr>
 											<tr>
 												<th style="background-color: #2196f3;color:white;border: 1px solid #f4f4f4;width: 20%";>Nama</th>
@@ -136,9 +139,9 @@
 			</div>
 			
 			<div id="modal1" class="modal modal-fixed-footer">
-				<form action="{{ url('handling/'.Crypt::encrypt($complaint->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+				{{--<form action="{{ url('handling/'.Crypt::encrypt($complaint->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 				{{ csrf_field() }}
-				<input type="hidden" name="_method" value="PUT">
+				<input type="hidden" name="_method" value="PUT">--}}
 
 				<div class="modal-content">
 
@@ -147,7 +150,7 @@
 						<select class="browser-default" name="unit_id" required>
 							<option value="">- Pilih Unit -</option>
 							@foreach($unit as $v)
-								<option value="{{ $v->id }}" @if(old('unit_id')=="$v->id") selected @endif>{{ $v->name }}</option>
+								<option value="{{ $v->unit->id }}" @if(old('unit_id')=="$v->unit->id") selected @endif>{{ $v->unit->name }}</option>
 							@endforeach
 						</select>
 					</div>
