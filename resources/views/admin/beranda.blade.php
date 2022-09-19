@@ -23,7 +23,7 @@
                               <div class="card animate fadeUp ">
                                  <div class="card-content blue white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-briefcase"></i> Kejadian Hari Ini</p>
-                                    <p style="font-size:40px">1</p>
+                                    <p style="font-size:40px">{{ $complaint }}</p>
                                  </div>
                                  <div class="card-action blue darken-1">
                                     <div id="clients-bar" class="center-align"></div>
@@ -34,7 +34,7 @@
                               <div class="card animate fadeUp ">
                                  <div class="card-content orange accent-2 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-sync"></i> Belum ditanggapi</p>
-                                    <p style="font-size:40px">2</p>
+                                    <p style="font-size:40px">{{ $complaint_request }}</p>
                                  </div>
                                  <div class="card-action orange darken-1">
                                     <div id="clients-bar" class="center-align"></div>
@@ -45,7 +45,7 @@
                               <div class="card animate fadeUp delay-1">
                                  <div class="card-content green lighten-1 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-check"></i> Selesai</p>
-                                    <p style="font-size:40px">3</p>
+                                    <p style="font-size:40px">{{ $complaint_done }}</p>
                                  </div>
                                  <div class="card-action green">
                                     <div id="sales-compositebar" class="center-align"></div>
@@ -56,7 +56,7 @@
                               <div class="card animate fadeUp delay-2">
                                  <div class="card-content red lighten-1 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-close"></i> Tolak</p>
-                                    <p style="font-size:40px">5</p>
+                                    <p style="font-size:40px">{{ $complaint_reject }}</p>
                                  </div>
                                  <div class="card-action red">
                                     <div id="invoice-line" class="center-align"></div>
@@ -73,7 +73,7 @@
                               <div class="card animate fadeUp ">
                                  <div class="card-content orange accent-2 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-sync"></i> Emergency Button</p>
-                                    <p style="font-size:40px">2</p>
+                                    <p style="font-size:40px">{{ $emergency_button }}</p>
                                  </div>
                                  <div class="card-action orange darken-1">
                                     <div id="clients-bar" class="center-align"></div>
@@ -84,7 +84,7 @@
                               <div class="card animate fadeUp delay-1">
                                  <div class="card-content green lighten-1 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-check"></i> Telepon 119</p>
-                                    <p style="font-size:40px">3</p>
+                                    <p style="font-size:40px">{{ $phone }}</p>
                                  </div>
                                  <div class="card-action green">
                                     <div id="sales-compositebar" class="center-align"></div>
@@ -95,7 +95,7 @@
                               <div class="card animate fadeUp delay-2">
                                  <div class="card-content red lighten-1 white-text">
                                     <p style="font-size:20px;padding-bottom:13px;padding-top:10px"><i class="fa fa-close"></i> Aduan Pesan</p>
-                                    <p style="font-size:40px">5</p>
+                                    <p style="font-size:40px">{{ $request }}</p>
                                  </div>
                                  <div class="card-action red">
                                     <div id="invoice-line" class="center-align"></div>

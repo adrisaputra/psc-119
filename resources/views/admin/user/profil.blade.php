@@ -24,7 +24,7 @@
 
 
 
-            <form action="{{ url('/'.Request::segment(1).'/edit_profil/'.Crypt::encrypt($user->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ url('/'.Request::segment(1).'/'.Crypt::encrypt($user->id)) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PUT">
 
@@ -71,23 +71,23 @@
                                                                 @if ($errors->has('email'))<small><div class="error">{{ $errors->first('email') }}</div></small>@endif
                                                             </div>
                                                             <div class="input-field col s12">
-                                                                <label for="foto">{{ __('Foto') }}</label> <br> <br>
-                                                                <input type="file" id="foto" name="foto" value="{{ $user->foto }}" style="@if ($errors->has('foto'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
-                                                                @if ($errors->has('foto'))<small><div class="error">{{ $errors->first('foto') }}</div></small>@endif <br>
+                                                                <label for="photo">{{ __('Foto') }}</label> <br> <br>
+                                                                <input type="file" id="photo" name="photo" value="{{ $user->photo }}" style="@if ($errors->has('photo'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
+                                                                @if ($errors->has('photo'))<small><div class="error">{{ $errors->first('photo') }}</div></small>@endif <br>
                                                                 <span style="font-size:11px"><i>Ukuran File Tidak Boleh Lebih Dari 300 Kb (jpg,jpeg,png)</i></span> <br>
-                                                                @if ($user->foto)
-                                                                    <img src="{{ asset('upload/foto/' . $user->foto) }}" width="150px" height="150px">
+                                                                @if ($user->photo)
+                                                                    <img src="{{ asset('upload/photo/' . $user->photo) }}" width="150px" height="150px">
                                                                 @endif
                                                             </div>
 
-                                                            {{-- <div class="input-field @if ($errors->has('foto')) has-error @endif">
+                                                            {{-- <div class="input-field @if ($errors->has('photo')) has-error @endif">
                                                                 <label class="col-sm-3 control-label">{{ __('Foto User ') }} <span class="required" style="color: #dd4b39;">*</span></label>
                                                                 <div class="col-sm-4">
-                                                                    @if ($errors->has('foto'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('foto_formal') }}</label>@endif
-                                                                    <input type="file" class="form-control" placeholder="Foto" name="foto" value="{{ $user->foto }}">
+                                                                    @if ($errors->has('photo'))<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {{ $errors->first('photo_formal') }}</label>@endif
+                                                                    <input type="file" class="form-control" placeholder="Foto" name="photo" value="{{ $user->photo }}">
                                                                     <span style="font-size:11px"><i>Ukuran File Tidak Boleh Lebih Dari 300 Kb (jpg,jpeg,png)</i></span>
-                                                                    @if ($user->foto)
-                                                                        <img src="{{ asset('upload/foto/' . $user->foto) }}" width="150px" height="150px">
+                                                                    @if ($user->photo)
+                                                                        <img src="{{ asset('upload/photo/' . $user->photo) }}" width="150px" height="150px">
                                                                     @endif
                                                                 </div>
                                                             </div> --}}

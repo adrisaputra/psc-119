@@ -165,7 +165,7 @@ class UserController extends Controller
             if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
                 $this->validate($request, [
                     'email' => 'required|email',
-                    'foto' => 'mimes:jpg,jpeg,png|max:300',
+                    'photo' => 'mimes:jpg,jpeg,png|max:300',
                     'current-password' => 'string|confirmed'
                 ]);
             } 
@@ -203,17 +203,17 @@ class UserController extends Controller
             $user->password = $cek_user[0]->password;
         }
         
-        if($request->file('foto') == ""){}
+        if($request->file('photo') == ""){}
         else
         {	
-            $filename = time().'.'.$request->foto->getClientOriginalExtension();
-            $request->foto->move(public_path('upload/foto'), $filename);
-            $user->foto = $filename;
+            $filename = time().'.'.$request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path('upload/photo'), $filename);
+            $user->photo = $filename;
         }
         
         $user->save();
         
         activity()->log('Ubah Data Profil dengan ID = '.$user->id);
-        return redirect('/user/edit_profil/'.Crypt::encrypt($user->id))->with('status', 'Data Berhasil Diubah');
+        return redirect('/profil/'.Crypt::encrypt($user->id))->with('status', 'Data Berhasil Diubah');
     }
 }

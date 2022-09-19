@@ -80,7 +80,7 @@
 											<select class="browser-default" name="status">
 												<option value="">- Pilih Status -</option>
 													<option value="available" @if($officer->status=="available") selected @endif>Tersedia</option>
-													<option value="available" @if($officer->status=="noavailable") selected @endif>Tidak Tersedia</option>
+													<option value="noavailable" @if($officer->status=="noavailable") selected @endif>Tidak Tersedia</option>
 											</select>
 											@if ($errors->has('status'))<small><div class="error">{{ $errors->first('status') }}</div></small>@endif
 										</div>

@@ -152,6 +152,7 @@ class ComplaintController extends Controller
 		$complaint->unit_id = $request->unit_id;
 		$complaint->report_type = 'phone';
 		$complaint->coordinate_citizen = $request->lat.', '.$request->long;
+		$complaint->user_id = Auth::user()->id;
         $complaint->save();
 		
         $officer = Officer::where('unit_id',$request->unit_id)->first();

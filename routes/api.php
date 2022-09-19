@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\SubdistrictController;
 use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
+use App\Http\Controllers\Api\CallNumberController;
 use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,7 @@ Route::controller(ComplaintController::class)->group(function() {
 Route::controller(HandlingController::class)->group(function() {
     Route::get('emergency_request', 'index');
     Route::get('detail_emergency_request', 'detail');
+    Route::get('update_position_officer', 'update_position_officer');
     Route::post('handling/{status}', 'store');
 });
 
@@ -95,8 +97,11 @@ Route::controller(UnitServiceController::class)->group(function() {
     Route::get('medical_service', 'index');
 });
 
+Route::controller(CallNumberController::class)->group(function() {
+    Route::get('psc_call_number', 'index');
+});
+
 Route::controller(SettingController::class)->group(function() {
     Route::get('setting', 'index');
-    Route::get('psc_call_number', 'psc_call_number');
     Route::get('time_refresh', 'time_refresh');
 });

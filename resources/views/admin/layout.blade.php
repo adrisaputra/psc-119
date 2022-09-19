@@ -71,8 +71,8 @@ $setting = SiteHelpers::setting();
                         <li>
                             <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
                                 <span class="avatar-status avatar-online">
-                                    @if (Auth::user()->foto)
-                                    <img src="{{ asset('upload/foto/' . Auth::user()->foto) }}" alt="avatar"><i></i>
+                                    @if (Auth::user()->photo)
+                                    <img src="{{ asset('upload/photo/' . Auth::user()->photo) }}" alt="avatar"><i></i>
                                     @else
                                     <img src="{{ asset('assets/images/avatar/avatar-7.png') }}" alt="avatar"><i></i>
                                     @endif
@@ -82,7 +82,7 @@ $setting = SiteHelpers::setting();
                     </ul>
                     <!-- profile-dropdown-->
                     <ul class="dropdown-content" id="profile-dropdown">
-                        <li><a class="grey-text text-darken-1" href="{{ url('profil/' . Auth::user()->id) }}"><i class="material-icons">person_outline</i> Profil</a></li>
+                        <li><a class="grey-text text-darken-1" href="{{ url('profil/' . Crypt::encrypt(Auth::user()->id)) }}"><i class="material-icons">person_outline</i> Profil</a></li>
                         @if(Auth::user()->group_id == 1)
                             <li><a class="grey-text text-darken-1" href="{{ url('setting') }}"><i class="material-icons">settings</i> Setting</a></li>
                         @endif

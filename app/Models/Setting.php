@@ -17,6 +17,7 @@ class Setting extends Model
         'background_sidebar',
         'gmaps_key',
         'psc_call_number',
+        'psc_call_number_description',
         'time_refresh_tracking',
         'layout',
         'skin',

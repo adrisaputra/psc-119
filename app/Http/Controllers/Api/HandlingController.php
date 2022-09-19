@@ -112,7 +112,7 @@ class HandlingController extends BaseController
             $handling->save();
 
             $officer = Officer::where('user_id',$handling->user_id)->first();
-            $officer->status = 'available';
+            // $officer->status = 'available';
             $officer->save();
             
             return response([
@@ -189,6 +189,17 @@ class HandlingController extends BaseController
         }
 
         
+    }
+
+    public function update_position_officer(Request $request)
+    {
+        $user = User::where('api_token', $request->header('token'))->first();   
+
+        $complaint = Complaint::where('id',$request->id)->first();
+        $complaint->fill($request->all());
+    	$complaint->save();
+
+        return $this->sendResponse($complaint, 'Update Posisi Petugas', $request->lang);
     }
 
 

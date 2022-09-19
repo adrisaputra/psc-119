@@ -24,12 +24,14 @@ use App\Http\Controllers\AmbulanceController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\SubdistrictController;
 use App\Http\Controllers\VillageController;
+use App\Http\Controllers\CallNumberController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MenuAccessController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubMenuAccessController;
 use App\Http\Controllers\SubMenuController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PrivacyPoliceController;
 use Carbon\Carbon;
 
 /*
@@ -79,8 +81,8 @@ Route::post('registrasi_w', [RegistrasiController::class, 'store']);
 Route::post('/logout-sistem', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [HomeController::class, 'index']);
-Route::get('/user/edit_profil/{user}', [UserController::class, 'edit_profil']);
-Route::put('/user/edit_profil/{user}', [UserController::class, 'update_profil']);
+Route::get('/profil/{user}', [UserController::class, 'edit_profil']);
+Route::put('/profil/{user}', [UserController::class, 'update_profil']);
 
 Route::get('database',[DatabaseController::class, 'index']);
 Route::post('import_database',[DatabaseController::class, 'store']);
@@ -197,6 +199,15 @@ Route::middleware(['user_access'])->group(function () {
     Route::get('/ambulance/edit/{ambulance}', [AmbulanceController::class, 'edit']);
     Route::put('/ambulance/edit/{ambulance}', [AmbulanceController::class, 'update']);
     Route::get('/ambulance/hapus/{ambulance}',[AmbulanceController::class, 'delete']);
+
+    ## PSC Call Number
+    Route::get('/call_number', [CallNumberController::class, 'index']);
+    Route::get('/call_number/search', [CallNumberController::class, 'search']);
+    Route::get('/call_number/create', [CallNumberController::class, 'create']);
+    Route::post('/call_number', [CallNumberController::class, 'store']);
+    Route::get('/call_number/edit/{call_number}', [CallNumberController::class, 'edit']);
+    Route::put('/call_number/edit/{call_number}', [CallNumberController::class, 'update']);
+    Route::get('/call_number/hapus/{call_number}',[CallNumberController::class, 'delete']);
 
     ## Pengumuman
     Route::get('/announcement', [AnnouncementController::class, 'index']);
@@ -316,3 +327,4 @@ Route::middleware(['cek_status'])->group(function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/privacypolicy', [PrivacyPoliceController::class, 'index'])->name('privacypolicy');

@@ -88,6 +88,7 @@ class ComplaintController extends BaseController
         // }
 
         $complaint->coordinate_citizen = $request->coordinate_citizen;
+		$complaint->user_id = $user->id;
         $complaint->save();
         
         $handling = new Handling();
