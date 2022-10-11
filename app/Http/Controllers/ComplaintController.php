@@ -8,6 +8,7 @@ use App\Models\Unit;   //nama model
 use App\Models\Handling;   //nama model
 use App\Models\SwitchOfficer;   //nama model
 use App\Models\Officer;   //nama model
+use App\Models\Notification;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
@@ -208,7 +209,24 @@ class ComplaintController extends Controller
         $complaint = Crypt::decrypt($complaint);
         $complaint = Complaint::where('id',$complaint)->first();
         $category = Category::get();
-        $unit = Officer::where('status','available')->get();
+        $lat_long = explode(", ", $complaint->coordinate_citizen); 
+        if($complaint->coordinate_citizen){
+            $unit = Unit::select("units.*"
+                    ,DB::raw("6371 * acos(cos(radians(" . $lat_long[0] . ")) 
+                    * cos(radians(SUBSTRING_INDEX(coordinate, ',', 1))) 
+                    * cos(radians(SUBSTRING_INDEX(coordinate, ',', -1)) - radians(" . $lat_long[1] . ")) 
+                    + sin(radians(" .$lat_long[0]. ")) 
+                    * sin(radians(SUBSTRING_INDEX(coordinate, ',', 1)))) AS distance"))
+                    ->whereHas('officer', function ($query) {
+                        $query->where('status','available');
+                    })->orderBy('distance','ASC')->get();
+        } else {
+            $unit = Unit::select("units.*")
+                    ->whereHas('officer', function ($query) {
+                        $query->where('status','available');
+                    })->get();
+        }
+        
         $officer = Officer::where('unit_id',$complaint->unit_id)->first();
         $get_unit = Unit::where('id',$complaint->unit_id)->first();
         $handling = Handling::where('complaint_id',$complaint->id)->first();
@@ -249,6 +267,7 @@ class ComplaintController extends Controller
         if($complaint->report_type=="complaint"){
             
             $complaint->fill($request->all());
+            $complaint->coordinate_citizen = $request->lat.', '.$request->long;
             $complaint->status = "process";
             $complaint->save();
             
@@ -260,6 +279,13 @@ class ComplaintController extends Controller
             $handling->status = NULL;
             $handling->user_id = $officer->user_id;
             $handling->save();
+
+            $notification = new Notification();
+            $notification->email = $officer->user->email;
+            $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
+            $notification->save();
+
+            $this->notif_handling($officer->user->email);
 
             activity()->log('Proses Data Aduan dengan ID = '.$complaint->id);
             return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
@@ -285,6 +311,13 @@ class ComplaintController extends Controller
             $handling->status = NULL;
             $handling->user_id = $officer->user_id;
             $handling->save();
+
+            $notification = new Notification();
+            $notification->email = $officer->user->email;
+            $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
+            $notification->save();
+
+            $this->notif_handling($officer->user->email);
 
             activity()->log('Proses Data Emergency dengan ID = '.$complaint->id);
             return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
@@ -379,4 +412,36 @@ class ComplaintController extends Controller
 		// }
         return $complaint;
     }
+
+    public function notif_handling($email)
+	{
+		/* Kirim Pesan */
+		$msg = array(
+			'body'  => 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti',
+			'title' => 'PSC-119 Kota Baubau',
+		);
+
+		$server_key = 'AAAAnu1CPUM:APA91bF2BPxuE5hWeUxUsSoPy_Tr_dAa0FRlnVvpzeTq3Z7tDg6qt2EPJggIN6Op7RPq7hkIsuSZApELpe6seewA9Wt_lB-jjt7r1gXniFbsEhpvQcwMSIPYjEOb8NWPC9cpqGdHohVv';
+
+		$url            = 'https://fcm.googleapis.com/fcm/send';
+		$fields['to']           = '/topics/'.$email;
+		$fields['notification'] = $msg;
+		$headers        = array(
+			'Content-Type:application/json',
+			'Authorization:key=' . $server_key,
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		// exit;
+	}
 }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Officer;   //nama model
 use App\Models\Unit;   //nama model
+use App\Models\Complaint;   //nama model
+use App\Models\Category;   //nama model
+use App\Models\Handling;   //nama model
+use App\Models\SwitchOfficer;   //nama model
 use App\Models\User;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -54,6 +58,7 @@ class OfficerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'username' => 'required|string|alpha_dash',
             'email' => 'required|unique:users',
             'phone_number' => 'required',
             'address' => 'required',
@@ -61,7 +66,7 @@ class OfficerController extends Controller
         ]);
 
         $user = new User();
-        $user->name = $request->name;
+        $user->name = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make('pass1234');
         $user->group_id = 3;
@@ -112,7 +117,7 @@ class OfficerController extends Controller
     	$officer->save();
 
         $user = User::where('id',$officer->user_id)->first();
-        $user->name = $request->name;
+        // $user->name = $request->name;
         $user->save();
 		
         activity()->log('Ubah Data Officer dengan ID = '.$officer->id);
@@ -143,4 +148,135 @@ class OfficerController extends Controller
         $officer = Officer::where('unit_id',$unit)->get();
         return view('admin.ambulance.get_officer',compact('officer'));
     }
+
+    public function emergency_request($user)
+    {
+        
+        $user = Crypt::decrypt($user);
+        $user = User::where('id',$user)->first();
+
+        $title = "List Aduan";
+        $complaint = Complaint::whereHas('handling', function ($query) use ($user){
+                        $query->where('user_id', $user->id);
+                    })->whereHas('handling', function ($query){
+                        $query->where('status', NULL)
+                            ->orWhere('status', 'accept');
+                    })->orderBy('id','DESC')->paginate(25)->onEachSide(1);
+        return view('admin.officer.emergency_request',compact('title','complaint'));
+    }
+
+    ## Tampilkan Form Edit
+    public function emergency_detail(Request $request, $user , $complaint)
+    {
+        $title = "Laporan Masyarakat";
+        $user = Crypt::decrypt($user);
+        $user = User::where('id',$user)->first();
+
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+        $category = Category::get();
+        $unit = Officer::where('status','available')->get();
+        $officer = Officer::where('unit_id',$complaint->unit_id)->first();
+        $get_unit = Unit::where('id',$complaint->unit_id)->first();
+        $handling = Handling::where('complaint_id',$complaint->id)->first();
+        $switch_officer = SwitchOfficer::where('complaint_id',$complaint->id)->get();
+        $lat = "-5.4856429306487176";
+        $long = "122.58496969552637";
+        
+        $view=view('admin.officer.emergency_detail', compact('title','user','complaint','category','get_unit','officer','handling','switch_officer'));
+        $view=$view->render();
+        return $view;
+    }
+
+    ## Hapus Data
+    public function accept(Request $request, $user , $complaint)
+    {
+        $title = "Laporan Masyarakat";
+        $user = Crypt::decrypt($user);
+        $user = User::where('id',$user)->first();
+
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+
+        $complaint->status = 'accept';
+        $complaint->coordinate_officer = '-5.465746452931535, 122.61993873042796';
+        $complaint->save();
+
+        $handling = Handling::where('complaint_id',$complaint->id)->first();
+        $handling->status = 'accept';
+        $handling->response_time = date('Y-m-d H:i:s');
+        $handling->save();
+
+        $officer = Officer::where('user_id',$handling->user_id)->first();
+        $officer->save();
+        
+        activity()->log('Laporan Masyarakat dengan ID = '.$complaint->id.' Diterima');
+        return redirect('/officer/emergency_request/'.Crypt::encrypt($handling->user_id))->with('status', 'Data Berhasil Diterima');
+    }
+
+    ## Hapus Data
+    public function reject(Request $request, $user , $complaint)
+    {
+        $title = "Laporan Masyarakat";
+        $user = Crypt::decrypt($user);
+        $user = User::where('id',$user)->first();
+
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+        $complaint->status = 'dispatch';
+        $complaint->save();
+
+        $handling = Handling::where('complaint_id',$complaint->id)->first();
+        $handling->status = 'reject';
+        $handling->save();
+
+        $officer = Officer::where('user_id',$handling->user_id)->first();
+        $officer->status = 'available';
+        $officer->save();
+        
+        $switch_officer = new SwitchOfficer;
+        $switch_officer->complaint_id = $complaint->id;
+        $switch_officer->description = 'Di tolak';
+        $switch_officer->unit_id = $officer->unit_id;
+        $switch_officer->save();
+        
+        activity()->log('Laporan Masyarakat dengan ID = '.$complaint->id.' Ditolak');
+        return redirect('/officer/emergency_request/'.Crypt::encrypt($handling->user_id))->with('status2', 'Data Ditolak');
+    }
+
+    ## Hapus Data
+    public function done(Request $request, $user , $complaint)
+    {
+        $title = "Laporan Masyarakat";
+        $user = Crypt::decrypt($user);
+        $user = User::where('id',$user)->first();
+
+        $complaint = Crypt::decrypt($complaint);
+        $complaint = Complaint::where('id',$complaint)->first();
+        $complaint->description = "Selesai";
+        $complaint->handling_status = 'home';
+        $complaint->status = 'done';
+        $complaint->save();
+
+        $handling = Handling::where('complaint_id',$complaint->id)->first();
+        $handling->status = 'done';
+        $handling->diagnosis = 'xxx';
+        $handling->handling = 'aaa';
+        $handling->done_time = date('Y-m-d H:i:s');
+        $handling->save();
+
+        $officer = Officer::where('user_id',$handling->user_id)->first();
+        $officer->status = 'available';
+        $officer->save();
+        
+        $switch_officer = new SwitchOfficer;
+        $switch_officer->complaint_id = $complaint->id;
+        $switch_officer->description = 'Di tolak';
+        $switch_officer->unit_id = $officer->unit_id;
+        $switch_officer->save();
+        
+        activity()->log('Laporan Masyarakat dengan ID = '.$complaint->id.' Ditolak');
+        return redirect('/officer/emergency_request/'.Crypt::encrypt($handling->user_id))->with('status', 'Data Berhasil Diterima');
+    }
+
 }

@@ -56,6 +56,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'image_done' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/image_done'),
+            'url' => env('APP_URL').'/storage/upload/image_done',
+            'visibility' => 'public',
+        ],
+
+        'photo' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/image_done'),
+            'url' => env('APP_URL').'/storage/upload/image_done',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

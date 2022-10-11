@@ -134,12 +134,16 @@
 												</th>
 											</tr>
 											<tr>
-												<th style="background-color: #2196f3;color:white;width: 20%";>Petass </th>
+												<th style="background-color: #2196f3;color:white;width: 20%";>Peta </th>
 												<th style="width: 80%">
-													<input id="pac-input" class="form-control"  style="width: 70%" type="text" placeholder="Search Box"/>
+													<input id="pac-input" class="form-control"  style="width: 70%; background-color:white" type="text" placeholder="Search Box"/>
 													<div id="xmap3"></div> 
 													@php 
-														$lat_long = explode(", ", $complaint->coordinate_citizen); 
+														if($complaint->coordinate_citizen){
+															$lat_long = explode(", ", $complaint->coordinate_citizen); 
+														} else {
+															$lat_long = explode(", ", "-5.4856429306487176, 122.58496969552637"); 
+														}
 													@endphp
 													<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
 													<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
@@ -169,7 +173,7 @@
 						<select class="browser-default" name="unit_id" required>
 							<option value="">- Pilih Unit -</option>
 							@foreach($unit as $v)
-								<option value="{{ $v->unit->id }}" @if(old('unit_id')=="$v->unit->id") selected @endif>{{ $v->unit->name }}</option>
+								<option value="{{ $v->id }}" @if(old('unit_id')=="$v->id") selected @endif>{{ $v->name }} @if($complaint->coordinate_citizen) ({{ number_format($v->distance,2,",",".") }} Km Dari Lokasi Kejadian) @endif</option>
 							@endforeach
 						</select>
 					</div>

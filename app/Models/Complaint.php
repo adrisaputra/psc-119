@@ -27,7 +27,8 @@ class Complaint extends Model
         'reason',
         'report_type',
         'handling_status',
-        'reference_place'
+        'reference_place',
+        'user_id'
     ];
     
     public function getIncrementing()
@@ -50,6 +51,10 @@ class Complaint extends Model
     
     public function switch_officer(){
         return $this->hasOne('App\Models\SwitchOfficer');
+    }
+    
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
     
 }

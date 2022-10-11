@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB; //untuk membuat query di controller
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Image;
 
 class AnnouncementController extends Controller
 {
@@ -51,12 +52,26 @@ class AnnouncementController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'text' => 'required'
+            'text' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png|max:500',
         ]);
 
 		$input['title'] = $request->title;
 		$input['text'] = $request->text;
 		
+        if ($request->file('image')) {
+            $input['image'] = time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $request->file('image')->storeAs('public/upload/announcement', $input['image']);
+            $request->file('image')->storeAs('public/upload/announcement/thumbnail', $input['image']);
+
+            $thumbnailpath = public_path('storage/upload/announcement/thumbnail/' . $input['image']);
+            $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailpath);
+        }
+
         $start_d = substr($request->date_start,0,2);
         $start_m = substr($request->date_start,3,2);
         $start_y = substr($request->date_start,6,4);
@@ -93,11 +108,35 @@ class AnnouncementController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
-            'text' => 'required'
+            'text' => 'required',
+            'image' => 'mimes:jpg,jpeg,png|max:500',
         ]);
+
+        if ($announcement->image && $request->file('image') != "") {
+            $image_path = public_path() . '/storage/upload/announcement/thumbnail/' . $announcement->image;
+            $image_path2 = public_path() . '/storage/upload/announcement/' . $announcement->image;
+            unlink($image_path);
+            unlink($image_path2);
+        }
 
         $announcement->fill($request->all());
         
+        if ($request->file('image')) {
+
+            $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $request->file('image')->storeAs('public/upload/announcement', $filename);
+            $request->file('image')->storeAs('public/upload/announcement/thumbnail', $filename);
+
+            $thumbnailpath = public_path('storage/upload/announcement/thumbnail/' . $filename);
+            $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailpath);
+
+            $announcement->image = $filename;
+        }
+
         $start_d = substr($request->date_start,0,2);
         $start_m = substr($request->date_start,3,2);
         $start_y = substr($request->date_start,6,4);

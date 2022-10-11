@@ -197,9 +197,9 @@ class ReportController extends Controller
         } else if($type == 'xls') {
             $writer = new Xls($spreadsheet);			
         }		
-        $writer->save("public/upload/report/".$fileName);
+        $writer->save("upload/report/".$fileName);
         header("Content-Type: application/vnd.ms-excel");
-        return redirect(url('/')."/public/upload/report/".$fileName);    
+        return redirect(url('/')."/upload/report/".$fileName);    
 
     }
  

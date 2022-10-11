@@ -118,12 +118,28 @@
 											</tr>
 											<tr>
 												<th style="background-color: #2196f3;color:white;border: 1px solid #f4f4f4;width: 20%";>Gambar</th>
-												<th style="width: 80%"><a href="{{ asset('storage/upload/image_citizen/'.$complaint->image)}}" target="_blank">Lihat Gambar</a></th>
+												<th style="width: 80%">
+													@if($complaint->image) 
+														<a href="{{ asset('storage/upload/image_citizen/'.$complaint->image)}}" target="_blank">Lihat Gambar</a>
+													@else
+														Tidak Ada
+													@endif
+												</th>
 											</tr>
 											<tr>
-												<th style="background-color: #2196f3;color:white;border: 1px solid #f4f4f4;width: 20%";>Peta</th>
+												<th style="background-color: #2196f3;color:white;width: 20%";>Peta </th>
 												<th style="width: 80%">
-												<div id="googleMap" style="width:100%;height:400px;"></div>
+													<input id="pac-input" class="form-control"  style="width: 70%; background-color:white" type="text" placeholder="Search Box"/>
+													<div id="xmap3"></div> 
+													@php 
+														if($complaint->coordinate_citizen){
+															$lat_long = explode(", ", $complaint->coordinate_citizen); 
+														} else {
+															$lat_long = explode(", ", "-5.4856429306487176, 122.58496969552637"); 
+														}
+													@endphp
+													<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat_long[0] }}" readonly>
+													<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $lat_long[1] }}" readonly>
 												</th>
 											</tr>
 										</thead>
@@ -150,7 +166,7 @@
 						<select class="browser-default" name="unit_id" required>
 							<option value="">- Pilih Unit -</option>
 							@foreach($unit as $v)
-								<option value="{{ $v->unit->id }}" @if(old('unit_id')=="$v->unit->id") selected @endif>{{ $v->unit->name }}</option>
+								<option value="{{ $v->id }}" @if(old('unit_id')=="$v->id") selected @endif>{{ $v->name }} @if($complaint->coordinate_citizen) ({{ number_format($v->distance,2,",",".") }} Km Dari Lokasi Kejadian) @endif</option>
 							@endforeach
 						</select>
 					</div>
@@ -203,83 +219,95 @@
 
     
 
-<!-- Menyisipkan library Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
+<script>
+      "use strict";
 
-<script type="text/javascript">
+      function initAutocomplete() {
+        const map = new google.maps.Map(document.getElementById("xmap3"), {
+          center: {
+            lat: <?php echo $lat_long[0];?>,
+            lng: <?php echo $lat_long[1];?>
+          },
+          zoom: 15,
+          mapTypeId: "roadmap"
+        }); 
 
-	var map; 
-	var lat_longs_map = new Array();
-	var markers_map = new Array();
-	var iw_map;
-
-	iw_map = new google.maps.InfoWindow();
-
-	function initialize_map() {
-
-	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
-	var myOptions = {
-		zoom: 14,
-		center: myLatlng,
-		mapTypeId: google.maps.MapTypeId.hybrid }
-	map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
+		var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
+		var marker = new google.maps.Marker({
+			  draggable: true,
+			  position: myLatlng,
+			  map: map,
+			  title: "Your location"
+		  });
 		
-	// Marker 1	
-	var myLatlng = new google.maps.LatLng({{ $complaint->coordinate_citizen }});
-
-	var pinColor = "#4caf50";
-    var pinLabel = "A";
-
-    // Pick your pin (hole or no hole)
-    var pinSVGHole = "M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z";
-    var labelOriginHole = new google.maps.Point(12,15);
-    var pinSVGFilled = "M 12,2 C 8.1340068,2 5,5.1340068 5,9 c 0,5.25 7,13 7,13 0,0 7,-7.75 7,-13 0,-3.8659932 -3.134007,-7 -7,-7 z";
-    var labelOriginFilled =  new google.maps.Point(12,9);
-
-
-    var markerImage = {  // https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerLabel
-        path: pinSVGHole,
-        anchor: new google.maps.Point(12,25),
-        fillOpacity: 1,
-        fillColor: pinColor,
-        strokeWeight: 2,
-        strokeColor: "white",
-        scale: 2,
-        labelOrigin: new google.maps.Point(12,30),
-    };
-	
-	var markerOptions = {
-		map: map,
-		position: myLatlng,
-		icon: markerImage
-	};
-	
-	marker_0 = createMarker_map(markerOptions);
-
-		google.maps.event.addListener(marker_0, "click", function(event) {
-         document.getElementById("clickButton").click();
-			$.ajax(
-            {
-               url: "{{ url('/detail_peta/') }}", 
-               success: function(result){
-				      $("#detail-modal").html(result);
-			      }
-            })
+		google.maps.event.addListener(map, 'click', function (event) {
+		  document.getElementById("latclicked").value = event.latLng.lat();
+		  document.getElementById("longclicked").value = event.latLng.lng();
+		  
+		  placeMarker(map, event.latLng);
 		});
 
+		function placeMarker(map, location) {
+		  	if (marker == undefined){
+				marker = new google.maps.Marker({
+					position: location,
+					map: map, 
+					animation: google.maps.Animation.DROP,
+				});
+			} else{
+				marker.setPosition(location);
+					  var infowindow = new google.maps.InfoWindow({
+							content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+					  });
+					  infowindow.open(map,marker);	
+					map.setCenter(location);		
+			}
+		}
+			
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); // Bias the SearchBox results towards current map's viewport.
 
-	}
+        map.addListener("bounds_changed", () => {
+          searchBox.setBounds(map.getBounds());
+        });
+        let markers = []; 
+		
+        searchBox.addListener("places_changed", () => {
+          const places = searchBox.getPlaces();
 
+          if (places.length == 0) {
+            return;
+          } // Clear out the old markers.
 
-	function createMarker_map(markerOptions) {
-	var marker = new google.maps.Marker(markerOptions);
-	markers_map.push(marker);
-	lat_longs_map.push(marker.getPosition());
-	return marker;
-	}
+          const bounds = new google.maps.LatLngBounds();
+          places.forEach(place => {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
 
-	google.maps.event.addDomListener(window, "load", initialize_map);
+            const icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            }; // Create a marker for each place.
 
-
+			
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+		  
+		  
+        });
+		
+      }
 </script>
 @endsection

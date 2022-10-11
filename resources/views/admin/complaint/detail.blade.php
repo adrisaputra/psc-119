@@ -116,7 +116,11 @@
 											</tr>
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Foto TKP/Korban</th>
-												<th style="width: 80%"><a href="{{ asset('storage/upload/photo_citizen/'.$complaint->photo_citizen)}}" target="_blank">Lihat Foto</a></th>
+												<th style="width: 80%">
+													@if($complaint->photo_citizen)
+														<a href="{{ asset('storage/upload/image_done/'.$complaint->photo_citizen)}}" target="_blank">Lihat Foto</a>
+													@endif
+												</th>
 											</tr>
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Waktu Respon</th>
@@ -175,7 +179,13 @@
 											</tr>
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Gambar</th>
-												<th style="width: 80%"><a href="{{ asset('storage/upload/image_citizen/'.$complaint->image)}}" target="_blank">Lihat Gambar</a></th>
+												<th style="width: 80%">
+													@if($complaint->image) 
+														<a href="{{ asset('storage/upload/image_citizen/'.$complaint->image)}}" target="_blank">Lihat Gambar</a>
+													@else
+														Tidak Ada
+													@endif
+												</th>
 											</tr>
 											<tr>
 												<th style="background-color: #9e9e9e;color:white;border: 1px solid #ffffff;width: 20%";>Peta</th>

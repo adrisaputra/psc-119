@@ -60,6 +60,28 @@ $setting = SiteHelpers::setting();
 												<td>Selesai</td>
 											</tr>
 										</tbody>
+										</table><br><br>
+
+										<table class="highlight">
+										<thead>
+											<tr style="background-color: gray;color:white;border: 1px solid #f4f4f4;">
+												<th colspan=2><center>JENIS KATEGORI PENGADUAN</center></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><center><img src="{{ asset('images/icon_aduan/Icon Button Emergency (Hijau).png')}}" width="35px" height="50px"></center></td>
+												<td>Button Emergency</td>
+											</tr>
+											<tr>
+												<td><center><img src="{{ asset('images/icon_aduan/Icon Telpon Langsung (Hijau).png')}}" width="40px" height="40px"></center></td>
+												<td>Telepon</td>
+											</tr>
+											<tr>
+												<td><center><img src="{{ asset('images/icon_aduan/Icon Laporan Aduan (Hijau).png')}}" width="40px" height="40px"></center></td>
+												<td>Form Aduan</td>
+											</tr>
+										</tbody>
 										</table>
 									</div>
 								</div>

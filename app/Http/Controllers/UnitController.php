@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB; //untuk membuat query di controller
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Image;
 
 
 class UnitController extends Controller
@@ -60,12 +61,30 @@ class UnitController extends Controller
             'subdistrict_id' => 'required',
             'lat' => 'required',
             'long' => 'required',
+            'image' => 'mimes:jpg,jpeg,png|max:500',
         ]);
 
 		$input['name'] = $request->name;
 		$input['address'] = $request->address;
+		$input['category'] = $request->category;
+		$input['image'] = $request->image;
+		$input['time_operation'] = $request->time_operation;
 		$input['subdistrict_id'] = $request->subdistrict_id;
 		$input['coordinate'] = $request->lat.', '.$request->long;
+        
+        if ($request->file('image')) {
+            $input['image'] = time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $request->file('image')->storeAs('public/upload/unit', $input['image']);
+            $request->file('image')->storeAs('public/upload/unit/thumbnail', $input['image']);
+
+            $thumbnailpath = public_path('storage/upload/unit/thumbnail/' . $input['image']);
+            $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailpath);
+        }
+
         Unit::create($input);
         
         activity()->log('Tambah Data Unit');
@@ -97,9 +116,34 @@ class UnitController extends Controller
             'subdistrict_id' => 'required',
             'lat' => 'required',
             'long' => 'required',
+            'image' => 'mimes:jpg,jpeg,png|max:500',
         ]);
 
+        if ($unit->image && $request->file('image') != "") {
+            $image_path = public_path() . '/storage/upload/unit/thumbnail/' . $unit->image;
+            $image_path2 = public_path() . '/storage/upload/unit/' . $unit->image;
+            unlink($image_path);
+            unlink($image_path2);
+        }
+
         $unit->fill($request->all());
+        
+        if ($request->file('image')) {
+
+            $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $request->file('image')->storeAs('public/upload/unit', $filename);
+            $request->file('image')->storeAs('public/upload/unit/thumbnail', $filename);
+
+            $thumbnailpath = public_path('storage/upload/unit/thumbnail/' . $filename);
+            $img = Image::make($thumbnailpath)->resize(400, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailpath);
+
+            $unit->image = $filename;
+        }
+
 		$unit->coordinate = $request->lat.', '.$request->long;
     	$unit->save();
 		

@@ -33,7 +33,8 @@ class SettingController extends Controller
             'small_icon' => 'mimes:jpg,jpeg,png|max:500',
             'large_icon' => 'mimes:jpg,jpeg,png|max:500',
             'background_login' => 'mimes:jpg,jpeg,png|max:500',
-            'background_sidebar' => 'mimes:jpg,jpeg,png|max:500'
+            'background_sidebar' => 'mimes:jpg,jpeg,png|max:500',
+            'apk_officer' => 'required',
         ]);
         
         if($request->file('small_icon') && $setting->small_icon){
@@ -62,6 +63,14 @@ class SettingController extends Controller
 
         if($request->file('background_sidebar') && $setting->background_sidebar){
             $pathToYourFile = public_path('upload/setting/'.$setting->background_sidebar);
+            if(file_exists($pathToYourFile))
+            {
+                unlink($pathToYourFile);
+            }
+        }
+
+        if($request->file('apk_officer') && $setting->apk_officer){
+            $pathToYourFile = public_path('upload/setting/'.$setting->apk_officer);
             if(file_exists($pathToYourFile))
             {
                 unlink($pathToYourFile);
@@ -100,6 +109,14 @@ class SettingController extends Controller
             $filename = time().'4.'.$request->background_sidebar->getClientOriginalExtension();
             $request->background_sidebar->move(public_path('upload/setting'), $filename);
             $setting->background_sidebar = $filename;
+		}
+		
+		if($request->file('apk_officer') == ""){}
+    	else
+    	{	
+            $filename = time().'4.'.$request->apk_officer->getClientOriginalExtension();
+            $request->apk_officer->move(public_path('upload/setting'), $filename);
+            $setting->apk_officer = $filename;
 		}
 		
 		$setting->user_id = Auth::user()->id;

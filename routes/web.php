@@ -104,6 +104,7 @@ Route::middleware(['user_access'])->group(function () {
     Route::put('/incoming_complaint/edit/{complaint}', [ComplaintController::class, 'update']);
     Route::put('/incoming_complaint/reject/{complaint}', [ComplaintController::class, 'reject']);
     Route::get('/incoming_complaint/hapus/{complaint}',[ComplaintController::class, 'delete']);
+    Route::get('/incoming_complaint/kota',[ComplaintController::class, 'kota']);
 
     ## Aduan diproses
     Route::get('/process_complaint', [ComplaintController::class, 'index']);
@@ -180,6 +181,11 @@ Route::middleware(['user_access'])->group(function () {
     Route::put('/officer/edit/{officer}', [OfficerController::class, 'update']);
     Route::get('/officer/hapus/{officer}',[OfficerController::class, 'delete']);
     Route::get('/officer/get/{unit}',[OfficerController::class, 'get']);
+    Route::get('/officer/emergency_request/{user}',[OfficerController::class, 'emergency_request']);
+    Route::get('/officer/emergency_detail/{user}/{complaint}',[OfficerController::class, 'emergency_detail']);
+    Route::get('/officer/accept/{user}/{complaint}', [OfficerController::class, 'accept']);
+    Route::get('/officer/reject/{user}/{complaint}', [OfficerController::class, 'reject']);
+    Route::get('/officer/done/{user}/{complaint}', [OfficerController::class, 'done']);
 
     ## Masyarakat
     Route::get('/citizen', [CitizenController::class, 'index']);
@@ -265,6 +271,7 @@ Route::middleware(['cek_status'])->group(function () {
 
     ## Detail Tracking
     Route::get('/detail_tracking/{complaint}', [TrackingController::class, 'detail']);
+    Route::get('/detail_tracking2/{complaint}', [TrackingController::class, 'detail2']);
 
     ## Kelurahan
     Route::get('/village/{subdistrict}', [VillageController::class, 'index']);

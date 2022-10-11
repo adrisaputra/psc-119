@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
 use App\Http\Controllers\Api\CallNumberController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,12 +37,15 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('reset_password', 'reset_password');
     Route::get('language', 'language');
     Route::post('renew_token', 'renewToken');
+    Route::get('notif_registration', 'notif_registration');
 });
 
 // profile
 Route::controller(ProfileController::class)->group(function() {
     Route::get('profile', 'profile');
     Route::post('profile', 'update');
+    Route::get('profile_officer', 'profile_officer');
+    Route::post('profile_officer', 'update_officer');
 });
 
 // content
@@ -72,8 +76,9 @@ Route::controller(ComplaintController::class)->group(function() {
 
 Route::controller(HandlingController::class)->group(function() {
     Route::get('emergency_request', 'index');
+    Route::get('last_emergency_accept', 'last_emergency_accept');
     Route::get('detail_emergency_request', 'detail');
-    Route::get('update_position_officer', 'update_position_officer');
+    Route::post('update_position_officer', 'update_position_officer');
     Route::post('handling/{status}', 'store');
 });
 
@@ -99,6 +104,12 @@ Route::controller(UnitServiceController::class)->group(function() {
 
 Route::controller(CallNumberController::class)->group(function() {
     Route::get('psc_call_number', 'index');
+});
+
+Route::controller(NotificationController::class)->group(function() {
+    Route::get('notification', 'index');
+    Route::post('delete_notification', 'delete');
+    Route::post('clear_notification', 'clear');
 });
 
 Route::controller(SettingController::class)->group(function() {

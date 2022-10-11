@@ -19,6 +19,7 @@ class Setting extends Model
         'psc_call_number',
         'psc_call_number_description',
         'time_refresh_tracking',
+        'apk_officer',
         'layout',
         'skin',
         'user_id'

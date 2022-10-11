@@ -55,10 +55,10 @@ class RegistrasiController extends Controller
 
             $user->save();
 
-            $message = 'Your account is activated. Lets Login on Apps';
+            $message = 'Akun anda telah aktif. Silahkan login melalui aplikasi';
             // return redirect('/')->with('status2','Akun Telah Aktif, Silahkan Login !');
         } else {
-            $message = 'Link is Expired';
+            $message = 'Tautan Kedaluwarsa';
             // return redirect('/')->with('status','Link Expired !');
         }
 

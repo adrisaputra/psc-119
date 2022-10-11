@@ -55,7 +55,8 @@ class ComplaintController extends BaseController
             $validator = Validator::make($request->all(), [
                 'incident_area' => 'required',
                 'summary' => 'required',
-                'category_id' => 'required'
+                'category_id' => 'required',
+                'coordinate_citizen' => 'required'
             ]);
             
             // return message if validation not passed
@@ -78,14 +79,14 @@ class ComplaintController extends BaseController
         $complaint->status = 'request';
         $complaint->report_type = $report_type;
          
-        // if($request->image){
+        if($request->image){
             $image = $request->image;  // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             $imageName = Str::random(40) . '.png';
             $complaint->image = $imageName;
             Storage::disk('image_citizen')->put($imageName, base64_decode($image));
-        // }
+        }
 
         $complaint->coordinate_citizen = $request->coordinate_citizen;
 		$complaint->user_id = $user->id;

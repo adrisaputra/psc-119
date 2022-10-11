@@ -63,8 +63,18 @@
 													
 													<div class="col s6">
 														<div class="input-field col s12">
-															<input id="psc_call_number" value="{{ $setting->psc_call_number }}" name="psc_call_number" type="text" class="validate" style="color: black;">
-															<label for="psc_call_number">{{ __('No Telepon PSC') }}</label>
+															<div class="file-field input-field">
+																<div class="btn waves-light cyan darken-0" style="line-height: 2rem;float: left;height: 2rem;">
+																	<span>Upload APK Petugas</span>
+																	<input type="file" name="apk_officer" >
+																</div>
+																<div class="file-path-wrapper">
+																	<input class="file-path validate" type="text" style="height: 2rem;">
+																</div>
+															</div>
+															@if($setting->apk_officer)
+																<a href="{{ asset('upload/setting/'.$setting->apk_officer) }}" class="btn waves-effect waves-light blue darken-1 btn-sm" title="Tambah Data"> Download</a>
+															@endif
 														</div>
 													</div>
 

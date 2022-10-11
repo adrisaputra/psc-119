@@ -25,7 +25,7 @@ class UnitController extends BaseController
     public function index(Request $request)
     {
         $unit = DB::table('units')
-                    ->select('units.id as id','units.name as name','address','coordinate'
+                    ->select('units.id as id','units.name as name','address','coordinate','category','image','time_operation'
                             ,'subdistricts.name as subdistrict_name','units.created_at as created_at','units.updated_at as updated_at')
                     ->join('subdistricts', 'subdistricts.id', '=', 'units.subdistrict_id')
                     ->get();

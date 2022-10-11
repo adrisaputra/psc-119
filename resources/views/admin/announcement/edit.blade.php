@@ -63,6 +63,22 @@
 											<input type="text" id="date_end" onChange="getNumberOfDays()" class="datepicker2" name="date_end" value="{{ $announcement->date_end }}" style="@if ($errors->has('date_end'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
 										</div>
 
+										<div class="input-field col s12">
+											<div class="file-field input-field">
+												<div class="btn waves-light cyan darken-0" style="line-height: 2rem;float: left;height: 2rem;">
+													<span>Upload Gambar</span>
+													<input type="file" name="image" >
+												</div>
+												<div class="file-path-wrapper">
+													<input class="file-path validate" type="text" style="height: 2rem;">
+												</div>
+												<span style="font-size:11px"><i>Ukuran File Tidak Boleh Lebih Dari 500 Kb (jpg,jpeg,png)</i></span>
+											</div>
+											@if($announcement->image)
+												<img src="{{ asset('storage/upload/announcement/thumbnail/'.$announcement->image) }}" width="150px" height="150px">
+											@endif
+										</div>
+										
 									</div>
 								</form>
 							</div>

@@ -54,7 +54,7 @@
 											@if ($errors->has('address'))<small><div class="error">{{ $errors->first('address') }}</div></small>@endif
 										</div>
 
-										<div class="input-field col s12">
+										<div class="input-field col s6">
 											<select class="select2 browser-default" name="subdistrict_id">
 												<option value="">- Pilih Kecamatan -</option>
 												@foreach($subdistrict as $v)
@@ -64,9 +64,39 @@
 											@if ($errors->has('subdistrict_id'))<small><div class="error">{{ $errors->first('subdistrict_id') }}</div></small>@endif
 										</div>
 
+										<div class="input-field col s6">
+											<select class="select2 browser-default" name="category">
+												<option value="">- Pilih Kategori -</option>
+												<option value="hospital" @if(old('category')=="hospital") selected @endif>Rumah Sakit</option>
+												<option value="health center" @if(old('category')=="health center") selected @endif>Puskesmas</option>
+												<option value="clinic" @if(old('category')=="clinic") selected @endif>Klinik</option>
+												<option value="drugstore" @if(old('category')=="drugstore") selected @endif>Apotek</option>
+											</select>
+											@if ($errors->has('category'))<small><div class="error">{{ $errors->first('category') }}</div></small>@endif
+										</div>
+
+										<div class="input-field col s6">
+											<div class="file-field input-field">
+												<div class="btn waves-light cyan darken-0" style="line-height: 2rem;float: left;height: 2rem;">
+													<span>Upload Gambar</span>
+													<input type="file" name="image" >
+												</div>
+												<div class="file-path-wrapper">
+													<input class="file-path validate" type="text" style="height: 2rem;">
+												</div>
+												<span style="font-size:11px"><i>Ukuran File Tidak Boleh Lebih Dari 500 Kb (jpg,jpeg,png)</i></span>
+											</div>
+										</div>
+																
+										<div class="input-field col s6">
+											<label for="time_operation">{{ __('Waktu Operasional') }} <span class="required" style="color: #dd4b39;">*</span></label>
+											<input type="text" id="time_operation" name="time_operation" value="{{ old('time_operation') }}" style="@if ($errors->has('time_operation'))border-bottom: 2px solid #ff5252;@else color: black; @endif">
+											@if ($errors->has('time_operation'))<small><div class="error">{{ $errors->first('time_operation') }}</div></small>@endif
+										</div>
+
 										<div class="input-field col s12">
 											<label for="address">{{ __('Peta Lokasi') }}</label>
-											<input id="pac-input" class="form-control"  style="width: 70%" type="text" placeholder="Search Box"/>
+											<input id="pac-input" class="form-control"  style="width: 70%;background-color:white" type="text" placeholder="Search Box"/>
 											<div id="xmap3"></div>
 											<input type="hidden" name="lat" id="latclicked" class="form-control" value="{{ $lat }}" readonly>
 											<input type="hidden" name="long" id="longclicked" class="form-control" value="{{ $long }}" readonly>

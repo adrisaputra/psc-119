@@ -17,9 +17,9 @@ class CekStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->group_id!=1){
-            return redirect('dashboard');
-        }
+        // if(Auth::user()->group_id!=1 || Auth::user()->group_id!=2){
+        //     return redirect('dashboard');
+        // }
 
         return $next($request);
     }

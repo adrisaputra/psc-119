@@ -7,6 +7,7 @@ use App\Models\Handling;   //nama model
 use App\Models\SwitchOfficer;   //nama model
 use App\Models\Officer;   //nama model
 use App\Models\User;   //nama model
+use App\Models\Notification;   //nama model
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\BaseController;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class HandlingController extends BaseController
@@ -41,6 +43,9 @@ class HandlingController extends BaseController
 
         $handling = Complaint::whereHas('handling', function ($query) use ($user){
                         $query->where('user_id', $user->id);
+                    })->whereHas('handling', function ($query){
+                        $query->where('status', NULL)
+                            ->orWhere('status', 'accept');
                     })->orderBy('id','DESC')->get();
         return $this->sendResponse($handling, 'Data Dispatch', $request->lang);
     }
@@ -55,6 +60,20 @@ class HandlingController extends BaseController
                         $query->where('user_id', $user->id);
                     })->orderBy('id','DESC')->get();
         return $this->sendResponse($handling, 'Detail Dispatch', $request->lang);
+    }
+
+    public function last_emergency_accept(Request $request)
+    {
+        
+        $user = User::where('api_token', $request->header('token'))->first();   
+
+        $handling = Complaint::whereHas('handling', function ($query) use ($user){
+                        $query->where('user_id', $user->id);
+                    })->whereHas('handling', function ($query){
+                        $query->where('status', 'accept');
+                            // ->orWhere('status', 'done');
+                    })->orderBy('id','DESC')->limit(1)->get();
+        return $this->sendResponse($handling, 'Data Aduan terakhir Yang Ditangani', $request->lang);
     }
 
     
@@ -115,6 +134,13 @@ class HandlingController extends BaseController
             // $officer->status = 'available';
             $officer->save();
             
+            $notification = new Notification();
+            $notification->email = $complaint->user->email;
+            $notification->message = "Petugas menuju Ke lokasi anda, Harap Tunggu";
+            $notification->save();
+
+            $this->notif_accept($complaint->user->email);
+            
             return response([
                 'status' => true,
                 'message' => 'Data Aduan Diterima',
@@ -158,13 +184,13 @@ class HandlingController extends BaseController
             }
             $complaint->status = 'done';
             
-            if($request->image){
-                $image = $request->image;  // your base64 encoded
+            if($request->photo_citizen){
+                $image = $request->photo_citizen;  // your base64 encoded
                 $image = str_replace('data:image/png;base64,', '', $image);
                 $image = str_replace(' ', '+', $image);
                 $imageName = Str::random(40) . '.png';
-                $complaint->image = $imageName;
-                Storage::disk('photo_citizen')->put($imageName, base64_decode($image));
+                $complaint->photo_citizen = $imageName;
+                Storage::disk('image_done')->put($imageName, base64_decode($image));
             }
            
             $complaint->save();
@@ -202,7 +228,37 @@ class HandlingController extends BaseController
         return $this->sendResponse($complaint, 'Update Posisi Petugas', $request->lang);
     }
 
+    public function notif_accept($email)
+	{
+		/* Kirim Pesan */
+		$msg = array(
+			'body'  => 'Petugas menuju Ke lokasi anda, Harap Tunggu',
+			'title' => 'PSC-119 Kota Baubau',
+		);
 
+		$server_key = 'AAAAY7iO1dQ:APA91bFFwvftfyDKdsb24HLuuYB0S73a2o-H84eTzx5ha0Ys2H_xziYt_U_QAdQDtI51vJs5GQEw_0QnX_w-9p0t7DYlIRfpGBgrS9raUMIOLmW8X7pXeC8B5HpIrRkg0OtY1R9yJUUm';
+
+		$url            = 'https://fcm.googleapis.com/fcm/send';
+		$fields['to']           = '/topics/'.$email;
+		$fields['notification'] = $msg;
+		$headers        = array(
+			'Content-Type:application/json',
+			'Authorization:key=' . $server_key,
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		// exit;
+	}
     
 
 }

@@ -12,6 +12,9 @@ class Unit extends Model
         'name',
         'address',
         'coordinate',
+        'category',
+        'image',
+        'time_operation',
         'subdistrict_id'
     ];
     

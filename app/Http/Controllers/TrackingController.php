@@ -44,6 +44,13 @@ class TrackingController extends Controller
         $get_unit = Unit::where('id',$complaint->unit_id)->first();
         $handling = Handling::where('complaint_id',$complaint->id)->first();
         $switch_officer = SwitchOfficer::where('complaint_id',$complaint->id)->get();
-        return view('admin.tracking.detail',compact('title','complaint','category','unit','officer','get_unit','handling','switch_officer'));
+        return view('admin.tracking.detail3',compact('title','complaint','category','unit','officer','get_unit','handling','switch_officer'));
+    }
+
+    ## Tampikan Data
+    public function detail2($complaint)
+    {
+        $complaint = Complaint::where('id',$complaint)->first();
+        return $complaint;
     }
 }

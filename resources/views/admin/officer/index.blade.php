@@ -88,6 +88,9 @@
 											</td>
 											<td>{{ $v->unit->name }}</td>
 											<td>
+												@if($v->status=="noavailable")
+													<a class="mb-12 btn waves-effect waves-light blue darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/emergency_request/'.Crypt::encrypt($v->user_id) ) }}">Lihat Aduan</a>
+												@endif
 												@can('ubah-data')
 													<a class="mb-12 btn waves-effect waves-light orange darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/edit/'.Crypt::encrypt($v->id) ) }}">Edit</a>
 												@endcan

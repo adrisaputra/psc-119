@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Models\Citizen;
+use App\Models\Notification;
 use App\Mail\NotifyMail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -22,50 +23,59 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        $user = User::where('email', $request->email)->where('status','active')->where('group_id',6)->first();
-        if ($user && Hash::check($request->password, $user->password)) {
-            // check if account is not active
-            if ($user->status != 'active') {
-                return $this->sendError('Unauthorized', ['error' => 'Account blocked by system'], 401, $request->lang);
+        $user = User::where('email', $request->email)->where('group_id',6)->first();
+        if($user){
+            if (Hash::check($request->password, $user->password)) {
+                // check if account is not active
+                if ($user->status != 'active') {
+                    return $this->sendError('Gagal', ['error' => 'Mohon maaf akun belum di aktivasi, silahkan cek email aktivasi akun anda'], 401, $request->lang);
+                }
+    
+                // update token if expired
+                $this->updateToken($user);
+    
+                $user = User::select('users.id','users.name','email','email_verified_at','phone_number','address','nik',
+                                'subdistrict_id','village_id','group_id','status','photo','api_token','api_expired','users.created_at','users.updated_at')
+                    ->join('citizens', 'citizens.user_id', '=', 'users.id')
+                    ->where('email' , $request->email)
+                    ->first();   
+                    
+                return $this->sendResponse($user, 'User Login', $request->lang);
+    
+            } else {
+                return $this->sendError('Gagal', ['error' => 'Maaf Password yang anda masukkan salah'], 401, $request->lang);
             }
-
-            // update token if expired
-            $this->updateToken($user);
-
-            $user = User::select('users.id','users.name','email','email_verified_at','phone_number','address','nik',
-                            'subdistrict_id','village_id','group_id','status','photo','api_token','api_expired','users.created_at','users.updated_at')
-                ->join('citizens', 'citizens.user_id', '=', 'users.id')
-                ->where('email' , $request->email)
-                ->first();   
-                
-            return $this->sendResponse($user, 'User Login', $request->lang);
-
         } else {
-            return $this->sendError('Unauthorized', ['error' => 'Account Unauthorized or not registered'], 401, $request->lang);
+            return $this->sendError('Gagal', ['error' => 'Maaf email belum terdaftar'], 401, $request->lang);
         }
+        
     }
 
     public function login_officer(Request $request)
     {
-        $user = User::where('email', $request->email)->where('status','active')->where('group_id',3)->first();
-        if ($user && Hash::check($request->password, $user->password)) {
-            // check if account is not active
-            if ($user->status != 'active') {
-                return $this->sendError('Unauthorized', ['error' => 'Account blocked by system'], 401, $request->lang);
+        $user = User::where('name', $request->name)->where('group_id',3)->first();
+        if($user){
+            if (Hash::check($request->password, $user->password)) {
+                // check if account is not active
+                if ($user->status != 'active') {
+                    return $this->sendError('Gagal', ['error' => 'Mohon maaf akun tidak aktif, silahkan hubungi admin PSC untuk mengaktifkan'], 401, $request->lang);
+                }
+
+                // update token if expired
+                $this->updateToken($user);
+
+                $user = User::select('users.id','users.name','email','email_verified_at','phone_number','users.status','group_id','photo','api_token','api_expired','users.created_at','users.updated_at')
+                    ->join('officers', 'officers.user_id', '=', 'users.id')
+                    ->where('users.name' , $request->name)
+                    ->first();    
+                    
+                return $this->sendResponse($user, 'User Login', $request->lang);
+
+            } else {
+                return $this->sendError('Gagal', ['error' => 'Maaf Password yang anda masukkan salah'], 401, $request->lang);
             }
-
-            // update token if expired
-            $this->updateToken($user);
-
-            $user = User::select('users.id','users.name','email','email_verified_at','phone_number','users.status','group_id','photo','api_token','api_expired','users.created_at','users.updated_at')
-                ->join('officers', 'officers.user_id', '=', 'users.id')
-                ->where('email' , $request->email)
-                ->first();    
-                
-            return $this->sendResponse($user, 'User Login', $request->lang);
-
         } else {
-            return $this->sendError('Unauthorized', ['error' => 'Account Unauthorized or not registered'], 401, $request->lang);
+            return $this->sendError('Gagal', ['error' => 'Maaf user belum terdaftar'], 401, $request->lang);
         }
     }
 
@@ -106,17 +116,23 @@ class AuthController extends BaseController
                 'lang' => $request->lang
             ];
 
+            $notification = new Notification();
+            $notification->email = $request->email;
+            $notification->message = "Registrasi berhasil, Silahkan Cek Email Untuk Aktivasi";
+            $notification->save();
+
+            $this->notif_registration($data);
             $this->sendEmail($data);
 
         } catch (\Throwable $th) {
-            return $this->sendError('Email Not Exists', $th, 401, $request->lang);
+            return $this->sendError('Email Tidak Terdaftar', $th, 401, $request->lang);
         }
 
 
         // Create New User
         $user = new User();
-        $user->fill($request->all());
-
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->password  = Hash::make($request->password);
         $user->status    = 'block';
         $user->api_token = $token;
@@ -133,7 +149,8 @@ class AuthController extends BaseController
         $citizen->user_id = $user->id;
         $citizen->save();
         
-        return $this->sendResponse([], 'Successfully registered new account. Check your email for verification', $request->lang);
+        
+        return $this->sendResponse(['Registrasi akun berhasil. Silahkan cek email untuk verfikasi akun'],'Berhasil', $request->lang);
     }
 
     /**
@@ -145,7 +162,7 @@ class AuthController extends BaseController
 
         
         if (is_null($user)) {
-            return $this->sendError('Email not registered', ['error' => 'Email not registered'], 401, $request->lang);
+            return $this->sendError('Email Tidak Terdaftar', ['error' => 'Email Tidak Terdaftar'], 401, $request->lang);
         } else {
             $new_password = Str::random(8);
         
@@ -167,7 +184,7 @@ class AuthController extends BaseController
             $user->password  = Hash::make($new_password);
             $user->save();
 
-            return $this->sendResponse([], 'Successfully reset password, Check your email for new password', $request->lang);
+            return $this->sendResponse(['Berhasil reset password, cek email anda untuk password baru'], 'Berhasil', $request->lang);
         }
     }
 
@@ -192,7 +209,7 @@ class AuthController extends BaseController
     {
         Mail::to($data['email'])->send(new NotifyMail($data));
         if (Mail::flushMacros()) {
-            return $this->sendError('Email Not Exists', ['error' => 'Email Not Exist'], 401, $data['lang']);
+            return $this->sendError('Email Tidak Terdaftar', ['error' => 'Email Tidak Terdaftar'], 401, $data['lang']);
         }
 
         return;
@@ -226,4 +243,36 @@ class AuthController extends BaseController
             return $this->sendError('Token Not Exists', ['error' => '-'], 401, $request->lang);
         }
     }
+    
+    public function notif_registration($data)
+	{
+		/* Kirim Pesan */
+		$msg = array(
+			'body'  => 'Registrasi berhasil, Silahkan Cek Email Untuk Aktivasi',
+			'title' => 'INFO PSC-119 Kota Baubau',
+		);
+
+		$server_key = 'AAAAY7iO1dQ:APA91bFFwvftfyDKdsb24HLuuYB0S73a2o-H84eTzx5ha0Ys2H_xziYt_U_QAdQDtI51vJs5GQEw_0QnX_w-9p0t7DYlIRfpGBgrS9raUMIOLmW8X7pXeC8B5HpIrRkg0OtY1R9yJUUm';
+
+		$url            = 'https://fcm.googleapis.com/fcm/send';
+		$fields['to']           = '/topics/'.$data['email'];
+		$fields['notification'] = $msg;
+		$headers        = array(
+			'Content-Type:application/json',
+			'Authorization:key=' . $server_key,
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+		$result = curl_exec($ch);
+		curl_close($ch);
+
+		// exit;
+	}
 }

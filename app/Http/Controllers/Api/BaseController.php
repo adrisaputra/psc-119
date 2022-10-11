@@ -191,7 +191,7 @@ class BaseController extends Controller
     {
         if ($this->checkExpirationToken($user->api_expired) == true) {
             $user->api_token    = Str::random(36);
-            $user->api_expired  = date('Y-m-d H:i:s', strtotime('+1 day', strtotime(date('Y-m-d H:i:s'))));
+            $user->api_expired  = date('Y-m-d H:i:s', strtotime('+1 weeks', strtotime(date('Y-m-d H:i:s'))));
             $user->save();
         }
     }
@@ -285,4 +285,7 @@ class BaseController extends Controller
 
         return response()->json($resposnse ?? []);
     }
+
+    
+
 }
