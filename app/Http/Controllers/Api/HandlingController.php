@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\BaseController;
 use Illuminate\Support\Facades\Storage;
+use App\Events\UpdatePositionEvent;
 use Image;
 
 class HandlingController extends BaseController
@@ -219,13 +220,47 @@ class HandlingController extends BaseController
 
     public function update_position_officer(Request $request)
     {
-        $user = User::where('api_token', $request->header('token'))->first();   
+        //$user = User::where('api_token', $request->header('token'))->first();   
 
+        // $complaint = Complaint::where('id',$request->id)->first();
+        // $complaint->fill($request->all());
+    	// $complaint->save();
+
+        // return $this->sendResponse($complaint, 'Update Posisi Petugas', $request->lang);
+
+        //$token = $request->header('token');
+        $id = $request->id;
+        $coordinate_officer = $request->coordinate_officer;
         $complaint = Complaint::where('id',$request->id)->first();
-        $complaint->fill($request->all());
-    	$complaint->save();
+        $account_detail = [
+                            'id'=>$id,
+                            'ticket_number'=>$complaint->ticket_number,
+                            'phone_number'=>$complaint->phone_number,
+                            'name'=>$complaint->name,
+                            'incident_area'=>$complaint->incident_area,
+                            'summary'=>$complaint->summary,
+                            'category_id'=>$complaint->category_id,
+                            'psc'=>$complaint->psc,
+                            'status'=>$complaint->status,
+                            'unit_id'=>$complaint->unit_id,
+                            'coordinate_citizen'=>$complaint->coordinate_citizen,
+                            'coordinate_officer'=>$coordinate_officer,
+                            'image'=>$complaint->image,
+                            'photo_citizen'=>$complaint->photo_citizen,
+                            'description'=>$complaint->description,
+                            'reason'=>$complaint->reason,
+                            'report_type'=>$complaint->report_type,
+                            'handling_status'=>$complaint->handling_status,
+                            'reference_place'=>$complaint->reference_place,
+                            'user_id'=>$complaint->user_id,
+                            'created_at'=>$complaint->created_at,
+                            'updated_at'=>$complaint->updated_at
+                        ];
 
-        return $this->sendResponse($complaint, 'Update Posisi Petugas', $request->lang);
+        $event = '';
+        event(new UpdatePositionEvent($account_detail));
+        
+        return $this->sendResponse($account_detail, 'Update Posisi Petugas', $request->lang);
     }
 
     public function notif_accept($email)

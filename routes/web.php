@@ -32,6 +32,7 @@ use App\Http\Controllers\SubMenuAccessController;
 use App\Http\Controllers\SubMenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PrivacyPoliceController;
+use App\Events\UpdatePositionEvent;
 use Carbon\Carbon;
 
 /*
@@ -74,6 +75,10 @@ Route::get('phpmyinfo', function () {
 
 // testing email
 Route::get('/email_verification', [RegistrasiController::class, 'email_verification']);
+
+// Route::get('/sender', function () {
+//     UpdatePositionEvent::dispatch('hello');
+// });
 
 Route::post('/login_w', [LoginController::class, 'authenticate']);
 Route::get('registrasi_w', [RegistrasiController::class, 'registrasi']);
@@ -334,4 +339,5 @@ Route::middleware(['cek_status'])->group(function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/get_city', [ComplaintController::class, 'get_city']);
 Route::get('/privacypolicy', [PrivacyPoliceController::class, 'index'])->name('privacypolicy');

@@ -101,7 +101,8 @@ class ProfileController extends BaseController
                     'address'     => 'required',
                     'email'    => 'required|email',
                     'nik' => 'required|numeric|digits:16',
-                    'village_id' => 'required'
+                    'subdistrict_id' => 'required',
+                    'village_id' => 'required',
                 ]);
                 
                 // // return message if validation not passed

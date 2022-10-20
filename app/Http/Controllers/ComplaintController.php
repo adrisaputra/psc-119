@@ -130,40 +130,50 @@ class ComplaintController extends Controller
     ## Simpan Data
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'phone_number' => 'numeric|required',
-            'incident_area' => 'required',
-            'summary' => 'required',
-            'category_id' => 'required'
-        ]);
-
-		$uuid = Str::uuid()->toString();
-
-        $complaint = new Complaint();
-        $complaint->id = $uuid;
-		$complaint->ticket_number = "SPGDT".date('YmdHis');
-		$complaint->name = $request->name;
-		$complaint->phone_number = $request->phone_number;
-		$complaint->incident_area = $request->incident_area;
-		$complaint->summary = $request->summary;
-		$complaint->category_id = $request->category_id;
-		$complaint->psc = 'Baubau';
-		$complaint->status = 'process';
-		$complaint->unit_id = $request->unit_id;
-		$complaint->report_type = 'phone';
-		$complaint->coordinate_citizen = $request->lat.', '.$request->long;
-		$complaint->user_id = Auth::user()->id;
-        $complaint->save();
+        $coordinate = $request->lat.',%20'.$request->long;
+        $check_location = $this->get_city($coordinate);
 		
-        $officer = Officer::where('unit_id',$request->unit_id)->first();
-        $handling = new Handling();
-		$handling->complaint_id = $uuid;
-		$handling->user_id = $officer->user_id;
-        $handling->save();
-		
-        activity()->log('Tambah Data Aduan');
-		return redirect('/process_complaint')->with('status','Data Tersimpan');
+        if (stripos($check_location, "Bau-Bau City") !== false || stripos($check_location, "Kota Bau-Bau") !== false) {
+            
+            $this->validate($request, [
+                'name' => 'required',
+                'phone_number' => 'numeric|required',
+                'incident_area' => 'required',
+                'summary' => 'required',
+                'category_id' => 'required'
+            ]);
+
+            $uuid = Str::uuid()->toString();
+
+            $complaint = new Complaint();
+            $complaint->id = $uuid;
+            $complaint->ticket_number = "SPGDT".date('YmdHis');
+            $complaint->name = $request->name;
+            $complaint->phone_number = $request->phone_number;
+            $complaint->incident_area = $request->incident_area;
+            $complaint->summary = $request->summary;
+            $complaint->category_id = $request->category_id;
+            $complaint->psc = 'Baubau';
+            $complaint->status = 'process';
+            $complaint->unit_id = $request->unit_id;
+            $complaint->report_type = 'phone';
+            $complaint->coordinate_citizen = $request->lat.', '.$request->long;
+            $complaint->user_id = Auth::user()->id;
+            $complaint->save();
+            
+            $officer = Officer::where('unit_id',$request->unit_id)->first();
+            $handling = new Handling();
+            $handling->complaint_id = $uuid;
+            $handling->user_id = $officer->user_id;
+            $handling->save();
+            
+            activity()->log('Tambah Data Aduan');
+            return redirect('/process_complaint')->with('status','Data Tersimpan');
+        } else {
+            $array = explode(',', $check_location);
+            return redirect('/incoming_complaint/create')->with('status2', 'Lokasi Berada Di Luar Kota Baubau ('.$array[1].' )');
+        }
+        
     }
 
     ## Tampilkan Form Edit
@@ -260,68 +270,77 @@ class ComplaintController extends Controller
     ## Process Data
     public function process(Request $request, $complaint)
     {
+        $coordinate = $request->lat.',%20'.$request->long;
+        $check_location = $this->get_city($coordinate);
+		
+        if (stripos($check_location, "Bau-Bau City") !== false || stripos($check_location, "Kota Bau-Bau") !== false) {
+           
+            $complaint = Crypt::decrypt($complaint);
+            $complaint = Complaint::where('id',$complaint)->first();
+
+            if($complaint->report_type=="complaint"){
+                
+                $complaint->fill($request->all());
+                $complaint->coordinate_citizen = $request->lat.', '.$request->long;
+                $complaint->status = "process";
+                $complaint->save();
+                
+                $officer = Officer::where('unit_id',$request->unit_id)->first();
+                $officer->status = 'noavailable';
+                $officer->save();
+
+                $handling = Handling::where('complaint_id',$complaint->id)->first();
+                $handling->status = NULL;
+                $handling->user_id = $officer->user_id;
+                $handling->save();
+
+                $notification = new Notification();
+                $notification->email = $officer->user->email;
+                $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
+                $notification->save();
+
+                $this->notif_handling($officer->user->email);
+
+                activity()->log('Proses Data Aduan dengan ID = '.$complaint->id);
+                return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
+
+            } else if($complaint->report_type=="emergency" || $complaint->report_type=="phone"){
+                
+                $this->validate($request, [
+                    'incident_area' => 'required',
+                    'summary' => 'required',
+                    'category_id' => 'required'
+                ]);
         
-        $complaint = Crypt::decrypt($complaint);
-        $complaint = Complaint::where('id',$complaint)->first();
+                $complaint->fill($request->all());
+                $complaint->coordinate_citizen = $request->lat.', '.$request->long;
+                $complaint->status = "process";
+                $complaint->save();
+                
+                $officer = Officer::where('unit_id',$request->unit_id)->first();
+                $officer->status = 'noavailable';
+                $officer->save();
 
-        if($complaint->report_type=="complaint"){
-            
-            $complaint->fill($request->all());
-            $complaint->coordinate_citizen = $request->lat.', '.$request->long;
-            $complaint->status = "process";
-            $complaint->save();
-            
-            $officer = Officer::where('unit_id',$request->unit_id)->first();
-            $officer->status = 'noavailable';
-            $officer->save();
+                $handling = Handling::where('complaint_id',$complaint->id)->first();
+                $handling->status = NULL;
+                $handling->user_id = $officer->user_id;
+                $handling->save();
 
-            $handling = Handling::where('complaint_id',$complaint->id)->first();
-            $handling->status = NULL;
-            $handling->user_id = $officer->user_id;
-            $handling->save();
+                $notification = new Notification();
+                $notification->email = $officer->user->email;
+                $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
+                $notification->save();
 
-            $notification = new Notification();
-            $notification->email = $officer->user->email;
-            $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
-            $notification->save();
+                $this->notif_handling($officer->user->email);
 
-            $this->notif_handling($officer->user->email);
-
-            activity()->log('Proses Data Aduan dengan ID = '.$complaint->id);
-            return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
-
-        } else if($complaint->report_type=="emergency" || $complaint->report_type=="phone"){
-            
-            $this->validate($request, [
-                'incident_area' => 'required',
-                'summary' => 'required',
-                'category_id' => 'required'
-            ]);
-    
-            $complaint->fill($request->all());
-            $complaint->coordinate_citizen = $request->lat.', '.$request->long;
-            $complaint->status = "process";
-            $complaint->save();
-            
-            $officer = Officer::where('unit_id',$request->unit_id)->first();
-            $officer->status = 'noavailable';
-            $officer->save();
-
-            $handling = Handling::where('complaint_id',$complaint->id)->first();
-            $handling->status = NULL;
-            $handling->user_id = $officer->user_id;
-            $handling->save();
-
-            $notification = new Notification();
-            $notification->email = $officer->user->email;
-            $notification->message = "Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti";
-            $notification->save();
-
-            $this->notif_handling($officer->user->email);
-
-            activity()->log('Proses Data Emergency dengan ID = '.$complaint->id);
-            return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
+                activity()->log('Proses Data Emergency dengan ID = '.$complaint->id);
+                return redirect('/process_complaint')->with('status', 'Data Berhasil Diproses');
+            }
+        } else {
+            $array = explode(',', $check_location);
+            return redirect('/incoming_complaint/detail/'.$complaint)->with('status2', 'Lokasi Berada Di Luar Kota Baubau ('.$array[1].' )');
         }
+        
         
     }
 
@@ -444,4 +463,31 @@ class ComplaintController extends Controller
 
 		// exit;
 	}
+
+    public function get_city($coordinate){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$coordinate.'&sensor=true&key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            ': '
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        $data = json_decode($response, TRUE);
+        // $get_city  =  json_encode($data['results'][1]['address_components'][5]['long_name']);
+        $get_city  = json_encode($data['plus_code']['compound_code']);
+        // ## String Ke Array
+        $city_name = json_decode($get_city, TRUE);
+        return $city_name;    
+     }
 }

@@ -42,6 +42,17 @@
 									<p style="text-align:center;font-size:20px;font-weight:bold">Tambah {{ __($title) }}</p>
 									<div class="col s12">
 
+									 	@if ($message = Session::get('status2')) 
+										<div class="col s12">
+											<div class="card-alert card red">
+												<div class="card-content white-text">
+												<p style="font-size:24px"><i class="icon fa fa-times"></i> Gagal !</p>
+												<p>{{ $message}}</p>
+												</div>
+											</div>
+										</div>
+										@endif
+									
 										<div class="input-field col s6">
 											<label for="name">{{ __('Nama Penelepon') }} <span class="required" style="color: #dd4b39;">*</span></label>
 											<input type="text" id="name" name="name" value="{{ old('name') }}" style="@if ($errors->has('name'))border-bottom: 2px solid #ff5252;@else color: black; @endif">

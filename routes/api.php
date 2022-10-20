@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
 use App\Http\Controllers\Api\CallNumberController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\DeviceController;
 use App\Http\Controllers\Api\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,7 @@ Route::controller(ResourceController::class)->group(function() {
 // 
 Route::controller(ComplaintController::class)->group(function() {
     Route::get('complaint', 'index');
+    Route::get('get_city', 'get_city');
     Route::post('medical_request/{report_type}', 'store');
 });
 
@@ -110,6 +112,11 @@ Route::controller(NotificationController::class)->group(function() {
     Route::get('notification', 'index');
     Route::post('delete_notification', 'delete');
     Route::post('clear_notification', 'clear');
+});
+
+Route::controller(DeviceController::class)->group(function() {
+    Route::get('get_device_id', 'index');
+    Route::post('update_device_id', 'update');
 });
 
 Route::controller(SettingController::class)->group(function() {

@@ -29,6 +29,22 @@ class UnitController extends BaseController
                             ,'subdistricts.name as subdistrict_name','units.created_at as created_at','units.updated_at as updated_at')
                     ->join('subdistricts', 'subdistricts.id', '=', 'units.subdistrict_id')
                     ->get();
-        return $this->sendResponse($unit, 'Data Faskes', $request->lang);
+
+        $resultData = array();
+        foreach($unit as $v){
+            $resultData[] = array(
+                'id'=>$v->id,
+                'name'=>$v->name,
+                'address'=>$v->address,
+                'coordinate'=>$v->coordinate,
+                'category'=>$v->category,
+                'image'=>url('/').'/storage/upload/unit/thumbnail/'.$v->image,
+                'time_operation'=>$v->time_operation,
+                'subdistrict_name'=>$v->subdistrict_name,
+                'created_at'=>$v->created_at,
+                'updated_at'=>$v->updated_at
+            );
+        }
+        return $this->sendResponse($resultData, 'Data Faskes', $request->lang);
     }
 }

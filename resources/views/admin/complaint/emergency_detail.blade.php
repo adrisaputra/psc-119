@@ -41,6 +41,17 @@
 
 								<div class="col s12 " style="overflow-x:auto;">
 								
+								@if ($message = Session::get('status2')) 
+								<div class="col s12">
+									<div class="card-alert card red">
+										<div class="card-content white-text">
+										<p style="font-size:24px"><i class="icon fa fa-times"></i> Gagal !</p>
+										<p>{{ $message}}</p>
+										</div>
+									</div>
+								</div>
+								@endif
+									
 								@if($complaint->status=="process" || $complaint->status=="dispatch")
 								<table class="highlight" style="margin-top:20px">
 										<thead>
