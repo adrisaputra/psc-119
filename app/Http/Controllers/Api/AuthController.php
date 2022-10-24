@@ -184,7 +184,7 @@ class AuthController extends BaseController
             $user->password  = Hash::make($new_password);
             $user->save();
 
-            return $this->sendResponse(['Berhasil reset password, cek email anda untuk password baru'], 'Berhasil', $request->lang);
+            return $this->sendResponse(['Berhasil Reset Akun, Silahkan cek akun email anda untuk mendapatkan password reset anda'], 'Berhasil', $request->lang);
         }
     }
 

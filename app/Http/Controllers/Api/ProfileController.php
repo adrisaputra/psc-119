@@ -149,11 +149,11 @@ class ProfileController extends BaseController
     
     public function profile_officer(Request $request)
     {
-        $user = User::where('email' , $request->email)->where('api_token', $request->header('token'))->first(); 
+        $user = User::where('api_token', $request->header('token'))->first(); 
          
         $user = User::select('users.id','users.name','email','email_verified_at','phone_number','users.status','group_id','photo','api_token','api_expired','users.created_at','users.updated_at')
                 ->join('officers', 'officers.user_id', '=', 'users.id')
-                ->where('email' , $request->email)->where('api_token', $request->header('token'))
+                ->where('email' , $user->email)->where('api_token', $request->header('token'))
                 ->first();    
         
         if($user){

@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\SubdistrictController;
 use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\UnitController;
 use App\Http\Controllers\Api\UnitServiceController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CallNumberController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\DeviceController;
@@ -86,6 +87,7 @@ Route::controller(HandlingController::class)->group(function() {
 
 Route::controller(AnnouncementController::class)->group(function() {
     Route::get('announcement', 'index');
+    Route::get('detail_announcement/{announcement}', 'detail');
 });
 
 Route::controller(VillageController::class)->group(function() {
@@ -102,6 +104,10 @@ Route::controller(UnitController::class)->group(function() {
 
 Route::controller(UnitServiceController::class)->group(function() {
     Route::get('medical_service', 'index');
+});
+
+Route::controller(CategoryController::class)->group(function() {
+    Route::get('category', 'index');
 });
 
 Route::controller(CallNumberController::class)->group(function() {

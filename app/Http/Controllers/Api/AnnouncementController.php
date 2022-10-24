@@ -17,4 +17,9 @@ class AnnouncementController extends BaseController
         return $this->sendResponse($announcement, 'Data Pengumuman', $request->lang);
     }
 
+    public function detail(announcement $announcement)
+    {
+        return $this->sendResponse($announcement, 'Detail Pengumuman', 'id');
+    }
+
 }

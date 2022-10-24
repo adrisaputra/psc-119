@@ -34,7 +34,7 @@ class UnitController extends Controller
     {
         $title = "Puskesmas";
         $unit = $request->get('search');
-        $unit = Unit::where('title', 'LIKE', '%'.$unit.'%')
+        $unit = Unit::where('name', 'LIKE', '%'.$unit.'%')
                 ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         
         return view('admin.unit.index',compact('title','unit'));
