@@ -60,7 +60,6 @@ class ProfileController extends BaseController
                 if (!(Hash::check($request->get('current-password'), $user->password))) {
                     $validator = Validator::make($request->all(), [
                         'email' => 'required|email',
-                        'photo' => 'mimes:jpg,jpeg,png|max:300',
                         'current-password' => 'string|confirmed'
                     ]);
                 } else {
@@ -111,7 +110,7 @@ class ProfileController extends BaseController
                 }
             }
             
-            $user->fill($request->all());
+            // $user->fill($request->all());
             if($request->password){
                 $user->password = Hash::make($request->password);
             } else {
@@ -121,7 +120,7 @@ class ProfileController extends BaseController
     
             if($request->photo){
                 $photo = $request->photo;
-                $folderPath = "upload/photo/"; //path location
+                $folderPath = "public/upload/photo/"; //path location
                 
                 $photo = str_replace('data:image/png;base64,', '', $photo);
                 $photo = str_replace(' ', '+', $photo);
@@ -131,13 +130,21 @@ class ProfileController extends BaseController
                 file_put_contents($file, base64_decode($photo));
             }
     
+            $user->email = $request->email;
+            $user->name = $request->name;
             $user->save();
     
-            $citizen->fill($request->all());
+            // $citizen->fill($request->all());
+            $citizen->name = $request->name;
+            $citizen->phone_number = $request->phone_number;
+            $citizen->address = $request->address;
+            $citizen->nik = $request->nik;
+            $citizen->subdistrict_id = $request->subdistrict_id;
+            $citizen->village_id = $request->village_id;
             $citizen->save();
     
             
-            return $this->sendResponse([], 'Successfully update profile', $request->lang);
+            return $this->sendResponse([], 'Berhasil update profile', $request->lang);
         } else {
             return $this->sendError('Unauthorized', ['error' => 'Account Unauthorized or not registered'], 401, $request->lang);
         }
@@ -177,7 +184,6 @@ class ProfileController extends BaseController
                 if (!(Hash::check($request->get('current-password'), $user->password))) {
                     $validator = Validator::make($request->all(), [
                         'name' => 'required|string|alpha_dash',
-                        'photo' => 'mimes:jpg,jpeg,png|max:300',
                         'current-password' => 'string|confirmed'
                     ]);
                 } else {
@@ -232,7 +238,7 @@ class ProfileController extends BaseController
     
             if($request->photo){
                 $photo = $request->photo;
-                $folderPath = "upload/photo/"; //path location
+                $folderPath = "public/upload/photo/"; //path location
                 
                 $photo = str_replace('data:image/png;base64,', '', $photo);
                 $photo = str_replace(' ', '+', $photo);
@@ -247,7 +253,7 @@ class ProfileController extends BaseController
             $officer->phone_number = $request->phone_number;
             $officer->save();
             
-            return $this->sendResponse([], 'Successfully update profile', $request->lang);
+            return $this->sendResponse([], 'Berhasil update profile', $request->lang);
     
         } else {
             return $this->sendError('Unauthorized', ['error' => 'Account Unauthorized or not registered'], 401, $request->lang);
