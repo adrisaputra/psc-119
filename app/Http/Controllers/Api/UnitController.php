@@ -18,7 +18,11 @@ class UnitController extends BaseController
                     ->select('units.id as id','units.name as name','address','coordinate','category','image','time_operation'
                             ,'subdistricts.name as subdistrict_name','units.created_at as created_at','units.updated_at as updated_at')
                     ->join('subdistricts', 'subdistricts.id', '=', 'units.subdistrict_id')
-                    ->where('units.name', 'LIKE', '%'.$search.'%')
+                    ->where(function ($query) use ($search){
+                        $query->where('units.name', 'LIKE', '%'.$search.'%')
+                            ->orWhere('units.address', 'LIKE', '%'.$search.'%')
+                            ->orWhere('units.time_operation', 'LIKE', '%'.$search.'%');
+                    })
                     ->where('category', 'LIKE', '%'.$category.'%')
                     ->get();
 

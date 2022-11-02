@@ -40,8 +40,8 @@ class ComplaintController extends BaseController
     {
         $user = User::where('api_token', $request->header('token'))->first();   
 
-        $complaint = Complaint::where('user_id',$user->id)->orderBy('id','DESC')->get();
-        return $this->sendResponse($complaint, 'Data Device', $request->lang);
+        $complaint = Complaint::where('user_id',$user->id)->orderBy('created_at','DESC')->first();
+        return $this->sendResponse($complaint, 'Data Aduan', $request->lang);
     }
 
     ## Simpan Data
@@ -96,6 +96,23 @@ class ComplaintController extends BaseController
                 }
         
                 $complaint->coordinate_citizen = $request->coordinate_citizen;
+                
+                $lat_long = explode(", ", $complaint->coordinate_citizen); 
+                if($complaint->coordinate_citizen){
+                    $unit = Unit::select("units.*"
+                            ,DB::raw("6371 * acos(cos(radians(" . $lat_long[0] . ")) 
+                            * cos(radians(SUBSTRING_INDEX(coordinate, ',', 1))) 
+                            * cos(radians(SUBSTRING_INDEX(coordinate, ',', -1)) - radians(" . $lat_long[1] . ")) 
+                            + sin(radians(" .$lat_long[0]. ")) 
+                            * sin(radians(SUBSTRING_INDEX(coordinate, ',', 1)))) AS distance"))
+                            ->whereHas('officer', function ($query) {
+                                $query->where('status','available');
+                            })->orderBy('distance','ASC')->first();
+
+                    
+                    $complaint->coordinate_officer = $unit->coordinate;
+                }
+                
                 $complaint->user_id = $user->id;
                 $complaint->save();
                 

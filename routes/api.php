@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Profile2Controller;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ResourceController;
 use App\Http\Controllers\Api\ComplaintController;
@@ -47,6 +48,9 @@ Route::controller(ProfileController::class)->group(function() {
     Route::get('profile', 'profile');
     Route::post('profile', 'update');
     Route::get('profile_officer', 'profile_officer');
+});
+
+Route::controller(Profile2Controller::class)->group(function() {
     Route::post('profile_officer', 'update_officer');
 });
 

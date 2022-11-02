@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use App\Models\Citizen;
 use App\Models\Officer;
+use App\Models\Village;   //nama model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Api\BaseController;
@@ -41,8 +42,29 @@ class ProfileController extends BaseController
                 ->where('email' , $request->email)->where('api_token', $request->header('token'))
                 ->first();   
 
+         // $resultData = array();
+            $resultData = array(
+                'id'=>$user->id,
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'email_verified_at'=>$user->email_verified_at,
+                'phone_number'=>$user->phone_number,
+                'address'=>$user->address,
+                'nik'=>$user->nik,
+                'subdistrict_id'=>$user->subdistrict_id,
+                'village_id'=>$user->village_id,
+                'group_id'=>$user->group_id,
+                'status'=>$user->status,
+                'photo'=>url('/').'/upload/photo/'.$user->photo,
+                'api_token'=>$user->api_token,
+                'api_expired'=>$user->api_expired,
+                'created_at'=>$user->created_at,
+                'updated_at'=>$user->updated_at,
+                'profile_photo_url'=>$user->profile_photo_url
+            );
+
         if($user){
-            return $this->sendResponse($user, 'Profile Data', $request->lang);
+            return $this->sendResponse($resultData, 'Profile Data', $request->lang);
         } else {
             return $this->sendError('Token Invalid', ['error' => 'Token not pair in your account'], 401, $request->lang);
         }
@@ -139,8 +161,9 @@ class ProfileController extends BaseController
             $citizen->phone_number = $request->phone_number;
             $citizen->address = $request->address;
             $citizen->nik = $request->nik;
-            $citizen->subdistrict_id = $request->subdistrict_id;
             $citizen->village_id = $request->village_id;
+            $subdistrict = Village::where('id',$request->village_id)->first();
+            $citizen->subdistrict_id = $subdistrict->subdistrict_id;
             $citizen->save();
     
             
@@ -162,9 +185,25 @@ class ProfileController extends BaseController
                 ->join('officers', 'officers.user_id', '=', 'users.id')
                 ->where('email' , $user->email)->where('api_token', $request->header('token'))
                 ->first();    
-        
+
+        $resultData = array(
+            'id'=>$user->id,
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'email_verified_at'=>$user->email_verified_at,
+            'phone_number'=>$user->phone_number,
+            'status'=>$user->status,
+            'group_id'=>$user->group_id,
+            'photo'=>url('/').'/upload/photo/'.$user->photo,
+            'api_token'=>$user->api_token,
+            'api_expired'=>$user->api_expired,
+            'created_at'=>$user->created_at,
+            'updated_at'=>$user->updated_at,
+            'profile_photo_url'=>$user->profile_photo_url
+        );
+
         if($user){
-            return $this->sendResponse($user, 'Profile Data', $request->lang);
+            return $this->sendResponse($resultData, 'Profile Data', $request->lang);
         } else {
             return $this->sendError('Token Invalid', ['error' => 'Token not pair in your account'], 401, $request->lang);
         }

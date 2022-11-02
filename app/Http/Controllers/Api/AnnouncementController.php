@@ -31,8 +31,9 @@ class AnnouncementController extends BaseController
         return $this->sendResponse($resultData, 'Data Pengumuman', $request->lang);
     }
 
-    public function detail(announcement $announcement)
+    public function detail($id)
     {
+        $announcement = Announcement::where('id',$id)->first();
         $resultData = array(
             'id'=>$announcement->id,
             'title'=>$announcement->title,
@@ -43,7 +44,12 @@ class AnnouncementController extends BaseController
             'created_at'=>$announcement->created_at,
             'updated_at'=>$announcement->updated_at
         );
-        return $this->sendResponse($resultData, 'Detail Pengumuman', 'id');
+
+        if($announcement){
+            return $this->sendResponse($resultData, 'Detail Pengumuman', 'id');
+        } else {
+            return $this->sendError('Token Invalid', ['error' => 'Token not pair in your account'], 401, $request->lang);
+        }
     }
 
 }
