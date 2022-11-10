@@ -62,7 +62,7 @@ class OfficerController extends Controller
             'email' => 'required|unique:users',
             'phone_number' => 'required',
             'address' => 'required',
-            'unit_id' => 'required|unique:officers',
+            'unit_id' => 'required',
         ]);
 
         $user = new User();
@@ -147,6 +147,16 @@ class OfficerController extends Controller
     {
         $officer = Officer::where('unit_id',$unit)->get();
         return view('admin.ambulance.get_officer',compact('officer'));
+    }
+
+    public function get2($unit)
+    {
+        $officer = Officer::where('unit_id',$unit)->get();
+        
+        echo "<option value=''>- Pilih Petugas -</option>";
+        foreach($officer as $v){
+            echo "<option value='".$v->id."' >".$v->name."</option>";
+        }
     }
 
     public function emergency_request($user)

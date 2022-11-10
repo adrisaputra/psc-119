@@ -22,7 +22,7 @@ class Profile2Controller extends BaseController
     public function update_officer(Request $request)
     {
         
-        $user = User::where('name' , $request->name)->where('group_id' , 3)->first();  
+        $user = User::where('email', $request->name)->where('group_id', 3)->first();  
 
         if($user){
             
@@ -31,7 +31,7 @@ class Profile2Controller extends BaseController
             if($request->get('current-password')){
                 if (!(Hash::check($request->get('current-password'), $user->password))) {
                     $validator = Validator::make($request->all(), [
-                        'name' => 'required|string|alpha_dash',
+                        // 'name' => 'required|string|alpha_dash',
                         'current-password' => 'string|confirmed'
                     ]);
                 } else {
@@ -40,7 +40,7 @@ class Profile2Controller extends BaseController
                         if(!(strcmp($request->get('password'), $request->get('password_confirmation'))) == 0){
                             if($request->password){
                                 $validator = Validator::make($request->all(), [
-                                    'name' => 'required|string|alpha_dash',
+                                    // 'name' => 'required|string|alpha_dash',
                                     'password' => 'string|min:8|confirmed'
                                 ]);
                             }
@@ -49,15 +49,16 @@ class Profile2Controller extends BaseController
     
                     if($request->password){
                         $validator = Validator::make($request->all(), [
-                            'name' => 'required|string|alpha_dash',
+                            // 'name' => 'required|string|alpha_dash',
                             'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
                             'password_confirmation' => 'min:8'
                         ]);
-                    } else {
-                        $validator = Validator::make($request->all(), [
-                            'name' => 'required|string|alpha_dash',
-                        ]);
-                    }
+                    } 
+					// else {
+                        // $validator = Validator::make($request->all(), [
+                            // 'name' => 'required|string|alpha_dash',
+                        // ]);
+                    // }
                 }
     
                 
@@ -65,18 +66,19 @@ class Profile2Controller extends BaseController
                 if ($validator->fails()) {
                     return $this->sendError2('Validation Error', ['error' => $validator->errors() ], 401, $request->lang);
                 }
-            } else {
-                $validator = Validator::make($request->all(), [
-                    'name' => 'required|string|alpha_dash',
-                ]);
+            } 
+			// else {
+                // $validator = Validator::make($request->all(), [
+                    // 'name' => 'required|string|alpha_dash',
+                // ]);
                 
-                // // return message if validation not passed
-                if ($validator->fails()) {
-                    return $this->sendError2('Validation Error', ['error' => $validator->errors() ], 401, $request->lang);
-                }
-            }
+                // return message if validation not passed
+                // if ($validator->fails()) {
+                    // return $this->sendError2('Validation Error', ['error' => $validator->errors() ], 401, $request->lang);
+                // }
+            // }
             
-            $user->fill($request->all());
+            // $user->fill($request->all());
             if($request->password){
                 $user->password = Hash::make($request->password);
             } else {
@@ -98,8 +100,8 @@ class Profile2Controller extends BaseController
     
             $user->save();
     
-            $officer->phone_number = $request->phone_number;
-            $officer->save();
+            // $officer->phone_number = $request->phone_number;
+            // $officer->save();
             
             return $this->sendResponse([], 'Berhasil update profile', $request->lang);
     

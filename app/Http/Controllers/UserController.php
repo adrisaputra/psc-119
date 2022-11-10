@@ -28,6 +28,14 @@ class UserController extends Controller
 		return view('admin.user.index',compact('title','user'));
     }
 	
+    ## Tampikan Data
+    public function index2()
+    {
+        $title = "User";
+        $user = User::onlyTrashed()->orderBy('id','DESC')->paginate(25)->onEachSide(1);
+        return view('admin.user.out',compact('title','user'));
+    }
+
 	## Tampilkan Data Search
 	public function search(Request $request)
     {
@@ -39,6 +47,19 @@ class UserController extends Controller
                         ->orWhere('email', 'LIKE', '%'.$user.'%');
                 })->orderBy('id','DESC')->paginate(10);
 		return view('admin.user.index',compact('title','user'));
+    }
+	
+	## Tampilkan Data Search
+	public function search2(Request $request)
+    {
+        $title = "User";
+        $user = $request->get('search');
+		$user = User::onlyTrashed()
+                ->where(function ($query) use ($user) {
+                    $query->where('name', 'LIKE', '%'.$user.'%')
+                        ->orWhere('email', 'LIKE', '%'.$user.'%');
+                })->orderBy('id','DESC')->paginate(10);
+		return view('admin.user.out',compact('title','user'));
     }
 	
 	## Tampilkan Form Create
@@ -133,14 +154,32 @@ class UserController extends Controller
 		return redirect('/user')->with('status', 'Data Berhasil Diubah');
     }
 
-    ## Hapus Data
+    ## Hapus Data Sementara
     public function delete($user)
     {
         $user = Crypt::decrypt($user);
         $user = User::where('id',$user)->first();
         $user->delete();
-        activity()->log('Hapus Data User dengan ID = '.$user->id);
+        activity()->log('Hapus Sementara Data User dengan ID = '.$user->id);
 		return redirect('/user')->with('status', 'Data Berhasil Dihapus');
+    }
+
+    ## Hapus Data Permanent
+    public function delete_permanent($user)
+    {
+        $user = Crypt::decrypt($user);
+        User::where('id',$user)->forcedelete();
+        activity()->log('Hapus Permanen Data User dengan ID = '.$user);
+		return redirect('/user')->with('status', 'Data Berhasil Dihapus');
+    }
+
+    ## Hapus Data
+    public function restore($user)
+    {
+        $user = Crypt::decrypt($user);
+        User::withTrashed()->where('id',$user)->restore();
+        activity()->log('Kembalikan Data User dengan ID = '.$user);
+		return redirect('/user')->with('status', 'Data Berhasil Dikembalikan');
     }
 
     ## Tampilkan Form Edit

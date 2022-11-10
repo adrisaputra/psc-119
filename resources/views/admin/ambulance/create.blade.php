@@ -55,8 +55,21 @@
 											@if ($errors->has('unit_id'))<small><div class="error">{{ $errors->first('unit_id') }}</div></small>@endif
 										</div>
 										
-										<div class="input-field col s12" id="officer" >
-										</div>
+										<div class="input-field col s12">
+										<span>Petugas</span>
+										<select class="browser-default" name="officer_id" id="officer_id" required>
+											<option value="">- Pilih Petugas -</option>
+											@if(old('unit_id'))
+												@php 
+													$officer = DB::table('officers')->where('unit_id',old('unit_id'))->get();
+												@endphp 
+												@foreach($officer as $v)
+													<option value="{{ $v->id }}" @if(old('officer_id')==$v->id) selected @endif>{{ $v->name }}</option>
+												@endforeach
+											@endif
+										</select>
+										@if ($errors->has('officer_id'))<small><div class="error">{{ $errors->first('officer_id') }}</div></small>@endif
+									</div>
 
 									</div>
 								</form>
@@ -82,11 +95,11 @@
 <script>
 	function Tampil() {
 		unit_id = document.getElementById("unit_id").value;
-		url = "{{ url('/officer/get') }}"
+		url = "{{ url('/officer/get2') }}"
 		$.ajax({
 			url:""+url+"/"+unit_id+"",
 			success: function(response){
-				$("#officer").html(response);
+				$("#officer_id").html(response);
 			}
 		});
 		return false;

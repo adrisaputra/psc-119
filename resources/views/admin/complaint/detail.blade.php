@@ -64,14 +64,14 @@
 											</tr>
 											@foreach($switch_officer as $v)
 												<tr>
-													<td>{{ $v->unit->name }}</td>
+													<td><b>{{ $v->unit->name }}</b><br>Petugas : {{ $v->officer->name }}</td>
 													<td><span class="new badge red" data-badge-caption="Ditolak"></span></td>
 													<td>{{ $v->description }}</td>
 												</tr>
 											@endforeach
 											@if($complaint->status == "process" || $complaint->status=="accept"  || $complaint->status=="done" )
 											<tr>
-												<td>{{ $get_unit->name }}</td>
+												<td><b>{{ $get_unit->name }}</b><br>Petugas : {{ $handling->user->name }}</td>
 												<td>	
 													@if($handling->status == NULL)
 														<span class="new badge orange" data-badge-caption="Dalam Proses"></span>

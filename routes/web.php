@@ -186,6 +186,7 @@ Route::middleware(['user_access'])->group(function () {
     Route::put('/officer/edit/{officer}', [OfficerController::class, 'update']);
     Route::get('/officer/hapus/{officer}',[OfficerController::class, 'delete']);
     Route::get('/officer/get/{unit}',[OfficerController::class, 'get']);
+    Route::get('/officer/get2/{unit}',[OfficerController::class, 'get2']);
     Route::get('/officer/emergency_request/{user}',[OfficerController::class, 'emergency_request']);
     Route::get('/officer/emergency_detail/{user}/{complaint}',[OfficerController::class, 'emergency_detail']);
     Route::get('/officer/accept/{user}/{complaint}', [OfficerController::class, 'accept']);
@@ -341,3 +342,10 @@ Route::middleware(['cek_status'])->group(function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/get_city', [ComplaintController::class, 'get_city']);
 Route::get('/privacypolicy', [PrivacyPoliceController::class, 'index'])->name('privacypolicy');
+
+## User Our
+Route::get('/user_out', [UserController::class, 'index2']);
+Route::get('/user_out/search', [UserController::class, 'index2']);
+Route::get('/user_out/restore/{user}', [UserController::class, 'restore']);
+Route::get('/user_out/hapus/{user}', [UserController::class, 'delete_permanent']);
+

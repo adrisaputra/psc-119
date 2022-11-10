@@ -44,7 +44,6 @@
 									<div class="card-title content-right">
 
 									</div>
-									@can('read-data')
 									<div id="view-borderless-table ">
 										<div class="row">
 
@@ -67,7 +66,8 @@
 															<th>Nama User</th>
 															<th>Email</th>
 															<th>Group</th>
-															<th>Status</th>
+															<th>Tanggal Registrasi</th>
+															<th>Tanggal Terhapus</th>
 															<th style="width: 20%">#aksi</th>
 														</tr>
 													</thead>
@@ -90,20 +90,11 @@
 																<span class="new badge yellow" data-badge-caption="{{ $v->group->group_name}}"></span>
 																@endif
 															</td>
+															<td>{{ date('d-m-Y', strtotime($v->created_at)) }}</td>
+															<td>{{ date('d-m-Y', strtotime($v->deleted_at)) }}</td>
 															<td>
-																@if ($v->status=="active")
-																<span class="new badge green" data-badge-caption="Aktif"></span>
-																@else
-																<span class="new badge red" data-badge-caption="TidakAktif"></span>
-																@endif
-															</td>
-															<td>
-																@can('ubah-data')
-																<a class="mb-12 btn waves-effect waves-light orange darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/edit/'.Crypt::encrypt($v->id) ) }}">Edit</a>
-																@endcan
-																@can('hapus-data')
-																<a class="mb-12 btn waves-effect waves-light red darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/hapus/'.Crypt::encrypt($v->id) ) }}" onclick="return confirm('Apakah anda yakin akan menghapus data ini ?');">Hapus</a>
-																@endcan
+																<a class="mb-12 btn waves-effect waves-light green darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/restore/'.Crypt::encrypt($v->id) ) }}" onclick="return confirm('Data user akan diaktifkan kembali. Apakah anda yakin ?');">Aktifkan</a>
+																<a class="mb-12 btn waves-effect waves-light red darken-1 btn-small" href="{{ url('/'.Request::segment(1).'/hapus/'.Crypt::encrypt($v->id) ) }}" onclick="return confirm('Data user akan terhapus secara permamnen. Apakah anda yakin akan menghapus data ini ?');">Hapus</a>
 															</td>
 														</tr>
 														@endforeach
@@ -113,18 +104,14 @@
 											</div>
 										</div>
 									</div>
-									@endcan
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div style="bottom: 90px; right: 19px;" class="fixed-action-btn direction-top">
-					@can('tambah-data')
-					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn-floating btn-large waves-effect waves-light green darken-2"><i class="material-icons">add</i></a>
-					@endcan
-                    	<a href="{{ url('/user_out/') }}" class="btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">people</i></a>
 					<a href="{{ url('/'.Request::segment(1)) }}" class="btn-floating btn-large waves-effect waves-light orange darken-2"><i class="material-icons">refresh</i></a>
+                    	<a href="{{ url('/user/') }}" class="btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">arrow_back</i></a>
 				</div>
 			</div>
 			<div class="content-overlay"></div>

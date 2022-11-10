@@ -33,8 +33,10 @@ class AmbulanceController extends Controller
     {
         $title = "Ambulance";
         $ambulance = $request->get('search');
-        $ambulance = Ambulance::where('police_number', 'LIKE', '%'.$ambulance.'%')
-                ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
+        $ambulance = Ambulance::
+                where(function ($query) use ($ambulance) {
+                    $query->where('police_number', 'LIKE', '%'.$ambulance.'%');
+                })->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         
         return view('admin.ambulance.index',compact('title','ambulance'));
     }
@@ -54,8 +56,8 @@ class AmbulanceController extends Controller
     {
         $this->validate($request, [
             'police_number' => 'required',
-            'unit_id' => 'required|unique:ambulances',
-            'officer_id' => 'required',
+            'unit_id' => 'required',
+            'officer_id' => 'required|unique:ambulances',
         ]);
 
 		$input['police_number'] = $request->police_number;
@@ -90,7 +92,7 @@ class AmbulanceController extends Controller
 
         $this->validate($request, [
             'police_number' => 'required',
-            'unit_id' => 'required|unique:ambulances',
+            'unit_id' => 'required',
             'officer_id' => 'required',
         ]);
 

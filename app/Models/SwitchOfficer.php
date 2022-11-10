@@ -13,6 +13,7 @@ class SwitchOfficer extends Model
         'complaint_id',
         'description',
         'unit_id',
+        'officer_id',
     ];
 
     public function complaint(){
@@ -22,5 +23,10 @@ class SwitchOfficer extends Model
     public function unit()
     {
         return $this->belongsTo('App\Models\Unit');
+    }
+
+    public function officer()
+    {
+        return $this->belongsTo('App\Models\Officer');
     }
 }

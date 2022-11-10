@@ -64,14 +64,14 @@
 											</tr>
 											@foreach($switch_officer as $v)
 												<tr>
-													<td>{{ $v->unit->name }}</td>
+													<td><b>{{ $v->unit->name }}</b><br>Petugas : {{ $v->officer->name }}</td>
 													<td><span class="new badge red" data-badge-caption="Ditolak"></span></td>
 													<td>{{ $v->description }}</td>
 												</tr>
 											@endforeach
 											@if($complaint->status == "process")
 											<tr>
-												<td>{{ $get_unit->name }}</td>
+												<td><b>{{ $get_unit->name }}</b><br>Petugas : {{ $handling->user->name }}</td>
 												<td>	
 													@if($handling->status == NULL)
 														<span class="new badge orange" data-badge-caption="Dalam Proses"></span>
@@ -175,11 +175,26 @@
 
 					<div class="input-field col s12">
 						<span>Unit</span>
-						<select class="browser-default" name="unit_id" required>
+						<select class="browser-default" name="unit_id" id="unit_id" onChange="Officer();" required>
 							<option value="">- Pilih Unit -</option>
 							@foreach($unit as $v)
 								<option value="{{ $v->id }}" @if(old('unit_id')=="$v->id") selected @endif>{{ $v->name }} @if($complaint->coordinate_citizen) ({{ number_format($v->distance,2,",",".") }} Km Dari Lokasi Kejadian) @endif</option>
 							@endforeach
+						</select>
+					</div>
+					
+					<div class="input-field col s12">
+						<span>Petugas</span>
+						<select class="browser-default" name="officer_id" id="officer_id" required>
+							<option value="">- Pilih Petugas -</option>
+							@if(old('unit_id'))
+								@php 
+									$officer = DB::table('officers')->where('unit_id',old('unit_id'))->get();
+								@endphp 
+								@foreach($officer as $v)
+									<option value="{{ $v->id }}" @if(old('officer_id')==$v->id) selected @endif>{{ $v->name }}</option>
+								@endforeach
+							@endif
 						</select>
 					</div>
 					
@@ -229,7 +244,23 @@
     </div>
     <!-- END: Page Main-->
 
-    
+
+<script>
+
+function Officer()
+{
+	unit_id = document.getElementById("unit_id").value;
+	url = "{{ url('/officer/get2') }}"
+	$.ajax({
+		url:""+url+"/"+unit_id+"",
+		success: function(response){
+			$("#officer_id").html(response);
+		}
+	});
+	return false;
+}
+
+</script>    
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
 <script>

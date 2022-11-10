@@ -26,4 +26,9 @@ class Officer extends Model
         return $this->belongsTo('App\Models\Unit');
     }
 
+    public function switch_officer()
+    {
+        return $this->hasOne('App\Models\SwitchOfficer');
+    }
+
 }

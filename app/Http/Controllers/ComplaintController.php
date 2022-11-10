@@ -285,7 +285,8 @@ class ComplaintController extends Controller
                 $complaint->status = "process";
                 $complaint->save();
                 
-                $officer = Officer::where('unit_id',$request->unit_id)->first();
+                // $officer = Officer::where('unit_id',$request->unit_id)->first();
+                $officer = Officer::where('id',$request->officer_id)->first();
                 $officer->status = 'noavailable';
                 $officer->save();
 
@@ -317,7 +318,8 @@ class ComplaintController extends Controller
                 $complaint->status = "process";
                 $complaint->save();
                 
-                $officer = Officer::where('unit_id',$request->unit_id)->first();
+                // $officer = Officer::where('unit_id',$request->unit_id)->first();
+                $officer = Officer::where('id',$request->officer_id)->first();
                 $officer->status = 'noavailable';
                 $officer->save();
 

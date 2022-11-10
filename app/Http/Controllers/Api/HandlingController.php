@@ -166,6 +166,7 @@ class HandlingController extends BaseController
             $switch_officer->complaint_id = $request->id;
             $switch_officer->description = $request->description;
             $switch_officer->unit_id = $complaint->unit_id;
+            $switch_officer->officer_id = $officer->id;
             $switch_officer->save();
 
             return response([

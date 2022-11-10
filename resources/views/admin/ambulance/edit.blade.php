@@ -59,16 +59,20 @@
 											@if ($errors->has('unit_id'))<small><div class="error">{{ $errors->first('unit_id') }}</div></small>@endif
 										</div>
 
-										<div class="input-field col s12" id="officer">
-											<select class="select2 browser-default" name="officer_id" id="officer_id">
+										<div class="input-field col s12">
+										<span>Petugas</span>
+										<select class="browser-default" name="officer_id" id="officer_id" required>
 											<option value="">- Pilih Petugas -</option>
+											@if($ambulance->unit_id)
+												@php 
+													$officer = DB::table('officers')->where('unit_id',$ambulance->unit_id)->get();
+												@endphp 
 												@foreach($officer as $v)
-													<option value="{{ $v->id }}" @if($ambulance->officer_id=="$v->id") selected @endif>{{ $v->name }}</option>
+													<option value="{{ $v->id }}" @if($ambulance->officer_id==$v->id) selected @endif>{{ $v->name }}</option>
 												@endforeach
-											</select>
-											@if ($errors->has('officer_id'))<small><div class="error">{{ $errors->first('officer_id') }}</div></small>@endif
-										</div>
-										
+											@endif
+										</select>
+										@if ($errors->has('officer_id'))<small><div class="error">{{ $errors->first('officer_id') }}</div></small>@endif
 									</div>
 								</form>
 							</div>
@@ -91,4 +95,18 @@
     </div>
     <!-- END: Page Main-->
 
+    <script>
+	function Tampil() {
+		unit_id = document.getElementById("unit_id").value;
+		url = "{{ url('/officer/get2') }}"
+		$.ajax({
+			url:""+url+"/"+unit_id+"",
+			success: function(response){
+				$("#officer_id").html(response);
+			}
+		});
+		return false;
+}
+
+</script>
 @endsection
