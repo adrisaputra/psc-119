@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         psc.projectkoding.com
--- Versi server:                 5.7.39 - MySQL Community Server (GPL)
--- OS Server:                    Linux
+-- Host:                         127.0.0.1
+-- Versi server:                 5.7.33 - MySQL Community Server (GPL)
+-- OS Server:                    Win64
 -- HeidiSQL Versi:               11.2.0.6213
 -- --------------------------------------------------------
 
@@ -12,7 +12,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- membuang struktur untuk table projectkoding_psc.activity_log
+-- membuang struktur untuk table db_psc_119.activity_log
 CREATE TABLE IF NOT EXISTS `activity_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `log_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `activity_log` (
   KEY `subject` (`subject_type`,`subject_id`),
   KEY `causer` (`causer_type`,`causer_id`),
   KEY `activity_log_log_name_index` (`log_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1025 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1582 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.activity_log: ~820 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.activity_log: ~1.263 rows (lebih kurang)
 /*!40000 ALTER TABLE `activity_log` DISABLE KEYS */;
 INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_type`, `event`, `subject_id`, `causer_type`, `causer_id`, `properties`, `batch_uuid`, `created_at`, `updated_at`) VALUES
 	(1, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 482, '[]', NULL, '2021-10-29 10:30:24', '2021-10-29 10:30:24'),
@@ -1058,10 +1058,331 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_type`, `ev
 	(1021, 'default', 'Hapus Data Tindakan dengan ID = 5', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-16 15:00:22', '2022-09-16 15:00:22'),
 	(1022, 'default', 'Hapus Data Category dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-16 15:00:31', '2022-09-16 15:00:31'),
 	(1023, 'default', 'Tambah Data Officer', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-16 15:02:37', '2022-09-16 15:02:37'),
-	(1024, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-16 19:14:25', '2022-09-16 19:14:25');
+	(1024, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-16 19:14:25', '2022-09-16 19:14:25'),
+	(1026, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:40:38', '2022-09-17 02:40:38'),
+	(1028, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:40:42', '2022-09-17 02:40:42'),
+	(1030, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:41:25', '2022-09-17 02:41:25'),
+	(1032, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:41:45', '2022-09-17 02:41:45'),
+	(1034, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:43:51', '2022-09-17 02:43:51'),
+	(1036, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:44:06', '2022-09-17 02:44:06'),
+	(1038, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:46:57', '2022-09-17 02:46:57'),
+	(1040, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:50:26', '2022-09-17 02:50:26'),
+	(1042, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:51:13', '2022-09-17 02:51:13'),
+	(1044, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 02:51:41', '2022-09-17 02:51:41'),
+	(1046, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 07:00:57', '2022-09-17 07:00:57'),
+	(1048, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 10:15:44', '2022-09-17 10:15:44'),
+	(1050, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 10:16:56', '2022-09-17 10:16:56'),
+	(1052, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 12:24:01', '2022-09-17 12:24:01'),
+	(1054, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 12:46:19', '2022-09-17 12:46:19'),
+	(1056, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 14:01:28', '2022-09-17 14:01:28'),
+	(1058, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 15:41:03', '2022-09-17 15:41:03'),
+	(1060, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 15:41:23', '2022-09-17 15:41:23'),
+	(1062, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 15:55:27', '2022-09-17 15:55:27'),
+	(1064, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 15:56:41', '2022-09-17 15:56:41'),
+	(1066, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 16:45:11', '2022-09-17 16:45:11'),
+	(1068, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 16:46:38', '2022-09-17 16:46:38'),
+	(1070, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 16:49:14', '2022-09-17 16:49:14'),
+	(1072, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 19:00:35', '2022-09-17 19:00:35'),
+	(1074, 'default', 'Ubah Data Pengaturan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 19:01:58', '2022-09-17 19:01:58'),
+	(1076, 'default', 'Ubah Data Pengaturan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 19:15:47', '2022-09-17 19:15:47'),
+	(1078, 'default', 'Ubah Data Pengaturan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 19:15:59', '2022-09-17 19:15:59'),
+	(1080, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 22:14:59', '2022-09-17 22:14:59'),
+	(1082, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 22:57:47', '2022-09-17 22:57:47'),
+	(1084, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-17 22:58:34', '2022-09-17 22:58:34'),
+	(1086, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 05:58:07', '2022-09-18 05:58:07'),
+	(1088, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 07:06:58', '2022-09-18 07:06:58'),
+	(1090, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 13:43:39', '2022-09-18 13:43:39'),
+	(1092, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 18:25:59', '2022-09-18 18:25:59'),
+	(1094, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 21:09:12', '2022-09-18 21:09:12'),
+	(1096, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 21:27:38', '2022-09-18 21:27:38'),
+	(1098, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 21:29:18', '2022-09-18 21:29:18'),
+	(1100, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 21:29:27', '2022-09-18 21:29:27'),
+	(1102, 'default', 'Ubah Data Profil dengan ID = da8248ec-1414-43f4-95c0-eb944cb7b168', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:02:26', '2022-09-18 22:02:26'),
+	(1104, 'default', 'Ubah Data Officer dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:42:10', '2022-09-18 22:42:10'),
+	(1106, 'default', 'Ubah Data Officer dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:43:32', '2022-09-18 22:43:32'),
+	(1108, 'default', 'Ubah Data Officer dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:45:14', '2022-09-18 22:45:14'),
+	(1110, 'default', 'Ubah Data Officer dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:46:59', '2022-09-18 22:46:59'),
+	(1112, 'default', 'Proses Data Aduan dengan ID = 14ea3fac-9a0e-448c-ac00-63e58b33965b', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-18 22:49:38', '2022-09-18 22:49:38'),
+	(1114, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 06:24:31', '2022-09-19 06:24:31'),
+	(1116, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 10:58:56', '2022-09-19 10:58:56'),
+	(1118, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 12:11:14', '2022-09-19 12:11:14'),
+	(1120, 'default', 'Tambah Data Announcement', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 12:17:27', '2022-09-19 12:17:27'),
+	(1122, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 13:57:25', '2022-09-19 13:57:25'),
+	(1124, 'default', 'Tambah Data Sub Menu', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 13:58:40', '2022-09-19 13:58:40'),
+	(1126, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 13:59:07', '2022-09-19 13:59:07'),
+	(1128, 'default', 'Ubah Data Telepon PSC dengan ID = 2', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 13:59:28', '2022-09-19 13:59:28'),
+	(1130, 'default', 'Ubah Data Telepon PSC dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 13:59:35', '2022-09-19 13:59:35'),
+	(1132, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 15:34:39', '2022-09-19 15:34:39'),
+	(1134, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 15:41:12', '2022-09-19 15:41:12'),
+	(1136, 'default', 'Tambah Data Subdistrict', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 16:02:55', '2022-09-19 16:02:55'),
+	(1138, 'default', 'Tambah Data Kelurahan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 16:04:09', '2022-09-19 16:04:09'),
+	(1140, 'default', 'Ubah Data Kelurahan dengan ID = 48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 16:04:20', '2022-09-19 16:04:20'),
+	(1142, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:03:04', '2022-09-19 19:03:04'),
+	(1144, 'default', 'Ubah Data Telepon PSC dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:05:14', '2022-09-19 19:05:14'),
+	(1146, 'default', 'Ubah Data Telepon PSC dengan ID = 1', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:05:44', '2022-09-19 19:05:44'),
+	(1148, 'default', 'Ubah Data Telepon PSC dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:05:58', '2022-09-19 19:05:58'),
+	(1150, 'default', 'Ubah Data Telepon PSC dengan ID = 2', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:06:11', '2022-09-19 19:06:11'),
+	(1152, 'default', 'Ubah Data User dengan ID = 6160aecf-6b09-4270-ba70-a888368b8546', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-19 19:33:50', '2022-09-19 19:33:50'),
+	(1154, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:06:39', '2022-09-20 09:06:39'),
+	(1156, 'default', 'Hapus Data Kelurahan dengan ID = 48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:07:26', '2022-09-20 09:07:26'),
+	(1158, 'default', 'Hapus Data Subdistrict dengan ID = 12', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:07:32', '2022-09-20 09:07:32'),
+	(1160, 'default', 'Tambah Data Tindakan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:13:11', '2022-09-20 09:13:11'),
+	(1162, 'default', 'Ubah Data Tindakan dengan ID = 8', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:13:21', '2022-09-20 09:13:21'),
+	(1164, 'default', 'Hapus Data Tindakan dengan ID = 8', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:13:25', '2022-09-20 09:13:25'),
+	(1166, 'default', 'Ubah Data Kategory dengan ID = 2', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:13:46', '2022-09-20 09:13:46'),
+	(1168, 'default', 'Tambah Data Category', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:14:02', '2022-09-20 09:14:02'),
+	(1170, 'default', 'Tambah Data Telepon PSC', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:46:31', '2022-09-20 09:46:31'),
+	(1172, 'default', 'Ubah Data Telepon PSC dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:46:45', '2022-09-20 09:46:45'),
+	(1174, 'default', 'Hapus Data Telepon PSC dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 09:46:49', '2022-09-20 09:46:49'),
+	(1176, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 10:23:51', '2022-09-20 10:23:51'),
+	(1178, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 14:51:30', '2022-09-20 14:51:30'),
+	(1180, 'default', 'Hapus Data Announcement dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 14:52:34', '2022-09-20 14:52:34'),
+	(1182, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 14:55:47', '2022-09-20 14:55:47'),
+	(1184, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 14:59:00', '2022-09-20 14:59:00'),
+	(1186, 'default', 'Tambah Data Category', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 15:00:24', '2022-09-20 15:00:24'),
+	(1188, 'default', 'Hapus Data Category dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 15:00:30', '2022-09-20 15:00:30'),
+	(1190, 'default', 'Hapus Data Category dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 15:00:33', '2022-09-20 15:00:33'),
+	(1192, 'default', 'Tambah Data Officer', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 15:13:52', '2022-09-20 15:13:52'),
+	(1194, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 17:08:02', '2022-09-20 17:08:02'),
+	(1196, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 19:04:43', '2022-09-20 19:04:43'),
+	(1198, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:03:20', '2022-09-20 20:03:20'),
+	(1200, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:17:27', '2022-09-20 20:17:27'),
+	(1202, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:25:45', '2022-09-20 20:25:45'),
+	(1204, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:26:52', '2022-09-20 20:26:52'),
+	(1206, 'default', 'Proses Data Aduan dengan ID = 4b026ccd-d3e9-4ea3-a055-8823ed102f4b', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:33:18', '2022-09-20 20:33:18'),
+	(1208, 'default', 'Ubah Data Aduan dengan ID = e4219c5e-4361-43e9-8902-dac6bc45f6b6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-20 20:55:28', '2022-09-20 20:55:28'),
+	(1210, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 11:34:33', '2022-09-21 11:34:33'),
+	(1212, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 13:39:02', '2022-09-21 13:39:02'),
+	(1214, 'default', 'Tambah Data User', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 14:18:28', '2022-09-21 14:18:28'),
+	(1216, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 14:51:04', '2022-09-21 14:51:04'),
+	(1218, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:01:28', '2022-09-21 15:01:28'),
+	(1220, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:01:42', '2022-09-21 15:01:42'),
+	(1222, 'default', 'Tambah Data User', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:04:24', '2022-09-21 15:04:24'),
+	(1224, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:10:46', '2022-09-21 15:10:46'),
+	(1226, 'default', 'Ubah Data Aduan dengan ID = 1fd2ee54-35d0-45a5-94b2-0ea3d3919175', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:29:43', '2022-09-21 15:29:43'),
+	(1228, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:39:04', '2022-09-21 15:39:04'),
+	(1230, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-21 15:41:14', '2022-09-21 15:41:14'),
+	(1232, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-21 15:42:10', '2022-09-21 15:42:10'),
+	(1234, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-21 15:42:22', '2022-09-21 15:42:22'),
+	(1236, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 10:25:08', '2022-09-22 10:25:08'),
+	(1238, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 12:48:53', '2022-09-22 12:48:53'),
+	(1240, 'default', 'Ubah Data Officer dengan ID = 5', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 12:51:15', '2022-09-22 12:51:15'),
+	(1242, 'default', 'Ubah Data Officer dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 12:52:03', '2022-09-22 12:52:03'),
+	(1244, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 13:25:42', '2022-09-22 13:25:42'),
+	(1246, 'default', 'Ubah Data Officer dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 13:26:57', '2022-09-22 13:26:57'),
+	(1248, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:16:18', '2022-09-22 14:16:18'),
+	(1250, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:17:02', '2022-09-22 14:17:02'),
+	(1252, 'default', 'Ubah Data User dengan ID = 8c3b691a-1db4-4248-a6ce-03dc4704e400', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:17:11', '2022-09-22 14:17:11'),
+	(1254, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:17:21', '2022-09-22 14:17:21'),
+	(1256, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:17:57', '2022-09-22 14:17:57'),
+	(1258, 'default', 'Ubah Data User dengan ID = 8c3b691a-1db4-4248-a6ce-03dc4704e400', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:18:17', '2022-09-22 14:18:17'),
+	(1260, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:18:23', '2022-09-22 14:18:23'),
+	(1262, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-22 14:18:37', '2022-09-22 14:18:37'),
+	(1264, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-22 14:19:27', '2022-09-22 14:19:27'),
+	(1266, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:19:38', '2022-09-22 14:19:38'),
+	(1268, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:40:57', '2022-09-22 14:40:57'),
+	(1270, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:41:16', '2022-09-22 14:41:16'),
+	(1272, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 14:41:38', '2022-09-22 14:41:38'),
+	(1274, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-22 14:41:52', '2022-09-22 14:41:52'),
+	(1276, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 8, '[]', NULL, '2022-09-22 15:13:56', '2022-09-22 15:13:56'),
+	(1278, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 15:14:14', '2022-09-22 15:14:14'),
+	(1280, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 15:34:36', '2022-09-22 15:34:36'),
+	(1282, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 16:34:04', '2022-09-22 16:34:04'),
+	(1284, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 16:39:54', '2022-09-22 16:39:54'),
+	(1286, 'default', 'Proses Data Aduan dengan ID = fa3e86c0-0e73-4e39-a1cb-fc92b084b48e', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-22 16:42:05', '2022-09-22 16:42:05'),
+	(1288, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 09:16:39', '2022-09-23 09:16:39'),
+	(1290, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 09:48:48', '2022-09-23 09:48:48'),
+	(1292, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 09:50:19', '2022-09-23 09:50:19'),
+	(1294, 'default', 'Ubah Data User dengan ID = efbc1902-9694-4074-b039-26b1af174c1b', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:33:32', '2022-09-23 10:33:32'),
+	(1296, 'default', 'Proses Data Emergency dengan ID = d8c305dd-540a-4033-aa5f-f81e0e998a58', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:43:19', '2022-09-23 10:43:19'),
+	(1298, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:44:04', '2022-09-23 10:44:04'),
+	(1300, 'default', 'Laporan Masyarakat dengan ID = d8c305dd-540a-4033-aa5f-f81e0e998a58 Diterima', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:44:07', '2022-09-23 10:44:07'),
+	(1302, 'default', 'Laporan Masyarakat dengan ID = d8c305dd-540a-4033-aa5f-f81e0e998a58 Ditolak', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:45:25', '2022-09-23 10:45:25'),
+	(1304, 'default', 'Proses Data Emergency dengan ID = 974aa033-9ab3-4f24-a6c8-696bd6f4c618', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 10:59:47', '2022-09-23 10:59:47'),
+	(1306, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:21:05', '2022-09-23 11:21:05'),
+	(1308, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:22:28', '2022-09-23 11:22:28'),
+	(1310, 'default', 'Ubah Data User dengan ID = 6160aecf-6b09-4270-ba70-a888368b8546', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:24:11', '2022-09-23 11:24:11'),
+	(1312, 'default', 'Ubah Data User dengan ID = 6160aecf-6b09-4270-ba70-a888368b8546', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:24:34', '2022-09-23 11:24:34'),
+	(1314, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:24:40', '2022-09-23 11:24:40'),
+	(1316, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:24:47', '2022-09-23 11:24:47'),
+	(1318, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-23 11:25:18', '2022-09-23 11:25:18'),
+	(1320, 'default', 'Ubah Data User dengan ID = 6160aecf-6b09-4270-ba70-a888368b8546', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:26:32', '2022-09-23 11:26:32'),
+	(1322, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:26:50', '2022-09-23 11:26:50'),
+	(1324, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-23 11:27:15', '2022-09-23 11:27:15'),
+	(1326, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-23 11:34:01', '2022-09-23 11:34:01'),
+	(1328, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-25 13:06:51', '2022-09-25 13:06:51'),
+	(1330, 'default', 'Ubah Data Profil dengan ID = a9c5b8f6-41e9-40c2-8b23-0b4b2ff43737', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-25 13:07:06', '2022-09-25 13:07:06'),
+	(1332, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-25 13:08:45', '2022-09-25 13:08:45'),
+	(1334, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-25 13:10:29', '2022-09-25 13:10:29'),
+	(1336, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-26 09:08:19', '2022-09-26 09:08:19'),
+	(1338, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-26 10:11:56', '2022-09-26 10:11:56'),
+	(1340, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-26 18:22:52', '2022-09-26 18:22:52'),
+	(1342, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 08:34:19', '2022-09-27 08:34:19'),
+	(1344, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 14:31:27', '2022-09-27 14:31:27'),
+	(1346, 'default', 'Proses Data Emergency dengan ID = 46df276d-a875-4414-893e-f58367a7f284', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 14:32:44', '2022-09-27 14:32:44'),
+	(1348, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:14:34', '2022-09-27 15:14:34'),
+	(1350, 'default', 'Tambah Data Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:17:20', '2022-09-27 15:17:20'),
+	(1352, 'default', 'Tambah Data Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:17:38', '2022-09-27 15:17:38'),
+	(1354, 'default', 'Tambah Data Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:17:59', '2022-09-27 15:17:59'),
+	(1356, 'default', 'Tambah Data Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:18:17', '2022-09-27 15:18:17'),
+	(1358, 'default', 'Tambah Data User', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:19:11', '2022-09-27 15:19:11'),
+	(1360, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-27 15:19:25', '2022-09-27 15:19:25'),
+	(1362, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:19:55', '2022-09-27 15:19:55'),
+	(1364, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:20:08', '2022-09-27 15:20:08'),
+	(1366, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:20:21', '2022-09-27 15:20:21'),
+	(1368, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:20:33', '2022-09-27 15:20:33'),
+	(1370, 'default', 'Tambah Data Sub Menu Akses', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 15:20:47', '2022-09-27 15:20:47'),
+	(1372, 'default', 'Tambah Data User', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 16:08:26', '2022-09-27 16:08:26'),
+	(1374, 'default', 'Tambah Data User', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-27 16:08:49', '2022-09-27 16:08:49'),
+	(1376, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-28 08:49:39', '2022-09-28 08:49:39'),
+	(1378, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-28 14:35:19', '2022-09-28 14:35:19'),
+	(1380, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-29 11:54:36', '2022-09-29 11:54:36'),
+	(1382, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-29 11:56:32', '2022-09-29 11:56:32'),
+	(1384, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-29 12:01:07', '2022-09-29 12:01:07'),
+	(1386, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 12:01:15', '2022-09-29 12:01:15'),
+	(1388, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 9051, '[]', NULL, '2022-09-29 13:03:55', '2022-09-29 13:03:55'),
+	(1390, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 14:22:55', '2022-09-29 14:22:55'),
+	(1392, 'default', 'Ubah Data User dengan ID = e03fa048-7025-4412-aed9-b31a57bdd434', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:23:14', '2022-09-29 15:23:14'),
+	(1394, 'default', 'Ubah Data User dengan ID = e03fa048-7025-4412-aed9-b31a57bdd434', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:23:26', '2022-09-29 15:23:26'),
+	(1396, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:23:35', '2022-09-29 15:23:35'),
+	(1398, 'default', 'Log Out', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:48:06', '2022-09-29 15:48:06'),
+	(1400, 'default', 'Tambah Data Subdistrict', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:48:28', '2022-09-29 15:48:28'),
+	(1402, 'default', 'Tambah Data Kelurahan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:48:43', '2022-09-29 15:48:43'),
+	(1404, 'default', 'Ubah Data Kelurahan dengan ID = 50', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:49:08', '2022-09-29 15:49:08'),
+	(1406, 'default', 'Hapus Data Kelurahan dengan ID = 50', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:49:12', '2022-09-29 15:49:12'),
+	(1408, 'default', 'Ubah Data Subdistrict dengan ID = 14', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:49:19', '2022-09-29 15:49:19'),
+	(1410, 'default', 'Hapus Data Subdistrict dengan ID = 14', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-29 15:49:22', '2022-09-29 15:49:22'),
+	(1412, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:16:49', '2022-09-30 09:16:49'),
+	(1414, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:26:41', '2022-09-30 09:26:41'),
+	(1416, 'default', 'Ubah Data User dengan ID = 6160aecf-6b09-4270-ba70-a888368b8546', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:27:27', '2022-09-30 09:27:27'),
+	(1418, 'default', 'Laporan Masyarakat dengan ID = 0edcdc67-c224-4962-babe-ea7f451ede42 Diterima', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:27:31', '2022-09-30 09:27:31'),
+	(1420, 'default', 'Laporan Masyarakat dengan ID = 0edcdc67-c224-4962-babe-ea7f451ede42 Ditolak', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:27:37', '2022-09-30 09:27:37'),
+	(1422, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 09:31:03', '2022-09-30 09:31:03'),
+	(1424, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:35:13', '2022-09-30 09:35:13'),
+	(1426, 'default', 'Ubah Data User dengan ID = 244fce6a-c245-4c9e-90a2-f9616aa75ac1', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 09:36:09', '2022-09-30 09:36:09'),
+	(1428, 'default', 'Proses Data Emergency dengan ID = 15f433d7-2a1c-4f24-874c-2af1e018f2d7', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 09:41:28', '2022-09-30 09:41:28'),
+	(1430, 'default', 'Hapus Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 10:12:36', '2022-09-30 10:12:36'),
+	(1432, 'default', 'Laporan Masyarakat dengan ID = 974aa033-9ab3-4f24-a6c8-696bd6f4c618 Diterima', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 10:16:13', '2022-09-30 10:16:13'),
+	(1434, 'default', 'Laporan Masyarakat dengan ID = 974aa033-9ab3-4f24-a6c8-696bd6f4c618 Ditolak', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 10:16:17', '2022-09-30 10:16:17'),
+	(1436, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 10:16:49', '2022-09-30 10:16:49'),
+	(1438, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 10:23:36', '2022-09-30 10:23:36'),
+	(1440, 'default', 'Proses Data Aduan dengan ID = 4cdeadd3-0c3e-4bdd-b15e-2302b96fcd27', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 10:31:29', '2022-09-30 10:31:29'),
+	(1442, 'default', 'Proses Data Aduan dengan ID = 4cdeadd3-0c3e-4bdd-b15e-2302b96fcd27', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 10:54:42', '2022-09-30 10:54:42'),
+	(1444, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 11:00:54', '2022-09-30 11:00:54'),
+	(1446, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 11:13:06', '2022-09-30 11:13:06'),
+	(1448, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 11:39:01', '2022-09-30 11:39:01'),
+	(1450, 'default', 'Proses Data Aduan dengan ID = 5b850b2f-9efa-44fe-a526-7ac924525d3a', NULL, NULL, NULL, 'App\\Models\\User', 6160, '[]', NULL, '2022-09-30 11:49:42', '2022-09-30 11:49:42'),
+	(1452, 'default', 'Ubah Data User dengan ID = d5643b0f-29f4-4b56-a917-5f3c5514b62c', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:29:46', '2022-09-30 14:29:46'),
+	(1454, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:44:14', '2022-09-30 14:44:14'),
+	(1456, 'default', 'Ubah Data Aduan dengan ID = 662c92c9-5beb-49d2-a71d-cddf9a8d3b0a', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:45:47', '2022-09-30 14:45:47'),
+	(1458, 'default', 'Ubah Data Aduan dengan ID = 90af5426-4270-4ccd-8059-e9a740a11b6e', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:01', '2022-09-30 14:46:01'),
+	(1460, 'default', 'Ubah Data Aduan dengan ID = bbc5709c-7dd2-4562-8cf0-37065890dcc6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:10', '2022-09-30 14:46:10'),
+	(1462, 'default', 'Ubah Data Aduan dengan ID = 51ac67f4-f3b7-45f4-b990-a5cbb6d75193', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:16', '2022-09-30 14:46:16'),
+	(1464, 'default', 'Ubah Data Aduan dengan ID = f57afec1-5f51-4123-851c-3bb41a48ac4f', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:27', '2022-09-30 14:46:27'),
+	(1466, 'default', 'Ubah Data Aduan dengan ID = e94e7e90-2efb-4c96-afc2-09b3775ea4a9', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:32', '2022-09-30 14:46:32'),
+	(1468, 'default', 'Ubah Data Aduan dengan ID = 4cdeadd3-0c3e-4bdd-b15e-2302b96fcd27', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:37', '2022-09-30 14:46:37'),
+	(1470, 'default', 'Ubah Data Aduan dengan ID = 81d60d09-7e33-4923-97bc-15a934a9ec2d', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:44', '2022-09-30 14:46:44'),
+	(1472, 'default', 'Ubah Data Aduan dengan ID = ce88031c-4698-4ed6-b7d9-bba906edf331', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:49', '2022-09-30 14:46:49'),
+	(1474, 'default', 'Ubah Data Aduan dengan ID = 14f323e9-14a7-439b-a904-f26054f2fc40', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:46:57', '2022-09-30 14:46:57'),
+	(1476, 'default', 'Ubah Data Aduan dengan ID = 9eee79d6-4da3-434b-b85f-58e272cf7efe', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:02', '2022-09-30 14:47:02'),
+	(1478, 'default', 'Ubah Data Aduan dengan ID = 4b83acd1-457e-41a4-8bac-b74839648a29', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:07', '2022-09-30 14:47:07'),
+	(1480, 'default', 'Ubah Data Aduan dengan ID = bd44be82-9742-4a64-ad88-8a304188f741', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:13', '2022-09-30 14:47:13'),
+	(1482, 'default', 'Ubah Data Aduan dengan ID = 3ec36aac-1b12-457c-b052-5a92d1427e6a', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:19', '2022-09-30 14:47:19'),
+	(1484, 'default', 'Ubah Data Aduan dengan ID = 14ea3fac-9a0e-448c-ac00-63e58b33965b', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:23', '2022-09-30 14:47:23'),
+	(1486, 'default', 'Ubah Data Aduan dengan ID = ac1cda3b-ba0d-4688-9fc3-df061311e733', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:47:29', '2022-09-30 14:47:29'),
+	(1488, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:48:50', '2022-09-30 14:48:50'),
+	(1490, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:56:55', '2022-09-30 14:56:55'),
+	(1492, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 14:58:55', '2022-09-30 14:58:55'),
+	(1494, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 15:08:04', '2022-09-30 15:08:04'),
+	(1496, 'default', 'Tambah Data Aduan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-09-30 15:26:14', '2022-09-30 15:26:14'),
+	(1497, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 14:54:41', '2022-10-01 14:54:41'),
+	(1498, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:01:25', '2022-10-01 15:01:25'),
+	(1499, 'default', 'Tambah Data Announcement', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:14:19', '2022-10-01 15:14:19'),
+	(1500, 'default', 'Ubah Data Kategory dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:16:51', '2022-10-01 15:16:51'),
+	(1501, 'default', 'Ubah Data Kategory dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:17:05', '2022-10-01 15:17:05'),
+	(1502, 'default', 'Ubah Data Kategory dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:18:19', '2022-10-01 15:18:19'),
+	(1503, 'default', 'Ubah Data Kategory dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-01 15:18:47', '2022-10-01 15:18:47'),
+	(1504, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 00:50:50', '2022-10-02 00:50:50'),
+	(1505, 'default', 'Proses Data Emergency dengan ID = f14ed3e7-10e8-4dc3-a924-9a0fb098b1be', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 01:12:28', '2022-10-02 01:12:28'),
+	(1506, 'default', 'Laporan Masyarakat dengan ID = f14ed3e7-10e8-4dc3-a924-9a0fb098b1be Diterima', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 01:49:08', '2022-10-02 01:49:08'),
+	(1507, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 07:37:50', '2022-10-02 07:37:50'),
+	(1508, 'default', 'Proses Data Aduan dengan ID = cfcb4a90-2466-4d37-a041-a67eda6d4c3d', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 08:16:21', '2022-10-02 08:16:21'),
+	(1509, 'default', 'Laporan Masyarakat dengan ID = cfcb4a90-2466-4d37-a041-a67eda6d4c3d Ditolak', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 08:22:28', '2022-10-02 08:22:28'),
+	(1510, 'default', 'Proses Data Aduan dengan ID = cfcb4a90-2466-4d37-a041-a67eda6d4c3d', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 08:23:16', '2022-10-02 08:23:16'),
+	(1511, 'default', 'Laporan Masyarakat dengan ID = cfcb4a90-2466-4d37-a041-a67eda6d4c3d Ditolak', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 08:26:55', '2022-10-02 08:26:55'),
+	(1512, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 19:58:34', '2022-10-02 19:58:34'),
+	(1513, 'default', 'Tambah Data Unit', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 20:39:45', '2022-10-02 20:39:45'),
+	(1514, 'default', 'Ubah Data Kategory dengan ID = 20', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 20:42:49', '2022-10-02 20:42:49'),
+	(1515, 'default', 'Ubah Data Kategory dengan ID = 20', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-02 20:43:01', '2022-10-02 20:43:01'),
+	(1516, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-03 17:59:47', '2022-10-03 17:59:47'),
+	(1517, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-04 07:34:52', '2022-10-04 07:34:52'),
+	(1518, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-04 11:24:00', '2022-10-04 11:24:00'),
+	(1519, 'default', 'Ubah Data Pengaturan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-04 11:32:59', '2022-10-04 11:32:59'),
+	(1520, 'default', 'Tambah Data Officer', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-04 14:42:02', '2022-10-04 14:42:02'),
+	(1521, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-05 14:28:10', '2022-10-05 14:28:10'),
+	(1522, 'default', 'Ubah Data Profil dengan ID = da8248ec-1414-43f4-95c0-eb944cb7b168', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-05 15:15:33', '2022-10-05 15:15:33'),
+	(1523, 'default', 'Ubah Data Officer dengan ID = 3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-05 15:41:11', '2022-10-05 15:41:11'),
+	(1524, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-06 18:03:45', '2022-10-06 18:03:45'),
+	(1525, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-06 20:47:44', '2022-10-06 20:47:44'),
+	(1526, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-06 23:00:25', '2022-10-06 23:00:25'),
+	(1527, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-06 23:01:34', '2022-10-06 23:01:34'),
+	(1528, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-07 15:46:49', '2022-10-07 15:46:49'),
+	(1529, 'default', 'Proses Data Aduan dengan ID = cfcb4a90-2466-4d37-a041-a67eda6d4c3d', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-07 17:11:29', '2022-10-07 17:11:29'),
+	(1530, 'default', 'Ubah Data Pengaturan', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-07 17:58:55', '2022-10-07 17:58:55'),
+	(1531, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-10 10:50:13', '2022-10-10 10:50:13'),
+	(1532, 'default', 'Proses Data Emergency dengan ID = 493dd71b-3170-4e6b-96da-17f2a7e03dea', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-10 11:09:43', '2022-10-10 11:09:43'),
+	(1533, 'default', 'Proses Data Emergency dengan ID = 493dd71b-3170-4e6b-96da-17f2a7e03dea', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-10 11:20:36', '2022-10-10 11:20:36'),
+	(1534, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-13 10:45:57', '2022-10-13 10:45:57'),
+	(1535, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-14 14:39:50', '2022-10-14 14:39:50'),
+	(1536, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-14 14:44:15', '2022-10-14 14:44:15'),
+	(1537, 'default', 'Ubah Data Kategory dengan ID = 20', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-14 14:44:31', '2022-10-14 14:44:31'),
+	(1538, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-19 16:36:31', '2022-10-19 16:36:31'),
+	(1539, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-19 21:22:56', '2022-10-19 21:22:56'),
+	(1540, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-24 14:10:29', '2022-10-24 14:10:29'),
+	(1541, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-28 10:32:32', '2022-10-28 10:32:32'),
+	(1542, 'default', 'Ubah Data User dengan ID = b5b33b83-a439-40a9-9fb5-a0216d27a636', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-10-28 10:33:28', '2022-10-28 10:33:28'),
+	(1543, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 18:20:16', '2022-11-03 18:20:16'),
+	(1544, 'default', 'Hapus Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:48:27', '2022-11-03 19:48:27'),
+	(1545, 'default', 'Kembalikan Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:49:53', '2022-11-03 19:49:53'),
+	(1546, 'default', 'Hapus Sementara Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:55:33', '2022-11-03 19:55:33'),
+	(1547, 'default', 'Kembalikan Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:55:39', '2022-11-03 19:55:39'),
+	(1548, 'default', 'Hapus Sementara Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:57:34', '2022-11-03 19:57:34'),
+	(1549, 'default', 'Kembalikan Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:58:53', '2022-11-03 19:58:53'),
+	(1550, 'default', 'Hapus Sementara Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:58:57', '2022-11-03 19:58:57'),
+	(1551, 'default', 'Hapus Permanen Data User dengan ID = faffb2bf-6b55-402b-b607-9188b470df48', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:59:25', '2022-11-03 19:59:25'),
+	(1552, 'default', 'Hapus Sementara Data User dengan ID = efbc1902-9694-4074-b039-26b1af174c1b', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-03 19:59:55', '2022-11-03 19:59:55'),
+	(1553, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:30:17', '2022-11-09 13:30:17'),
+	(1554, 'default', 'Tambah Data Officer', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:32:40', '2022-11-09 13:32:40'),
+	(1555, 'default', 'Ubah Data User dengan ID = 9a429e59-4fa7-4728-be10-7a455ace252f', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:37:20', '2022-11-09 13:37:20'),
+	(1556, 'default', 'Ubah Data Officer dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:40:48', '2022-11-09 13:40:48'),
+	(1557, 'default', 'Ubah Data Officer dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:41:04', '2022-11-09 13:41:04'),
+	(1558, 'default', 'Ubah Data Officer dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:41:13', '2022-11-09 13:41:13'),
+	(1559, 'default', 'Ubah Data Officer dengan ID = 8', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:41:28', '2022-11-09 13:41:28'),
+	(1560, 'default', 'Ubah Data Officer dengan ID = 8', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:44:39', '2022-11-09 13:44:39'),
+	(1561, 'default', 'Ubah Data Officer dengan ID = 7', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:44:44', '2022-11-09 13:44:44'),
+	(1562, 'default', 'Proses Data Emergency dengan ID = 4ade43d5-cec3-4d1d-9666-c5c047a1a7cb', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 13:45:03', '2022-11-09 13:45:03'),
+	(1563, 'default', 'Ubah Data Officer dengan ID = 6', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 14:38:43', '2022-11-09 14:38:43'),
+	(1564, 'default', 'Proses Data Emergency dengan ID = 4ade43d5-cec3-4d1d-9666-c5c047a1a7cb', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 14:38:54', '2022-11-09 14:38:54'),
+	(1565, 'default', 'Proses Data Emergency dengan ID = f6f2caf3-7726-4fd5-853b-aa7aae4898f3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 14:43:51', '2022-11-09 14:43:51'),
+	(1566, 'default', 'Proses Data Emergency dengan ID = f6f2caf3-7726-4fd5-853b-aa7aae4898f3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 14:46:18', '2022-11-09 14:46:18'),
+	(1567, 'default', 'Proses Data Emergency dengan ID = f6f2caf3-7726-4fd5-853b-aa7aae4898f3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:09:35', '2022-11-09 15:09:35'),
+	(1568, 'default', 'Proses Data Emergency dengan ID = f6f2caf3-7726-4fd5-853b-aa7aae4898f3', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:11:07', '2022-11-09 15:11:07'),
+	(1569, 'default', 'Proses Data Aduan dengan ID = 9f30109d-f459-47b1-8a59-8767d987cdb1', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:22:23', '2022-11-09 15:22:23'),
+	(1570, 'default', 'Proses Data Aduan dengan ID = 9f30109d-f459-47b1-8a59-8767d987cdb1', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:25:51', '2022-11-09 15:25:51'),
+	(1571, 'default', 'Proses Data Emergency dengan ID = 186fefdf-1f71-46c5-9550-469c806ecfb0', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:34:58', '2022-11-09 15:34:58'),
+	(1572, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-09 15:58:20', '2022-11-09 15:58:20'),
+	(1573, 'default', 'Login', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:38:25', '2022-11-10 10:38:25'),
+	(1574, 'default', 'Hapus Data Ambulance dengan ID = 2', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:43:53', '2022-11-10 10:43:53'),
+	(1575, 'default', 'Tambah Data Ambulance', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:45:52', '2022-11-10 10:45:52'),
+	(1576, 'default', 'Tambah Data Ambulance', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:46:12', '2022-11-10 10:46:12'),
+	(1577, 'default', 'Ubah Data Ambulance dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:49:49', '2022-11-10 10:49:49'),
+	(1578, 'default', 'Ubah Data Ambulance dengan ID = 5', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:50:00', '2022-11-10 10:50:00'),
+	(1579, 'default', 'Ubah Data Ambulance dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:52:52', '2022-11-10 10:52:52'),
+	(1580, 'default', 'Ubah Data Ambulance dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:52:58', '2022-11-10 10:52:58'),
+	(1581, 'default', 'Ubah Data Ambulance dengan ID = 4', NULL, NULL, NULL, 'App\\Models\\User', 0, '[]', NULL, '2022-11-10 10:53:03', '2022-11-10 10:53:03');
 /*!40000 ALTER TABLE `activity_log` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.ambulances
+-- membuang struktur untuk table db_psc_119.ambulances
 CREATE TABLE IF NOT EXISTS `ambulances` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `police_number` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1074,35 +1395,56 @@ CREATE TABLE IF NOT EXISTS `ambulances` (
   KEY `ambulances_unit_id_foreign` (`unit_id`),
   CONSTRAINT `ambulances_officer_id_foreign` FOREIGN KEY (`officer_id`) REFERENCES `officers` (`id`),
   CONSTRAINT `ambulances_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.ambulances: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.ambulances: ~1 rows (lebih kurang)
 /*!40000 ALTER TABLE `ambulances` DISABLE KEYS */;
 INSERT INTO `ambulances` (`id`, `police_number`, `officer_id`, `unit_id`, `created_at`, `updated_at`) VALUES
-	(2, 'DT 2190 TG', 3, 3, '2022-09-09 11:43:24', '2022-09-14 17:05:10'),
-	(3, 'DT 1243 G', 4, 3, '2022-09-09 11:43:38', '2022-09-14 17:04:36');
+	(3, 'DT 1243 G', 4, 3, '2022-09-09 11:43:38', '2022-09-14 17:04:36'),
+	(4, 'DT 1234 PF', 7, 12, '2022-11-10 10:45:52', '2022-11-10 10:53:03'),
+	(5, 'DT 1255 PF', 8, 12, '2022-11-10 10:46:12', '2022-11-10 10:50:00');
 /*!40000 ALTER TABLE `ambulances` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.announcements
+-- membuang struktur untuk table db_psc_119.announcements
 CREATE TABLE IF NOT EXISTS `announcements` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `text` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_start` date DEFAULT NULL,
   `date_end` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.announcements: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.announcements: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `announcements` DISABLE KEYS */;
-INSERT INTO `announcements` (`id`, `title`, `text`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
-	(3, 'Iuran BPJS Kesehatan Kelas 1 hingga 3 Dihapus', 'Iuran BPJS Kesehatan 2022 terbaru usai kelas 1, 2 dan 3 dihapus. Lalu iuran BPJS Kesehatan nantinya akan disesuaikan dengan besaran gaji peserta.  Penghapusan kelas BPJS Kesehatan rencananya akan dimulai pada Juli 2022.', '2022-09-05', '2022-09-06', '2022-08-16 09:30:58', '2022-09-12 09:08:50'),
-	(4, 'ETLE (Electronic Traffic Law Enforcement)', '<h2>Apa itu E-Tilang?</h2>\r\n\r\n<p>Tilang Elektronik atau Pelanggaran digitalisasi yang namakan dengan&nbsp;<strong>E-tilang</strong>&nbsp;adalah denda yang dikenakan oleh penegak hukum yaitu Polisi kepada pengguna / pemakai jalan yang melanggar peraturan di Kendari - Sulawesi Tenggara.</p>\r\n\r\n<h3>Bagaimana Cara Bayar E-Tilang Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara bayar E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara bisa melalui kejaksaan. Jika melalui ATM caranya adalah sebagai berikut:</p>\r\n\r\n<p>1. Silahkan masukkan kartu ATM Debit dan PIN Anda<br />\r\n2. Pilih atau klik menu Transaksi Lainnya -&gt; Transfer -&gt; Ke Rek Bank Lain<br />\r\n3. Pilih terlebih dahulu kode bank yang ingin di transfer, untuk hal ini E-Tilang menggunakan Bank BRI maka Masukkan kode bank BRI yaitu nomor 002 kemudian diikuti dengan 15 digit angka Nomor Pembayaran E-Tilang. contoh : 002123456789012345<br />\r\n4. lihat tanda terima yang anda dapat dari e-tilang lalu Masukkan angka nominal jumlah pembayaran sesuai dengan denda yang harus dibayarkan.<br />\r\nTransaksi E-Tilang akan ditolak jika pembayaran tidak sesuai dengan jumlah denda E-Tilang titipan<br />\r\n5. kemudian Ikuti instruksi selanjutnya yang ada di menu ATM untuk menyelesaikan transaksi<br />\r\n6. Simpan struk transaksi E-Tilang sebagai bukti pembayaran<br />\r\nCatatan : Biaya denda tilang elektronik dibayarkan setelah sidang pengadilan dan sudah mendapat amar putusan dari Pengadilan. Jika pada ke H-4 dari tanggal sidang belum dibayarkan, maka E-Tilang / Nomor Briva otomatis akan berubah(Aturan dapat berubah sewaktu waktu)<br />\r\n&nbsp;</p>\r\n\r\n<h3>Bagaimana cara cek E-Tilang Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara Cek E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara adalah dengan mengunjungi website polres Kendari - Sulawesi Tenggara lalu cari menu tilang atau situs pihak ketiga seperti cektilang.com ketik No E-Tilang / No Blanko / No BRIVA anda lalu klik Cek untuk mengetahui berapa besar denda dan biaya yang harus dibayarkan</p>\r\n\r\n<h3>Bagaimana cara cek denda tilang Kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara cek denda E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara atau tilang elektronik memungkinkan kita Cek Tilang secara online. untuk E-Tilang itu sendiri ada 2 cara Cek denda E-Tilang di Kendari - Sulawesi Tenggara yaitu melalui website atau pun melalui HP. kalau melalui website. buka situs resmi kejaksaan negeri pemerintah Kendari - Sulawesi Tenggara lalu klik menu tilang dan ketikkan nomor resi nya. kalau melalui hp, silahkan kunjungi playstore dan download aplikasi resmi dari pemerintah atau kejaksaan negeri</p>\r\n\r\n<h3>Bagaimana cara cek resi tilang kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p>Pelanggar tidak perlu lagi mengikuti sidang tilang di pengadilan negeri Kendari - Sulawesi Tenggara, anda cukup membuka Sistem Informasi Penelusuran Perkara (SIPP) kemudian anda ketikkan nomor kendaraaan dan Nomor E-Tilang anda. untuk pembayaran denda tilang dan pengambilan barang bukti, anda cukup datang ke kantor kejaksaan Negeri Kendari - Sulawesi Tenggara. apabila nomor tilang anda sudah di putus atau belum oleh pengadilan negeri Sulawesi Tenggara serta tidak ada dalam daftar sesuai dengan tanggal putusan yang di tentukan oleh pengadilan negeri Kendari - Sulawesi Tenggara, maka anda bisa langsung menghubungi pihak terkait (Pihak kepolisian atau DLLAJ)</p>\r\n\r\n<h3>Bagaimana cara cek denda tilang pasal 288 ayat 1 slip biru di kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p>sebelum kita melangkah lebih jauh, ada baiknya kita ketahui dahulu apa isi pasal tersebut.</p>\r\n\r\n<p>&quot;Setiap orang yang mengemudikan Kendaraan Bermotor di Jalan yang melanggar aturan perintah atau larangan yang dinyatakan dengan Rambu Lalu Lintas sebagaimana dimaksud dalam Pasal 106 ayat (4) huruf a atau Marka Jalan sebagaimana dimaksud dalam Pasal 106 ayat (4) huruf b dipidana dengan pidana kurungan paling lama 2 (dua) bulan atau denda paling banyak Rp. 500.000 (lima ratus ribu rupiah).&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>jika anda terkena pasal tersebut, datanglah ke kejaksaan negeri Kendari - Sulawesi Tenggara, lalu lihatlah di Sistem Informasi Penelusuran Perkara (SIPP), lalu ikuti prosedur selanjutnya</p>', '2022-09-14', '2022-09-30', '2022-09-14 17:08:38', '2022-09-14 17:08:38');
+INSERT INTO `announcements` (`id`, `title`, `text`, `image`, `date_start`, `date_end`, `created_at`, `updated_at`) VALUES
+	(3, 'Iuran BPJS Kesehatan Kelas 1 hingga 3 Dihapus', 'Iuran BPJS Kesehatan 2022 terbaru usai kelas 1, 2 dan 3 dihapus. Lalu iuran BPJS Kesehatan nantinya akan disesuaikan dengan besaran gaji peserta.  Penghapusan kelas BPJS Kesehatan rencananya akan dimulai pada Juli 2022.', NULL, '2022-09-05', '2022-09-06', '2022-08-16 09:30:58', '2022-09-12 09:08:50'),
+	(4, 'ETLE (Electronic Traffic Law Enforcement)', '<h2>Apa itu E-Tilang?</h2>\r\n\r\n<p>Tilang Elektronik atau Pelanggaran digitalisasi yang namakan dengan&nbsp;<strong>E-tilang</strong>&nbsp;adalah denda yang dikenakan oleh penegak hukum yaitu Polisi kepada pengguna / pemakai jalan yang melanggar peraturan di Kendari - Sulawesi Tenggara.</p>\r\n\r\n<h3>Bagaimana Cara Bayar E-Tilang Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara bayar E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara bisa melalui kejaksaan. Jika melalui ATM caranya adalah sebagai berikut:</p>\r\n\r\n<p>1. Silahkan masukkan kartu ATM Debit dan PIN Anda<br />\r\n2. Pilih atau klik menu Transaksi Lainnya -&gt; Transfer -&gt; Ke Rek Bank Lain<br />\r\n3. Pilih terlebih dahulu kode bank yang ingin di transfer, untuk hal ini E-Tilang menggunakan Bank BRI maka Masukkan kode bank BRI yaitu nomor 002 kemudian diikuti dengan 15 digit angka Nomor Pembayaran E-Tilang. contoh : 002123456789012345<br />\r\n4. lihat tanda terima yang anda dapat dari e-tilang lalu Masukkan angka nominal jumlah pembayaran sesuai dengan denda yang harus dibayarkan.<br />\r\nTransaksi E-Tilang akan ditolak jika pembayaran tidak sesuai dengan jumlah denda E-Tilang titipan<br />\r\n5. kemudian Ikuti instruksi selanjutnya yang ada di menu ATM untuk menyelesaikan transaksi<br />\r\n6. Simpan struk transaksi E-Tilang sebagai bukti pembayaran<br />\r\nCatatan : Biaya denda tilang elektronik dibayarkan setelah sidang pengadilan dan sudah mendapat amar putusan dari Pengadilan. Jika pada ke H-4 dari tanggal sidang belum dibayarkan, maka E-Tilang / Nomor Briva otomatis akan berubah(Aturan dapat berubah sewaktu waktu)<br />\r\n&nbsp;</p>\r\n\r\n<h3>Bagaimana cara cek E-Tilang Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara Cek E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara adalah dengan mengunjungi website polres Kendari - Sulawesi Tenggara lalu cari menu tilang atau situs pihak ketiga seperti cektilang.com ketik No E-Tilang / No Blanko / No BRIVA anda lalu klik Cek untuk mengetahui berapa besar denda dan biaya yang harus dibayarkan</p>\r\n\r\n<h3>Bagaimana cara cek denda tilang Kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p><strong>Cara cek denda E-Tilang Kendari</strong>&nbsp;- Sulawesi Tenggara atau tilang elektronik memungkinkan kita Cek Tilang secara online. untuk E-Tilang itu sendiri ada 2 cara Cek denda E-Tilang di Kendari - Sulawesi Tenggara yaitu melalui website atau pun melalui HP. kalau melalui website. buka situs resmi kejaksaan negeri pemerintah Kendari - Sulawesi Tenggara lalu klik menu tilang dan ketikkan nomor resi nya. kalau melalui hp, silahkan kunjungi playstore dan download aplikasi resmi dari pemerintah atau kejaksaan negeri</p>\r\n\r\n<h3>Bagaimana cara cek resi tilang kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p>Pelanggar tidak perlu lagi mengikuti sidang tilang di pengadilan negeri Kendari - Sulawesi Tenggara, anda cukup membuka Sistem Informasi Penelusuran Perkara (SIPP) kemudian anda ketikkan nomor kendaraaan dan Nomor E-Tilang anda. untuk pembayaran denda tilang dan pengambilan barang bukti, anda cukup datang ke kantor kejaksaan Negeri Kendari - Sulawesi Tenggara. apabila nomor tilang anda sudah di putus atau belum oleh pengadilan negeri Sulawesi Tenggara serta tidak ada dalam daftar sesuai dengan tanggal putusan yang di tentukan oleh pengadilan negeri Kendari - Sulawesi Tenggara, maka anda bisa langsung menghubungi pihak terkait (Pihak kepolisian atau DLLAJ)</p>\r\n\r\n<h3>Bagaimana cara cek denda tilang pasal 288 ayat 1 slip biru di kejaksaan Kendari - Sulawesi Tenggara?</h3>\r\n\r\n<p>sebelum kita melangkah lebih jauh, ada baiknya kita ketahui dahulu apa isi pasal tersebut.</p>\r\n\r\n<p>&quot;Setiap orang yang mengemudikan Kendaraan Bermotor di Jalan yang melanggar aturan perintah atau larangan yang dinyatakan dengan Rambu Lalu Lintas sebagaimana dimaksud dalam Pasal 106 ayat (4) huruf a atau Marka Jalan sebagaimana dimaksud dalam Pasal 106 ayat (4) huruf b dipidana dengan pidana kurungan paling lama 2 (dua) bulan atau denda paling banyak Rp. 500.000 (lima ratus ribu rupiah).&quot;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>jika anda terkena pasal tersebut, datanglah ke kejaksaan negeri Kendari - Sulawesi Tenggara, lalu lihatlah di Sistem Informasi Penelusuran Perkara (SIPP), lalu ikuti prosedur selanjutnya</p>', NULL, '2022-09-14', '2022-09-30', '2022-09-14 17:08:38', '2022-09-14 17:08:38'),
+	(7, 'xxx', 'xx', '1664608727.jpeg', '2022-10-01', '2022-10-03', '2022-10-01 15:14:19', '2022-10-01 15:18:47');
 /*!40000 ALTER TABLE `announcements` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.categories
+-- membuang struktur untuk table db_psc_119.call_numbers
+CREATE TABLE IF NOT EXISTS `call_numbers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `phone_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Membuang data untuk tabel db_psc_119.call_numbers: ~3 rows (lebih kurang)
+/*!40000 ALTER TABLE `call_numbers` DISABLE KEYS */;
+INSERT INTO `call_numbers` (`id`, `phone_number`, `description`, `created_at`, `updated_at`) VALUES
+	(1, '04022824192', 'Berbayar', '2022-09-19 13:42:13', '2022-09-19 19:05:44'),
+	(2, '119', 'Bebas Pulsa', '2022-09-19 13:42:23', '2022-09-19 19:06:11'),
+	(3, '085367029945', 'Berbayar', '2022-09-19 13:42:43', '2022-09-19 19:05:58');
+/*!40000 ALTER TABLE `call_numbers` ENABLE KEYS */;
+
+-- membuang struktur untuk table db_psc_119.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1111,16 +1453,17 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.categories: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.categories: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `name`, `image`, `text`, `created_at`, `updated_at`) VALUES
 	(1, 'Ibu Melahirkan', '1660612024.jpg', 'ytytytytytytyt', '2022-08-16 09:06:24', '2022-08-16 09:07:04'),
-	(2, 'Kecelakaan Lalu Lintas', NULL, NULL, '2022-08-31 18:17:49', '2022-08-31 18:17:49');
+	(2, 'Kecelakaan Lalu Lintas', NULL, '---', '2022-08-31 18:17:49', '2022-09-20 09:13:46'),
+	(8, NULL, NULL, NULL, '2022-09-21 13:20:32', '2022-09-21 13:20:32');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.citizens
+-- membuang struktur untuk table db_psc_119.citizens
 CREATE TABLE IF NOT EXISTS `citizens` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1135,20 +1478,26 @@ CREATE TABLE IF NOT EXISTS `citizens` (
   PRIMARY KEY (`id`),
   KEY `citizens_village_id_foreign` (`village_id`),
   KEY `FK_citizens_users` (`user_id`),
-  CONSTRAINT `FK_citizens_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `FK_citizens_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `citizens_village_id_foreign` FOREIGN KEY (`village_id`) REFERENCES `villages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.citizens: ~4 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.citizens: ~11 rows (lebih kurang)
 /*!40000 ALTER TABLE `citizens` DISABLE KEYS */;
 INSERT INTO `citizens` (`id`, `name`, `phone_number`, `address`, `nik`, `subdistrict_id`, `village_id`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, 'adri saputra', '082259504093', 'Anawai', '7471091616160001', '2', 1, 'ab2b0f48-6d49-4b99-b125-e2c9b543f12f', '2022-08-24 08:32:14', '2022-08-24 08:32:14'),
-	(2, 'adsry', '0101110111011', 'sasa', '1234567890123456', '2', 1, '58a5a90e-8e8e-4748-b877-01b39e224862', '2022-08-29 17:37:42', '2022-08-29 17:37:42'),
-	(3, 'Andi Bintang', '0101110111011', 'Test', '1234567891012345', '2', 1, '030566c5-d7e9-40aa-94ca-c51867a39624', '2022-09-05 13:59:12', '2022-09-05 13:59:12'),
-	(4, 'Andi Bintang', '7471091010100001', 'Test', '7471091010100001', '2', 1, '3ea91509-a5eb-4efc-b5db-3c3e47929506', '2022-09-05 14:01:09', '2022-09-05 14:01:09');
+	(26, 'Andy Musly Afriyanto', '081289896166', 'mandonga', '1239097891091222', '2', 1, 'e1214a6d-aa83-4ac5-9be5-350543fad1dd', '2022-09-21 12:15:35', '2022-09-21 12:15:35'),
+	(36, 'euis nurhiliya', '085208520852', 'anawai', '7471095656560003', '7', 29, 'c35f0559-3516-4245-97fd-160055ef8827', '2022-09-21 14:20:33', '2022-09-21 14:20:33'),
+	(40, 'mely', '08529637410', 'jl', '0852963741085225', '4', 4, 'c3a53035-a63a-426c-92d9-ada953a85034', '2022-09-21 14:34:56', '2022-09-21 14:34:56'),
+	(46, 'indra', '08114091027', 'jl.labalawo', '7471553294971111', '3', 12, 'efbc1902-9694-4074-b039-26b1af174c1b', '2022-09-23 10:31:23', '2022-09-23 10:31:23'),
+	(48, 'sholeh', '082292606733', 'Jl.Betoambari', '7471051101910002', '2', 1, 'b3640f52-bd7c-499d-9a13-1e733eae4098', '2022-09-30 09:28:01', '2022-09-30 09:28:01'),
+	(50, 'Mohammad', '082292606733', 'Jl.Betoambari', '7471050703960002', '2', 1, '244fce6a-c245-4c9e-90a2-f9616aa75ac1', '2022-09-30 09:33:24', '2022-09-30 09:33:24'),
+	(54, 'Muh. Fahril', '082246817119', 'Jl. Tunggala', '7406006481020001', '5', 39, '5a93f8c5-caa5-4898-af50-9845aa0f6e25', '2022-09-30 10:18:41', '2022-09-30 10:18:41'),
+	(56, 'mely', '085296374120', 'jl', '7371085246970008', '4', 4, 'd5643b0f-29f4-4b56-a917-5f3c5514b62c', '2022-09-30 11:34:26', '2022-09-30 11:34:26'),
+	(60, 'uun', '3444444', 'mandonga', '1233467891091222', '2', 1, 'aff3e565-75ce-4bd0-8d95-91033087766c', '2022-10-03 18:39:14', '2022-10-03 18:39:14'),
+	(68, 'Adri Saputra', '082259504999', 'Anawai', '1234567891011111', '4', 1, '9a429e59-4fa7-4728-be10-7a455ace252f', '2022-11-03 18:43:43', '2022-11-03 18:43:43');
 /*!40000 ALTER TABLE `citizens` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.complaints
+-- membuang struktur untuk table db_psc_119.complaints
 CREATE TABLE IF NOT EXISTS `complaints` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ticket_number` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1169,28 +1518,27 @@ CREATE TABLE IF NOT EXISTS `complaints` (
   `report_type` enum('emergency','phone','complaint') COLLATE utf8mb4_unicode_ci NOT NULL,
   `handling_status` enum('home','refer') COLLATE utf8mb4_unicode_ci NOT NULL,
   `reference_place` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `complaints_category_id_foreign` (`category_id`),
   KEY `complaints_unit_id_foreign` (`unit_id`),
+  KEY `FK_complaints_users` (`user_id`),
+  CONSTRAINT `FK_complaints_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `complaints_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `complaints_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.complaints: ~7 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.complaints: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `complaints` DISABLE KEYS */;
-INSERT INTO `complaints` (`id`, `ticket_number`, `phone_number`, `name`, `incident_area`, `summary`, `category_id`, `psc`, `status`, `unit_id`, `coordinate_citizen`, `coordinate_officer`, `image`, `photo_citizen`, `description`, `reason`, `report_type`, `handling_status`, `reference_place`, `created_at`, `updated_at`) VALUES
-	('4ee3196b-9111-46f8-b5dd-a64afd24cc3a', 'SPGDT20220914173634', '082259504093', 'adri saputra', 'Pantai', 'kecelakaan', 2, 'Baubau', 'reject', NULL, '-5.458301015235267, 122.615936364176', NULL, 'nOCsKMp9QAMaXaV656Ry3djoFzZhHHpKNZtJOgnS.png', NULL, NULL, 'tolak', 'complaint', 'home', NULL, '2022-09-14 17:36:34', '2022-09-14 23:25:29'),
-	('9cb7f230-8050-49af-b44e-df68ee2d169b', 'SPGDT20220914173607', '082259504093', 'adri saputra', 'Lapangan Betoambari', 'Oke', 2, 'Baubau', 'process', 4, '-5.52014917436978, 122.56334115729935', NULL, 'VBSqQgjm6fHyOnZWr2jh8dOcuIG4bj7Ak9ufW6BF.png', NULL, NULL, NULL, 'emergency', 'home', NULL, '2022-09-14 17:36:07', '2022-09-16 14:44:49'),
-	('ac1cda3b-ba0d-4688-9fc3-df061311e733', 'SPGDT20220914150018', '082259504093', 'adri saputra', 'Oke', 'Oke', 1, 'Baubau', 'process', 4, '-5.5073123339827275, 122.59296389552647', NULL, 'BpUdAzYnuCsJ22nK2XX7cjooh5ye2IoCsdzFFzXi.png', NULL, 'Oke', NULL, 'emergency', 'home', NULL, '2022-09-14 15:00:18', '2022-09-14 16:57:13'),
-	('bd7b451a-c84b-4208-91da-f8aa50573396', 'SPGDT20220914150149', '082259504093', 'adri saputra', 'Pantai Kamali', 'ibu melahirkan', 1, 'Baubau', 'process', 4, '-5.492478585667966, 122.56801935167181', NULL, 'EjoBvnYEbbdQ7ZpOT8oTc3yQFZ1cfFljG0JbMvyC.png', NULL, 'oke', NULL, 'complaint', 'home', NULL, '2022-09-14 15:01:49', '2022-09-14 16:53:19'),
-	('cf099474-3308-4419-8a99-f5626f3f5484', 'SPGDT20220914173730', '082259504093', 'adri saputra', 'Dekat kantor walikota', 'ada kecelakaan motor', 2, 'Baubau', 'reject', NULL, '-5.462745901593952, 122.59917589144632', NULL, 'ZMWnz4Ati4aq5hMvUzaNRIHaWs9aePYiHl36fUs5.png', NULL, NULL, 'Tolak', 'complaint', 'home', NULL, '2022-09-14 17:37:30', '2022-09-14 19:00:34'),
-	('edee6e93-4bf1-48ec-8054-d3425513d8a3', 'SPGDT20220914145831', '08124321121', 'Indrawijaya', 'stadion betoambari', 'Kecelakaan tungga;', 2, 'Baubau', 'done', 3, '-5.469404145133952, 122.59441034033661', '-5.46620569513222, 122.62033569738274', NULL, NULL, 'keterangan', NULL, 'phone', 'home', NULL, '2022-09-14 14:58:31', '2022-09-14 16:51:35'),
-	('f4f44867-ea74-4c23-bcee-cd2a211af893', 'SPGDT20220914143756', '0813131313', 'Mister', 'jl kaki', 'ada bahaya', 1, 'Baubau', 'done', 3, '-5.4856429306487176, 122.58496969552637', '-5.46620569513222, 122.62033569738274', NULL, NULL, 'keterangan', NULL, 'phone', 'home', NULL, '2022-09-14 14:37:56', '2022-09-14 16:29:30');
+INSERT INTO `complaints` (`id`, `ticket_number`, `phone_number`, `name`, `incident_area`, `summary`, `category_id`, `psc`, `status`, `unit_id`, `coordinate_citizen`, `coordinate_officer`, `image`, `photo_citizen`, `description`, `reason`, `report_type`, `handling_status`, `reference_place`, `user_id`, `created_at`, `updated_at`) VALUES
+	('186fefdf-1f71-46c5-9550-469c806ecfb0', 'SPGDT20221109152159', '082259504999', 'Adri Saputra', 'dd', 'ddd', 1, 'Baubau', 'process', 3, '-5.459679771829231, 122.61970773339272', '-5.455280589900395, 122.60656355365813', NULL, NULL, 'xxxxx', NULL, 'phone', 'home', NULL, '9a429e59-4fa7-4728-be10-7a455ace252f', '2022-11-09 15:21:59', '2022-11-09 15:34:57'),
+	('9f30109d-f459-47b1-8a59-8767d987cdb1', 'SPGDT20221109152205', '082259504999', 'Adri Saputra', 'Mall', 'ibu melahirkan', 1, 'Baubau', 'accept', 13, '-5.458301015235267, 122.615936364176', '-5.46620569513222, 122.62033569738274', 'RYG1FZgLU5Bzkn4X9u97VAfHur5vNFVrhkKNQvIW.png', NULL, 'xxx', NULL, 'complaint', 'home', NULL, '9a429e59-4fa7-4728-be10-7a455ace252f', '2022-11-09 15:22:05', '2022-11-09 15:30:45'),
+	('f6f2caf3-7726-4fd5-853b-aa7aae4898f3', 'SPGDT20221109144330', '082259504999', 'Adri Saputra', 'dd', 'ddd', 1, 'Baubau', 'dispatch', 12, '-5.458301015235267, 122.615936364176', '-5.455280589900395, 122.60656355365813', NULL, NULL, 'zxxxx', NULL, 'emergency', 'home', NULL, '9a429e59-4fa7-4728-be10-7a455ace252f', '2022-11-09 14:43:30', '2022-11-09 15:15:37');
 /*!40000 ALTER TABLE `complaints` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.failed_jobs
+-- membuang struktur untuk table db_psc_119.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1203,22 +1551,22 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.failed_jobs: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.failed_jobs: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.groups
+-- membuang struktur untuk table db_psc_119.groups
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(18) DEFAULT NULL,
+  `group_name` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.groups: ~6 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.groups: ~7 rows (lebih kurang)
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
 INSERT INTO `groups` (`id`, `group_name`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Administrator', 0, 1, '2022-01-11 13:01:48', '2022-01-11 13:01:48'),
@@ -1230,7 +1578,7 @@ INSERT INTO `groups` (`id`, `group_name`, `status`, `user_id`, `created_at`, `up
 	(7, 'Tracking Aduan', 0, 0, '2022-09-14 17:13:17', '2022-09-14 17:13:56');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.handlings
+-- membuang struktur untuk table db_psc_119.handlings
 CREATE TABLE IF NOT EXISTS `handlings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `complaint_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1247,37 +1595,33 @@ CREATE TABLE IF NOT EXISTS `handlings` (
   KEY `handlings_user_id_foreign` (`user_id`),
   CONSTRAINT `handlings_complaint_id_foreign` FOREIGN KEY (`complaint_id`) REFERENCES `complaints` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `handlings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.handlings: ~7 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.handlings: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `handlings` DISABLE KEYS */;
 INSERT INTO `handlings` (`id`, `complaint_id`, `diagnosis`, `handling`, `response_time`, `done_time`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-	(10, 'f4f44867-ea74-4c23-bcee-cd2a211af893', 'diagnosis', 'penanganan', '2022-09-14 14:54:18', '2022-09-14 16:29:30', 'done', '85591b09-acb4-4742-989b-a6eaa38ce099', '2022-09-14 14:37:56', '2022-09-14 16:29:30'),
-	(12, 'edee6e93-4bf1-48ec-8054-d3425513d8a3', 'diagnosis', 'penanganan', NULL, '2022-09-14 16:51:35', 'done', '85591b09-acb4-4742-989b-a6eaa38ce099', '2022-09-14 14:58:31', '2022-09-14 16:51:35'),
-	(13, 'ac1cda3b-ba0d-4688-9fc3-df061311e733', NULL, NULL, NULL, NULL, NULL, 'e03fa048-7025-4412-aed9-b31a57bdd434', '2022-09-14 15:00:18', '2022-09-14 16:57:13'),
-	(14, 'bd7b451a-c84b-4208-91da-f8aa50573396', NULL, NULL, NULL, NULL, NULL, 'e03fa048-7025-4412-aed9-b31a57bdd434', '2022-09-14 15:01:49', '2022-09-14 16:53:19'),
-	(15, '9cb7f230-8050-49af-b44e-df68ee2d169b', NULL, NULL, NULL, NULL, NULL, 'e03fa048-7025-4412-aed9-b31a57bdd434', '2022-09-14 17:36:07', '2022-09-16 14:44:49'),
-	(16, '4ee3196b-9111-46f8-b5dd-a64afd24cc3a', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-14 17:36:34', '2022-09-14 17:36:34'),
-	(17, 'cf099474-3308-4419-8a99-f5626f3f5484', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-14 17:37:30', '2022-09-14 17:37:30');
+	(2, 'f6f2caf3-7726-4fd5-853b-aa7aae4898f3', NULL, NULL, NULL, NULL, 'reject', '4928adaf-f946-465a-b7f3-f653f4f24ea4', '2022-11-09 14:43:30', '2022-11-09 15:15:37'),
+	(3, '186fefdf-1f71-46c5-9550-469c806ecfb0', NULL, NULL, NULL, NULL, NULL, '85591b09-acb4-4742-989b-a6eaa38ce099', '2022-11-09 15:21:59', '2022-11-09 15:34:57'),
+	(4, '9f30109d-f459-47b1-8a59-8767d987cdb1', NULL, NULL, '2022-11-09 15:37:27', NULL, 'accept', '5ade2d23-f6be-4246-9ad9-42ac66079543', '2022-11-09 15:22:05', '2022-11-09 15:37:27');
 /*!40000 ALTER TABLE `handlings` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.menus
+-- membuang struktur untuk table db_psc_119.menus
 CREATE TABLE IF NOT EXISTS `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_name` varchar(50) DEFAULT NULL,
-  `link` varchar(50) DEFAULT NULL,
-  `attribute` varchar(50) DEFAULT NULL,
+  `menu_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attribute` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL DEFAULT '0',
-  `desc` tinytext,
+  `desc` tinytext COLLATE utf8mb4_unicode_ci,
   `category` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.menus: ~14 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.menus: ~14 rows (lebih kurang)
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
 INSERT INTO `menus` (`id`, `menu_name`, `link`, `attribute`, `position`, `desc`, `category`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 	(4, 'Pengaturan', '#', 'fa fa-cogs', 15, NULL, 1, 1, 1, '2022-01-12 11:05:31', '2022-06-03 11:00:35'),
@@ -1296,7 +1640,7 @@ INSERT INTO `menus` (`id`, `menu_name`, `link`, `attribute`, `position`, `desc`,
 	(26, 'Grafik', 'chart', 'fa fa-chart-area', 8, NULL, 2, 1, 0, '2022-08-24 13:37:09', '2022-09-14 19:25:01');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.menu_accesses
+-- membuang struktur untuk table db_psc_119.menu_accesses
 CREATE TABLE IF NOT EXISTS `menu_accesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL DEFAULT '0',
@@ -1314,9 +1658,9 @@ CREATE TABLE IF NOT EXISTS `menu_accesses` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `FK_access_tbl_group_tbl` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_access_tbl_menu_tbl` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.menu_accesses: ~19 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.menu_accesses: ~24 rows (lebih kurang)
 /*!40000 ALTER TABLE `menu_accesses` DISABLE KEYS */;
 INSERT INTO `menu_accesses` (`id`, `group_id`, `menu_id`, `create`, `read`, `update`, `delete`, `print`, `user_id`, `created_at`, `updated_at`) VALUES
 	(1, 1, 4, 1, 1, 1, 1, 1, 1, '2022-01-13 11:02:25', '2022-01-13 11:02:25'),
@@ -1338,18 +1682,22 @@ INSERT INTO `menu_accesses` (`id`, `group_id`, `menu_id`, `create`, `read`, `upd
 	(41, 2, 26, 1, 1, 1, 1, 1, 0, '2022-09-14 16:27:22', '2022-09-14 16:27:22'),
 	(42, 2, 19, 1, 1, 1, 1, 1, 0, '2022-09-14 16:31:46', '2022-09-14 16:31:46'),
 	(43, 2, 5, 1, 1, 1, 1, 1, 0, '2022-09-14 16:32:13', '2022-09-14 16:32:13'),
-	(44, 7, 24, 0, 1, 0, 0, 0, 0, '2022-09-14 17:14:16', '2022-09-14 17:14:34');
+	(44, 7, 24, 0, 1, 0, 0, 0, 0, '2022-09-14 17:14:16', '2022-09-14 17:14:34'),
+	(46, 4, 23, 0, 1, 0, 0, 0, 0, '2022-09-27 15:17:20', '2022-09-27 15:17:20'),
+	(48, 4, 24, 0, 1, 0, 0, 0, 0, '2022-09-27 15:17:38', '2022-09-27 15:17:38'),
+	(50, 4, 25, 1, 1, 1, 0, 0, 0, '2022-09-27 15:17:59', '2022-09-27 15:17:59'),
+	(52, 4, 26, 1, 1, 1, 0, 0, 0, '2022-09-27 15:18:17', '2022-09-27 15:18:17');
 /*!40000 ALTER TABLE `menu_accesses` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.migrations
+-- membuang struktur untuk table db_psc_119.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.migrations: ~25 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.migrations: ~25 rows (lebih kurang)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
@@ -1376,16 +1724,51 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(23, '2022_08_24_115332_create_unit_services_table', 17),
 	(24, '2022_08_31_160917_create_complaints_table', 18),
 	(25, '2022_08_31_163942_create_handlings_table', 19),
-	(26, '2022_08_31_165141_create_switch_officers_table', 20);
+	(26, '2022_08_31_165141_create_switch_officers_table', 20),
+	(27, '2022_10_10_103312_create_notifications_table', 21),
+	(28, '0000_00_00_000000_create_websockets_statistics_entries_table', 22);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.officers
+-- membuang struktur untuk table db_psc_119.notifications
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Membuang data untuk tabel db_psc_119.notifications: ~17 rows (lebih kurang)
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` (`id`, `email`, `message`, `created_at`, `updated_at`) VALUES
+	(2, 'izra.ismail.com', 'Ada Pengaduan Masuk, Silahkan buka aplikasi', '2022-10-10 11:09:43', '2022-10-10 11:09:43'),
+	(3, 'izra.ismail.com', 'Ada Pengaduan Masuk, Silahkan buka aplikasi', '2022-10-10 11:19:30', '2022-10-10 11:19:30'),
+	(4, 'izra.ismail.com', 'Ada Pengaduan Masuk, Silahkan buka aplikasi', '2022-10-10 11:20:05', '2022-10-10 11:20:05'),
+	(5, 'izra.ismail.com', 'Ada Pengaduan Masuk, Silahkan buka aplikasi', '2022-10-10 11:20:33', '2022-10-10 11:20:33'),
+	(6, 'adri.saputra.ibrahim@gmail.com', 'Petugas menuju Ke lokasi anda, Harap Tunggu', '2022-10-17 15:17:11', '2022-10-17 15:17:11'),
+	(7, 'adri.saputra.ibrahim@gmail.com', 'Registrasi berhasil, Silahkan Cek Email Untuk Aktivasi', '2022-11-03 18:43:40', '2022-11-03 18:43:40'),
+	(8, 'rahmat@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 13:45:03', '2022-11-09 13:45:03'),
+	(9, 'ikra@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 14:38:54', '2022-11-09 14:38:54'),
+	(10, 'ikra@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 14:43:51', '2022-11-09 14:43:51'),
+	(11, 'rahmat@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 14:46:18', '2022-11-09 14:46:18'),
+	(12, 'rahmat@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 15:09:35', '2022-11-09 15:09:35'),
+	(13, 'liwuto2@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 15:11:07', '2022-11-09 15:11:07'),
+	(14, 'indra@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 15:22:23', '2022-11-09 15:22:23'),
+	(15, 'ikra@gmail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 15:25:51', '2022-11-09 15:25:51'),
+	(16, 'adri.saputra.ibrahim@gmail.com', 'Petugas menuju Ke lokasi anda, Harap Tunggu', '2022-11-09 15:30:45', '2022-11-09 15:30:45'),
+	(17, 'izra.ismail.com', 'Perhatian!! Anda mendapat penugasan kegawatdaruratan medis, Harap ditindaklanjuti', '2022-11-09 15:34:57', '2022-11-09 15:34:57'),
+	(18, 'adri.saputra.ibrahim@gmail.com', 'Petugas menuju Ke lokasi anda, Harap Tunggu', '2022-11-09 15:37:27', '2022-11-09 15:37:27');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+
+-- membuang struktur untuk table db_psc_119.officers
 CREATE TABLE IF NOT EXISTS `officers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('available','noavailable') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `device_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_id` int(10) unsigned NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1395,17 +1778,20 @@ CREATE TABLE IF NOT EXISTS `officers` (
   KEY `officers_unit_id_foreign` (`unit_id`),
   CONSTRAINT `FK_officers_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `officers_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.officers: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.officers: ~5 rows (lebih kurang)
 /*!40000 ALTER TABLE `officers` DISABLE KEYS */;
-INSERT INTO `officers` (`id`, `name`, `phone_number`, `address`, `status`, `unit_id`, `user_id`, `created_at`, `updated_at`) VALUES
-	(3, 'Indra', '082170000122', 'Jalan P. Diponegoro', 'noavailable', 4, 'e03fa048-7025-4412-aed9-b31a57bdd434', '2022-08-19 09:40:32', '2022-09-16 14:44:49'),
-	(4, 'Izra Ismail', '085218101102', 'Jl. Agus Salim', 'available', 3, '85591b09-acb4-4742-989b-a6eaa38ce099', '2022-09-08 10:49:24', '2022-09-08 10:49:24'),
-	(5, 'Ahmad', '1313', 'Jl. Poros', 'available', 5, 'b912d226-396d-4cda-9b19-2e85f6c72872', '2022-09-16 15:02:37', '2022-09-16 15:02:37');
+INSERT INTO `officers` (`id`, `name`, `phone_number`, `address`, `status`, `device_id`, `unit_id`, `user_id`, `created_at`, `updated_at`) VALUES
+	(3, 'Indra Wijaya latif', '34555565665', 'Jalan P. Diponegoro', 'available', NULL, 4, 'e03fa048-7025-4412-aed9-b31a57bdd434', '2022-08-19 09:40:32', '2022-11-09 15:24:29'),
+	(4, 'Izra Ismail', '085218101102', 'Jl. Agus Salim', 'noavailable', '111222333', 3, '85591b09-acb4-4742-989b-a6eaa38ce099', '2022-09-08 10:49:24', '2022-11-09 15:34:57'),
+	(5, 'Ahmad', '1313', 'Jl. Poros', 'available', NULL, 5, 'b912d226-396d-4cda-9b19-2e85f6c72872', '2022-09-16 15:02:37', '2022-09-22 12:51:15'),
+	(6, 'Ikra', '082039801919', 'Jalan', 'noavailable', NULL, 13, '5ade2d23-f6be-4246-9ad9-42ac66079543', '2022-09-20 15:13:52', '2022-11-09 15:25:51'),
+	(7, 'Rahmat Saleh Ibrahim', 's12212121', 'eewew', 'available', NULL, 12, 'd2de9686-804b-4d17-a36f-9df686fe3a65', '2022-10-04 14:42:02', '2022-11-09 15:10:20'),
+	(8, 'liwuto2', '081111111', 'JL', 'available', NULL, 12, '4928adaf-f946-465a-b7f3-f653f4f24ea4', '2022-11-09 13:32:40', '2022-11-09 15:15:37');
 /*!40000 ALTER TABLE `officers` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.offices
+-- membuang struktur untuk table db_psc_119.offices
 CREATE TABLE IF NOT EXISTS `offices` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `office_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1415,7 +1801,7 @@ CREATE TABLE IF NOT EXISTS `offices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=377 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.offices: ~375 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.offices: ~375 rows (lebih kurang)
 /*!40000 ALTER TABLE `offices` DISABLE KEYS */;
 INSERT INTO `offices` (`id`, `office_name`, `office_address`, `created_at`, `updated_at`) VALUES
 	(1, 'SEKRETARIAT DAERAH', 'Komplek Perkantoran Kel. Wanggudu Kec. Asera Kab. Konawe Utara', '2022-06-08 13:28:37', '2022-06-08 13:28:37'),
@@ -1795,7 +2181,7 @@ INSERT INTO `offices` (`id`, `office_name`, `office_address`, `created_at`, `upd
 	(376, 'KELURAHAN TINOBU', 'KELURAHAN TINOBU', NULL, NULL);
 /*!40000 ALTER TABLE `offices` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.password_resets
+-- membuang struktur untuk table db_psc_119.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1803,13 +2189,13 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.password_resets: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.password_resets: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 	('adri.saputra.ibrahim@gmail.com', '$2y$10$1ZCbChwlh1RE.Fl3G0zoje4PR2GtxKM9Nzrrdq2IG1kO1Nv6gKupC', '2022-03-01 11:06:40');
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.personal_access_tokens
+-- membuang struktur untuk table db_psc_119.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1825,11 +2211,11 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.personal_access_tokens: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.personal_access_tokens: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.sessions
+-- membuang struktur untuk table db_psc_119.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
   `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) unsigned DEFAULT NULL,
@@ -1842,54 +2228,49 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.sessions: ~7 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.sessions: ~1 rows (lebih kurang)
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('5sToIhKjFDGZH6YeGqP0arpq8mkEtxNoKubnglVk', NULL, '140.213.180.206', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiM3hFMXF2Mm0wSURNaEhRWDQ0R0pFaWFyTzdCSFVMRDVKZHZCblhiYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1663326268),
-	('6IiLxF5zdJdf8PssZZDYZTR9BoKrLWM4d09m33C0', 0, '36.83.107.29', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiT016Ym90ZGFBbHhRTHM5OTlOUFNrRXR4endUNndTRks0dW1RZmI1MiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzAyOiJodHRwczovL3BzYy5wcm9qZWN0a29kaW5nLmNvbS9kZXRhaWxfdHJhY2tpbmcvZXlKcGRpSTZJbEpNVmpCR1kyWllkbE5QWldKdWJrSnRUbGRCVUZFOVBTSXNJblpoYkhWbElqb2lWQzlCY0VKeVpUUkVRbVkxTmpOQ1oyaEtiMDVFV21KYVYwOUtUM05ZU0ZWaFJtSTRZVVVyTVVRdlowbE1ORTVrTm5wUmEyOVhSVkozWms1alNrTktNaUlzSW0xaFl5STZJak5tTTJFeE9UQTRaREl5WVRReVpUQTJPREJoWldZM05qVXhaR1UxWVdReE5qWXlaRGd6WVdVNU9XTmhOR0ZrT0RCaE1URTVPV1UyTkRWaU56aGhPVGNpTENKMFlXY2lPaUlpZlE9PSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtzOjM2OiJkYTgyNDhlYy0xNDE0LTQzZjQtOTVjMC1lYjk0NGNiN2IxNjgiO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkdWRUQTY3LmN4M3ZyV0c0RENlOHFyLjNna1VvNGlxeHdTQmdjWnpVZGtRQ21vZ0VoZW1jbC4iO30=', 1663325041),
-	('DyvgCRrdse19q9WnStOgObo9nKD226TlbTUmm4ou', NULL, '140.213.180.206', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMzlyTDZjS0V2dktuek91Y2JRU094QnhqVmtnempYc3hnMEtuUUZqRiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1663326268),
-	('FrAQZnCQmEZ5pkUJOWsL8RFxSyEMP5NqFQFja3o1', NULL, '140.213.180.206', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiUXdsd050NjBTdGY4YzROa1ZQM0luc2FZRmNJeXJXZVd6WFhpM1ZESyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1663326268),
-	('mqAMi3CCFCxTaCmw6bblcBLOkqyNrOkb4llenP6b', NULL, '140.213.180.206', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibVhubERtckVhRHJhQkpKc21NMEk0TW1uRnBYTlRGMlBDZUVoS2tLbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1663326268),
-	('YwMgpymhrzWmPzPeAK88BvIYjXmG500E3wjorxd1', NULL, '140.213.180.206', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibVk4SzZrTVlDVzZRQUEzNWM2Y0w2dDFIWU92cHhoYjVPMGxUN3YybiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1663326268),
-	('ZVzur3TXdD7p5bATQBYVH21ip5xgb12ADze6Z3bG', 0, '125.162.212.83', 'Mozilla/5.0 (Linux; Android 10; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Mobile Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSnVFaDRjamRSRnFoWUVPZUN5SmpZVmI5cEtRSjhmOWJTOGxLdTgzSCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzAxOiJodHRwOi8vcHNjLnByb2plY3Rrb2RpbmcuY29tL2RldGFpbF90cmFja2luZy9leUpwZGlJNklqWnphMjlFYld3MWVVcG1RV0VyYmpkWGQyUjZSWGM5UFNJc0luWmhiSFZsSWpvaVNUaHZWVll4T0UxeUx6Sk1RM05sTUZwVU5HRjFORWg1UkU5TE9XWkZUSFZwUVd4eGJrNUpRbGhXZUU4NFlsTkNTMWRtVjJGSVpUSk5XbU5GTUV0cGVDSXNJbTFoWXlJNklqZG1OREJqTVRWa05ESmpORFJqWWpReE1qTXpNRFpqWm1abU1UTmhOak0zTmpSaU9EaGtNak5pTkRoak5tSmxNelpsWWpkaU5HRmhaRGt4WmpVeFpqSWlMQ0owWVdjaU9pSWlmUT09Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO3M6MzY6ImRhODI0OGVjLTE0MTQtNDNmNC05NWMwLWViOTQ0Y2I3YjE2OCI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCR1ZFRBNjcuY3gzdnJXRzREQ2U4cXIuM2drVW80aXF4d1NCZ2NaelVka1FDbW9nRWhlbWNsLiI7fQ==', 1663327332);
+	('qY1YDvrROQr1atXFZ7Nf2CKn5vyg5eeyBDVelfHb', 0, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid0FZUWYzNXB1em5WQ043SnE5TmRNVXNoUFM2bzgzSHVsVTBWYTlMNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9sb2NhbGhvc3QvcHNjLTExOS9hbWJ1bGFuY2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7czozNjoiZGE4MjQ4ZWMtMTQxNC00M2Y0LTk1YzAtZWI5NDRjYjdiMTY4IjtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJHVkVEE2Ny5jeDN2cldHNERDZThxci4zZ2tVbzRpcXh3U0JnY1p6VWRrUUNtb2dFaGVtY2wuIjt9', 1668048891);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.settings
+-- membuang struktur untuk table db_psc_119.settings
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `application_name` varchar(200) DEFAULT NULL,
-  `short_application_name` varchar(200) DEFAULT NULL,
-  `small_icon` varchar(100) DEFAULT NULL,
-  `large_icon` varchar(100) DEFAULT NULL,
-  `background_login` varchar(100) DEFAULT NULL,
-  `background_sidebar` varchar(100) DEFAULT NULL,
-  `gmaps_key` varchar(100) DEFAULT NULL,
-  `psc_call_number` varchar(100) DEFAULT NULL,
-  `time_refresh_tracking` varchar(100) DEFAULT NULL,
-  `layout` varchar(100) DEFAULT NULL,
-  `skin` varchar(100) DEFAULT NULL,
+  `application_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `short_application_name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `small_icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `large_icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background_login` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background_sidebar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gmaps_key` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `psc_call_number` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `time_refresh_tracking` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apk_officer` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `layout` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `skin` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.settings: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.settings: ~1 rows (lebih kurang)
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` (`id`, `application_name`, `short_application_name`, `small_icon`, `large_icon`, `background_login`, `background_sidebar`, `gmaps_key`, `psc_call_number`, `time_refresh_tracking`, `layout`, `skin`, `user_id`, `created_at`, `updated_at`) VALUES
-	(1, 'PSC-119', 'PSC-119', '16612053271.png', '16612069552.png', '16612107243.jpg', NULL, 'AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ', '081189209189', '15', 'default', 'skin-green-light', 0, '2021-10-29 10:58:27', '2022-08-23 07:25:24');
+INSERT INTO `settings` (`id`, `application_name`, `short_application_name`, `small_icon`, `large_icon`, `background_login`, `background_sidebar`, `gmaps_key`, `psc_call_number`, `time_refresh_tracking`, `apk_officer`, `layout`, `skin`, `user_id`, `created_at`, `updated_at`) VALUES
+	(1, 'PSC-119', 'PSC-119', '16612053271.png', '16612069552.png', '16612107243.jpg', NULL, 'AIzaSyDk5azS8gZ2aDInOTqyPv7FmB5uBlu55RQ', '04022824192', '15', '16651367354.apk', 'default', 'skin-green-light', 0, '2021-10-29 10:58:27', '2022-10-07 17:58:55');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.subdistricts
+-- membuang struktur untuk table db_psc_119.subdistricts
 CREATE TABLE IF NOT EXISTS `subdistricts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.subdistricts: ~8 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.subdistricts: ~8 rows (lebih kurang)
 /*!40000 ALTER TABLE `subdistricts` DISABLE KEYS */;
 INSERT INTO `subdistricts` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(2, 'Betoambari', '2022-08-16 07:48:48', '2022-09-07 18:09:24'),
@@ -1902,15 +2283,15 @@ INSERT INTO `subdistricts` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(9, 'Batupoaro', '2022-09-12 08:34:11', '2022-09-12 08:34:11');
 /*!40000 ALTER TABLE `subdistricts` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.sub_menus
+-- membuang struktur untuk table db_psc_119.sub_menus
 CREATE TABLE IF NOT EXISTS `sub_menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_id` int(11) NOT NULL,
-  `sub_menu_name` varchar(18) DEFAULT NULL,
-  `link` varchar(50) DEFAULT NULL,
-  `attribute` varchar(50) DEFAULT NULL,
+  `sub_menu_name` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attribute` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL DEFAULT '0',
-  `desc` tinytext,
+  `desc` tinytext COLLATE utf8mb4_unicode_ci,
   `status` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1918,9 +2299,9 @@ CREATE TABLE IF NOT EXISTS `sub_menus` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `FK_sub_menu_tbl_group_tbl` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.sub_menus: ~12 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.sub_menus: ~13 rows (lebih kurang)
 /*!40000 ALTER TABLE `sub_menus` DISABLE KEYS */;
 INSERT INTO `sub_menus` (`id`, `menu_id`, `sub_menu_name`, `link`, `attribute`, `position`, `desc`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 	(6, 4, 'User', 'user', 'fa-circle-notch', 1, NULL, 1, 1, '2022-01-12 13:42:20', '2022-01-14 20:01:44'),
@@ -1934,10 +2315,11 @@ INSERT INTO `sub_menus` (`id`, `menu_id`, `sub_menu_name`, `link`, `attribute`, 
 	(16, 23, 'Proses', 'process_complaint', NULL, 2, NULL, 1, 0, '2022-09-02 15:25:09', '2022-09-02 16:29:44'),
 	(17, 23, 'Dalam Penanganan', 'accept_complaint', NULL, 3, NULL, 1, 0, '2022-09-02 15:26:11', '2022-09-14 15:03:44'),
 	(18, 23, 'Tolak', 'reject_complaint', NULL, 4, NULL, 1, 0, '2022-09-02 15:56:42', '2022-09-02 16:30:20'),
-	(19, 23, 'Selesai', 'done_complaint', NULL, 5, 'xxx', 1, 0, '2022-09-02 15:57:23', '2022-09-02 16:30:33');
+	(19, 23, 'Selesai', 'done_complaint', NULL, 5, 'xxx', 1, 0, '2022-09-02 15:57:23', '2022-09-02 16:30:33'),
+	(20, 17, 'No. Panggilan PSC', 'call_number', NULL, 3, NULL, 1, 0, '2022-09-19 13:58:40', '2022-09-19 13:58:40');
 /*!40000 ALTER TABLE `sub_menus` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.sub_menu_accesses
+-- membuang struktur untuk table db_psc_119.sub_menu_accesses
 CREATE TABLE IF NOT EXISTS `sub_menu_accesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL DEFAULT '0',
@@ -1958,9 +2340,9 @@ CREATE TABLE IF NOT EXISTS `sub_menu_accesses` (
   CONSTRAINT `FK_sub_menu_access_tbl_group_tbl` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_sub_menu_access_tbl_menu_access_tbl_2` FOREIGN KEY (`menu_id`) REFERENCES `menu_accesses` (`menu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_sub_menu_access_tbl_sub_menu_tbl` FOREIGN KEY (`sub_menu_id`) REFERENCES `sub_menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.sub_menu_accesses: ~13 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.sub_menu_accesses: ~21 rows (lebih kurang)
 /*!40000 ALTER TABLE `sub_menu_accesses` DISABLE KEYS */;
 INSERT INTO `sub_menu_accesses` (`id`, `group_id`, `menu_id`, `sub_menu_id`, `create`, `read`, `update`, `delete`, `print`, `user_id`, `created_at`, `updated_at`) VALUES
 	(48, 1, 4, 6, 1, 1, 1, 1, 1, 1, '2022-08-15 17:59:57', NULL),
@@ -1977,31 +2359,44 @@ INSERT INTO `sub_menu_accesses` (`id`, `group_id`, `menu_id`, `sub_menu_id`, `cr
 	(60, 2, 23, 16, 0, 1, 0, 0, 0, 0, '2022-09-14 16:19:17', '2022-09-14 17:00:48'),
 	(61, 2, 23, 17, 0, 1, 0, 0, 0, 0, '2022-09-14 16:19:36', '2022-09-14 17:03:01'),
 	(62, 2, 23, 18, 0, 1, 0, 0, 0, 0, '2022-09-14 16:49:26', '2022-09-14 17:03:20'),
-	(63, 2, 23, 19, 0, 1, 0, 0, 0, 0, '2022-09-14 16:49:50', '2022-09-14 17:03:39');
+	(63, 2, 23, 19, 0, 1, 0, 0, 0, 0, '2022-09-14 16:49:50', '2022-09-14 17:03:39'),
+	(64, 1, 17, 20, 1, 1, 1, 1, 1, 0, '2022-09-19 13:59:07', '2022-09-19 13:59:07'),
+	(66, 4, 23, 15, 0, 1, 0, 0, 0, 0, '2022-09-27 15:19:55', '2022-09-27 15:19:55'),
+	(68, 4, 23, 16, 0, 1, 0, 0, 0, 0, '2022-09-27 15:20:08', '2022-09-27 15:20:08'),
+	(70, 4, 23, 17, 0, 1, 0, 0, 0, 0, '2022-09-27 15:20:21', '2022-09-27 15:20:21'),
+	(72, 4, 23, 18, 0, 1, 0, 0, 0, 0, '2022-09-27 15:20:33', '2022-09-27 15:20:33'),
+	(74, 4, 23, 19, 0, 1, 0, 0, 0, 0, '2022-09-27 15:20:47', '2022-09-27 15:20:47');
 /*!40000 ALTER TABLE `sub_menu_accesses` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.switch_officers
+-- membuang struktur untuk table db_psc_119.switch_officers
 CREATE TABLE IF NOT EXISTS `switch_officers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `complaint_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `unit_id` int(10) unsigned NOT NULL,
+  `officer_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `switch_officers_complaint_id_foreign` (`complaint_id`),
   KEY `switch_officers_unit_id_foreign` (`unit_id`),
+  KEY `FK_switch_officers_officers` (`officer_id`),
+  CONSTRAINT `FK_switch_officers_officers` FOREIGN KEY (`officer_id`) REFERENCES `officers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `switch_officers_complaint_id_foreign` FOREIGN KEY (`complaint_id`) REFERENCES `complaints` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `switch_officers_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.switch_officers: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.switch_officers: ~4 rows (lebih kurang)
 /*!40000 ALTER TABLE `switch_officers` DISABLE KEYS */;
-INSERT INTO `switch_officers` (`id`, `complaint_id`, `description`, `unit_id`, `created_at`, `updated_at`) VALUES
-	(1, 'edee6e93-4bf1-48ec-8054-d3425513d8a3', 'Mobil Mogok', 4, '2022-09-14 16:32:45', '2022-09-14 16:32:45');
+INSERT INTO `switch_officers` (`id`, `complaint_id`, `description`, `unit_id`, `officer_id`, `created_at`, `updated_at`) VALUES
+	(3, 'f6f2caf3-7726-4fd5-853b-aa7aae4898f3', 'Mobil Mogok juga', 13, 6, '2022-11-09 14:44:23', '2022-11-09 14:44:23'),
+	(4, 'f6f2caf3-7726-4fd5-853b-aa7aae4898f3', 'Kehabisan Bensin', 12, 7, '2022-11-09 14:47:46', '2022-11-09 14:47:46'),
+	(5, 'f6f2caf3-7726-4fd5-853b-aa7aae4898f3', 'Kehabisan Bensin', 12, 7, '2022-11-09 15:10:20', '2022-11-09 15:10:20'),
+	(6, 'f6f2caf3-7726-4fd5-853b-aa7aae4898f3', 'Kehabisan Bensin', 12, 8, '2022-11-09 15:15:37', '2022-11-09 15:15:37'),
+	(7, '9f30109d-f459-47b1-8a59-8767d987cdb1', 'Kehabisan Bensin Bung', 4, 3, '2022-11-09 15:24:29', '2022-11-09 15:24:29');
 /*!40000 ALTER TABLE `switch_officers` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.treatments
+-- membuang struktur untuk table db_psc_119.treatments
 CREATE TABLE IF NOT EXISTS `treatments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `text` text COLLATE utf8mb4_unicode_ci,
@@ -2011,52 +2406,56 @@ CREATE TABLE IF NOT EXISTS `treatments` (
   PRIMARY KEY (`id`),
   KEY `treatments_category_id_foreign` (`category_id`),
   CONSTRAINT `treatments_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.treatments: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.treatments: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `treatments` DISABLE KEYS */;
 INSERT INTO `treatments` (`id`, `text`, `category_id`, `created_at`, `updated_at`) VALUES
 	(3, '<p>xxxx</p>', 1, '2022-08-24 11:35:35', '2022-08-24 11:41:17'),
 	(4, '<p>Petugas memberikan pertolongan pertama dengan melakukan perban luka pada pasien</p>', 2, '2022-09-08 10:04:27', '2022-09-08 10:04:27');
 /*!40000 ALTER TABLE `treatments` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.units
+-- membuang struktur untuk table db_psc_119.units
 CREATE TABLE IF NOT EXISTS `units` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `coordinate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` enum('hospital','health center','clinic','drugstore') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `time_operation` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `subdistrict_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `units_subdistrict_id_foreign` (`subdistrict_id`),
   CONSTRAINT `units_subdistrict_id_foreign` FOREIGN KEY (`subdistrict_id`) REFERENCES `subdistricts` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.units: ~17 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.units: ~17 rows (lebih kurang)
 /*!40000 ALTER TABLE `units` DISABLE KEYS */;
-INSERT INTO `units` (`id`, `name`, `address`, `coordinate`, `subdistrict_id`, `created_at`, `updated_at`) VALUES
-	(3, 'Puskesmas Wajo', 'Jl. Dr. Wahidin No.137 Kel. Wajo, Kec. Murhum 9372', '-5.482888385231235, 122.59222984313965', 3, '2022-08-18 20:27:11', '2022-09-09 13:26:35'),
-	(4, 'Puskesmas Betoambari', 'Kel. Bone-bone, Kec. Batupoaro', '-5.4856429306487176, 122.58496969552637', 2, '2022-09-09 13:24:33', '2022-09-09 13:25:59'),
-	(5, 'Puskesmas Bataraguru', 'Jl. MH Thamrin Kel. Bataraguru, Kec. Wolio', '-5.4856429306487176, 122.58496969552637', 5, '2022-09-13 10:20:58', '2022-09-13 10:20:58'),
-	(6, 'Puskesmas Bukit Wolio Indah', 'Kompleks BTN Medi Brata, Kel. Bukit Wolio Indah, K', '-5.4856429306487176, 122.58496969552637', 5, '2022-09-13 10:27:02', '2022-09-13 10:27:02'),
-	(7, 'Puskesmas Bungi', 'Jl. Anoa KM.11 Kel. Liabuku, Kec. Bungi', '-5.345491898944882, 122.6955738183452', 4, '2022-09-13 10:30:08', '2022-09-13 10:30:08'),
-	(8, 'Puskesmas Kadolomoko', 'Jl. Anoa Kel. Kadolomoko, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', 8, '2022-09-13 10:34:07', '2022-09-13 10:34:07'),
-	(9, 'Puskesmas Kampeonaho', 'Jl. Anoa KM.19 Kel. Kampeonaho, Kec. Bungi', '-5.4856429306487176, 122.58496969552637', 4, '2022-09-13 10:35:21', '2022-09-13 10:35:21'),
-	(10, 'Puskesmas Katobengke', 'Jl. La Karambau No.23C Kel. Katobengke, Kec. Betoa', '-5.4856429306487176, 122.58496969552637', 2, '2022-09-13 10:42:53', '2022-09-13 10:42:53'),
-	(11, 'Puskesmas Lakologou', 'Jl. Anoa Kel. Lakologou, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', 8, '2022-09-13 10:46:15', '2022-09-13 10:46:15'),
-	(12, 'Puskesmas Liwuto', 'Kel. Liwuto, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', 8, '2022-09-13 12:41:45', '2022-09-13 12:41:45'),
-	(13, 'Puskesmas Lowu-Lowu', 'Kel. Lowu-lowu, Kec. Lea-Lea', '-5.4856429306487176, 122.58496969552637', 7, '2022-09-13 12:44:48', '2022-09-13 12:44:48'),
-	(14, 'Puskesmas Melai', 'Jl. La Buke Kel. Melai, Kec. Murhum', '-5.4856429306487176, 122.58496969552637', 3, '2022-09-13 12:46:41', '2022-09-13 12:46:41'),
-	(15, 'Puskesmas Meo-Meo', 'Jl. Hayam Wuruk No.97 Kel. Wameo, Kec. Batupoaro', '-5.4856429306487176, 122.58496969552637', 9, '2022-09-13 12:54:16', '2022-09-13 12:54:16'),
-	(16, 'Puskesmas Sorawollio', 'Kel. Sorawolio, Kec. Sorawolio', '-5.4856429306487176, 122.58496969552637', 6, '2022-09-13 13:04:41', '2022-09-13 13:04:41'),
-	(17, 'Puskesmas Sulaa', 'Komplek BTN Wanabakti, Kel. Sulaa, Kec. Betoambari', '-5.4856429306487176, 122.58496969552637', 2, '2022-09-13 13:06:03', '2022-09-13 13:06:03'),
-	(18, 'Puskesmas Waborobo', 'Kel. Waborobo, Kec. Betoambari', '-5.4856429306487176, 122.58496969552637', 2, '2022-09-13 13:17:11', '2022-09-13 13:17:11'),
-	(19, 'Puskesmas Wolio', 'Jl. Pahlawan Kel. Bukit Wolio Indah, Kec. Wolio', '-5.4856429306487176, 122.58496969552637', 5, '2022-09-13 13:18:36', '2022-09-13 13:18:36');
+INSERT INTO `units` (`id`, `name`, `address`, `coordinate`, `category`, `image`, `time_operation`, `subdistrict_id`, `created_at`, `updated_at`) VALUES
+	(3, 'Puskesmas Wajo', 'Jl. Dr. Wahidin No.137 Kel. Wajo, Kec. Murhum 9372', '-5.469643316374675, 122.59950486854608', NULL, NULL, NULL, 3, '2022-08-18 20:27:11', '2022-09-09 13:26:35'),
+	(4, 'Puskesmas Betoambari', 'Kel. Bone-bone, Kec. Batupoaro', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 2, '2022-09-09 13:24:33', '2022-09-09 13:25:59'),
+	(5, 'Puskesmas Bataraguru', 'Jl. MH Thamrin Kel. Bataraguru, Kec. Wolio', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 5, '2022-09-13 10:20:58', '2022-09-13 10:20:58'),
+	(6, 'Puskesmas Bukit Wolio Indah', 'Kompleks BTN Medi Brata, Kel. Bukit Wolio Indah, K', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 5, '2022-09-13 10:27:02', '2022-09-13 10:27:02'),
+	(7, 'Puskesmas Bungi', 'Jl. Anoa KM.11 Kel. Liabuku, Kec. Bungi', '-5.345491898944882, 122.6955738183452', NULL, NULL, NULL, 4, '2022-09-13 10:30:08', '2022-09-13 10:30:08'),
+	(8, 'Puskesmas Kadolomoko', 'Jl. Anoa Kel. Kadolomoko, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 8, '2022-09-13 10:34:07', '2022-09-13 10:34:07'),
+	(9, 'Puskesmas Kampeonaho', 'Jl. Anoa KM.19 Kel. Kampeonaho, Kec. Bungi', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 4, '2022-09-13 10:35:21', '2022-09-13 10:35:21'),
+	(10, 'Puskesmas Katobengke', 'Jl. La Karambau No.23C Kel. Katobengke, Kec. Betoa', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 2, '2022-09-13 10:42:53', '2022-09-13 10:42:53'),
+	(11, 'Puskesmas Lakologou', 'Jl. Anoa Kel. Lakologou, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 8, '2022-09-13 10:46:15', '2022-09-13 10:46:15'),
+	(12, 'Puskesmas Liwuto', 'Kel. Liwuto, Kec. Kokalukuna', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 8, '2022-09-13 12:41:45', '2022-09-13 12:41:45'),
+	(13, 'Puskesmas Lowu-Lowu', 'Kel. Lowu-lowu, Kec. Lea-Lea', '-5.455280589900395, 122.60656355365813', NULL, NULL, NULL, 7, '2022-09-13 12:44:48', '2022-09-13 12:44:48'),
+	(14, 'Puskesmas Melai', 'Jl. La Buke Kel. Melai, Kec. Murhum', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 3, '2022-09-13 12:46:41', '2022-09-13 12:46:41'),
+	(15, 'Puskesmas Meo-Meo', 'Jl. Hayam Wuruk No.97 Kel. Wameo, Kec. Batupoaro', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 9, '2022-09-13 12:54:16', '2022-09-13 12:54:16'),
+	(16, 'Puskesmas Sorawollio', 'Kel. Sorawolio, Kec. Sorawolio', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 6, '2022-09-13 13:04:41', '2022-09-13 13:04:41'),
+	(17, 'Puskesmas Sulaa', 'Komplek BTN Wanabakti, Kel. Sulaa, Kec. Betoambari', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 2, '2022-09-13 13:06:03', '2022-09-13 13:06:03'),
+	(18, 'Puskesmas Waborobo', 'Kel. Waborobo, Kec. Betoambari', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 2, '2022-09-13 13:17:11', '2022-09-13 13:17:11'),
+	(19, 'Puskesmas Wolio', 'Jl. Pahlawan Kel. Bukit Wolio Indah, Kec. Wolio', '-5.4856429306487176, 122.58496969552637', NULL, NULL, NULL, 5, '2022-09-13 13:18:36', '2022-09-13 13:18:36'),
+	(20, 'xxx', 'xxx', '-5.463183923010716, 122.61299014091492', 'clinic', '1664714569.jpeg', '12 Jam', 2, '2022-10-02 20:39:45', '2022-10-02 20:43:01');
 /*!40000 ALTER TABLE `units` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.unit_services
+-- membuang struktur untuk table db_psc_119.unit_services
 CREATE TABLE IF NOT EXISTS `unit_services` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `service` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2069,14 +2468,14 @@ CREATE TABLE IF NOT EXISTS `unit_services` (
   CONSTRAINT `unit_services_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.unit_services: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.unit_services: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `unit_services` DISABLE KEYS */;
 INSERT INTO `unit_services` (`id`, `service`, `description`, `unit_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Perawatan', '<p>sasasadf dsds</p>', 3, '2022-08-24 16:48:28', '2022-08-24 16:54:16'),
 	(2, 'Pemeriksaan Umum', '<p>Pemeriksaan umum terdiri dari :</p>\r\n\r\n<ul>\r\n	<li>Pelayanan Kesehatan Gigi dan Mulut</li>\r\n	<li>Pelayanan Kesehatan Ibu dan Anak</li>\r\n	<li>Pelayanan Keluarga Berencana</li>\r\n	<li>Pelayanan Gawat Darurat</li>\r\n	<li>Pelayanan Gizi</li>\r\n	<li>Pelayanan Imunisasi</li>\r\n	<li>Pelayanan Kefarmasian</li>\r\n	<li>Pelayanan Laboratorium</li>\r\n	<li>Pelayanan Persalinan</li>\r\n	<li>Pelayanan Rawat Inap Persalinan</li>\r\n</ul>', 4, '2022-09-09 13:34:45', '2022-09-09 13:34:45');
 /*!40000 ALTER TABLE `unit_services` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.users
+-- membuang struktur untuk table db_psc_119.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -2097,22 +2496,35 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_groups` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.users: ~10 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.users: ~22 rows (lebih kurang)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `group_id`, `status`, `photo`, `api_token`, `api_expired`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	('030566c5-d7e9-40aa-94ca-c51867a39624', 'Andi Bintang', 'adri@gmail.com', NULL, '$2y$10$8Tofi3vPpDjif99GXuGnL.syM3p1li3dMqxbsfYEaCW6Le.Z8MQfC', NULL, 6, 'block', NULL, 'Chr2aoJlR2Jty5GwEpJhsTgIDumcxggEhXFU', NULL, '2022-09-05 13:59:12', '2022-09-05 13:59:12', NULL),
-	('3ea91509-a5eb-4efc-b5db-3c3e47929506', 'Andi Bintang', 'adrisa@gmail.com', NULL, '$2y$10$PmfQjhFcZ2rHmQONJgcEPugth2mAbbZTTtO222N1r3xKuoyzUhUai', NULL, 6, 'block', NULL, 'b5KZZwA0RgwMiu9S6HavBXa1kQ9GUmcaW4rE', NULL, '2022-09-05 14:01:09', '2022-09-05 14:01:09', NULL),
-	('58a5a90e-8e8e-4748-b877-01b39e224862', 'adsry', 'andibintang.dev@gmail.com', NULL, '$2y$10$GYqEnsQS6FVjkcH13lvKPOBy4zdVeX10.570T.q/IiLGWkcKaGhXG', NULL, 6, 'block', NULL, 'ERv2XObYrBup97uLg2rT1UnFQ8nYsBEapoHr', NULL, '2022-08-29 17:37:42', '2022-08-29 17:37:42', NULL),
-	('6160aecf-6b09-4270-ba70-a888368b8546', 'Amelya', 'adminpscbaubau@gmail.com', '2022-09-14 16:43:07', '$2y$10$sGZW1R5Pjsxud1/euWUPbuUdzaDSNksqTzJxB8c1fiQt.KZcyLZve', NULL, 2, 'active', NULL, '42a3afdedbc3518994a1555434edb94e94676f4cffc3336be59bfbe1c1868c74', NULL, '2022-09-14 16:43:07', '2022-09-14 16:43:07', NULL),
-	('85591b09-acb4-4742-989b-a6eaa38ce099', 'Izra Ismail', 'izra.ismail.com', NULL, '$2y$10$bNOS8XTr8qBUdLcJii/3gON7xiYdIhr82.7IhZs3HzbGlk2kpsIxG', NULL, 3, 'active', NULL, 'NZT43wlVtSXXqKfYcNfuuffgopXNxOzerRVc', '2022-09-15 14:47:48', '2022-09-08 10:49:24', '2022-09-14 14:47:48', NULL),
-	('ab2b0f48-6d49-4b99-b125-e2c9b543f12f', 'Adri Saputra ibrahim', 'adri.saputra.ibrahim@gmail.com', '2022-08-24 08:34:07', '$2y$10$I/GxM7B1/nnczIhBj8UdZ.zvOkHrmCO.qeR1ajCBd8O2g0ca/MCZ.', NULL, 6, 'active', NULL, 'KMU14UCEBBMoEQjjHdcsandiwAP7bTlpr2rv', '2022-09-17 14:40:50', '2022-08-24 08:32:14', '2022-09-16 14:40:50', NULL),
+	('244fce6a-c245-4c9e-90a2-f9616aa75ac1', 'Mohammad', 'muhsoleh607@gmail.com', '2022-09-30 09:34:00', '$2y$10$V4ZjJ1nvkrqn71rVQX1fP./GS8G1Y0sZvWkCf7A94HMVIUxlJx/jO', NULL, 6, 'active', NULL, '6fFU3ZPynFvd7BpDBiG5POXddZtP4gTSSfLo', '2022-10-01 09:36:45', '2022-09-30 09:33:24', '2022-09-30 09:36:45', NULL),
+	('4928adaf-f946-465a-b7f3-f653f4f24ea4', 'liwuto2', 'liwuto2@gmail.com', NULL, '$2y$10$O4eMqW3yfBafEVzsF.yxdOr1Pqa8c5GGSS09HcOvFmvyRkkMk4LAO', NULL, 3, 'active', NULL, 'O0UZdAlsUson8VPiTj9kz633VzE0VOLxRIeR', '2022-11-16 13:45:59', '2022-11-09 13:32:40', '2022-11-09 13:45:59', NULL),
+	('5a93f8c5-caa5-4898-af50-9845aa0f6e25', 'Muh. Fahril', 'fahrilkabaena123@gmail.com', '2022-09-30 10:23:01', '$2y$10$iSW61vfeeCteGcGsKFY6p.zWwvfRdE6H3PVN9yQxti6WKRjkMhJVy', NULL, 6, 'active', NULL, 'ptJeTyGCqnowVFH0Geaw4GH5JrH4hsNdM04V', '2022-10-01 10:23:47', '2022-09-30 10:18:41', '2022-09-30 11:37:40', NULL),
+	('5ade2d23-f6be-4246-9ad9-42ac66079543', 'Ikra', 'ikra@gmail.com', NULL, '$2y$10$Gbz1dMSBYwu4WISQ1S/m/uPWx98/6.9h518KaVcEMF1YB5BdlRE7.', NULL, 3, 'active', NULL, 'ARUtiuKG0BUCTgVlnuG1C1tKslH2zi3DwG9w', '2022-11-16 14:39:13', '2022-09-20 15:13:52', '2022-11-09 14:39:13', NULL),
+	('6160aecf-6b09-4270-ba70-a888368b8546', 'callcenter', 'adminpscbaubau@gmail.com', '2022-09-14 16:43:07', '$2y$10$irY34fT0QlwZdTuZryA3WOoVvsNf8MY7trIVBi6MMD6wx200bLTPG', NULL, 2, 'active', NULL, '42a3afdedbc3518994a1555434edb94e94676f4cffc3336be59bfbe1c1868c74', NULL, '2022-09-14 16:43:07', '2022-09-30 09:27:27', NULL),
+	('66cbe34e-22ba-44cf-a93d-615a0b615dfb', 'kabid', 'kabid@gmail.com', '2022-09-27 16:08:26', '$2y$10$wzC5sP90JgLXSZGGdSRxt.Y.Du4faIoFSnVR98P4TYkt6y/8g2MY.', NULL, 4, 'active', NULL, 'fc044b5479cab4a48b0b82bd1d16b6173f3fe820adc564294abe8736cfc20d66', NULL, '2022-09-27 16:08:26', '2022-09-27 16:08:26', NULL),
+	('85591b09-acb4-4742-989b-a6eaa38ce099', 'Izra Ismail', 'izra.ismail.com', NULL, '$2y$10$bNOS8XTr8qBUdLcJii/3gON7xiYdIhr82.7IhZs3HzbGlk2kpsIxG', NULL, 3, 'active', NULL, 'wKLcmri2kkkRfgh2m533Snc51g1WxKSC9VSG', '2022-10-24 15:16:05', '2022-09-08 10:49:24', '2022-10-17 15:16:05', NULL),
+	('8c3b691a-1db4-4248-a6ce-03dc4704e400', 'dinkes', 'dinkesbaubau@gmail.com', '2022-09-21 15:04:24', '$2y$10$U2/BiKDn.1IBWFkQ8whAPuy2R2YCJIycoKSHGH8jEnnutY2qGUuma', NULL, 7, 'active', NULL, 'bb14760c7b1f37f95c71612bffdff66a353ada9c3cc15d2a8d14bb17e3afcfeb', NULL, '2022-09-21 15:04:24', '2022-09-22 14:18:17', NULL),
+	('9051bd4c-4862-41be-868b-b92aa02c5136', 'kadis', 'kadis@gmail.com', '2022-09-27 15:19:11', '$2y$10$6SWG.ECsn1rBaI93ffUtfeklld3MxkVZMT7yrtzuU0kQm3ruYxJze', NULL, 4, 'active', NULL, 'c9f1588044f0377f5be88790a06cb7d259c1d4e1dc2520eb678b533e2255fd9a', NULL, '2022-09-27 15:19:11', '2022-09-27 15:19:11', NULL),
+	('9a429e59-4fa7-4728-be10-7a455ace252f', 'Adri Saputra', 'adri.saputra.ibrahim@gmail.com', NULL, '$2y$10$tp7NypApd3KpstUMbFW.3OgOxMKr2wbKG60x.mZo9ZZf/fwM7qpFS', NULL, 6, 'active', NULL, '10iLyQ65LWQLDB3kzDYdOnPO8fZ4y9zhMnGI', '2022-11-16 13:37:24', '2022-11-03 18:43:43', '2022-11-09 13:37:24', NULL),
+	('a9c5b8f6-41e9-40c2-8b23-0b4b2ff43737', 'admin10', 'a@b.com', NULL, '$2y$10$ZzToIUZvty7qgWQAcMs/X.HkP/4X4o3VJWjK/kegMnNjw6oA2ahHG', NULL, 2, 'active', '1664082426.php', NULL, NULL, '2022-09-25 13:06:38', '2022-09-25 13:07:06', NULL),
+	('aff3e565-75ce-4bd0-8d95-91033087766c', 'uun', 'divmarketingts@gmail.com', NULL, '$2y$10$tgPZHi5vL.aBd7QWM0J2yOwxj7aMxboRnP4EkXBQBV1jUco891Gwi', NULL, 6, 'block', NULL, 'cJNqdl6aYbNGeOG00bRSZ752JFM4MizAp0BD', NULL, '2022-10-03 18:39:14', '2022-10-03 18:39:14', NULL),
+	('b3640f52-bd7c-499d-9a13-1e733eae4098', 'sholeh', 'bkadkotakendari2022@gmail.com', NULL, '$2y$10$V0Y1wVH3n..sZ1qZoMeVI.ORTrDvxxtfmBtFT5AJQW8WqaRWs.3Qy', NULL, 6, 'block', NULL, 'bE5ffSIeWZpcrMsixLCvfbCN1hvlpynlUR53', NULL, '2022-09-30 09:28:01', '2022-09-30 09:28:01', NULL),
 	('b912d226-396d-4cda-9b19-2e85f6c72872', 'Ahmad', 'kbjbhjvjhbkjgmail.com', NULL, '$2y$10$88zb5tf7Svs/LLO9Krkzk.2NTf6WFKItU1PVaplRsSAGu0axj2Ha6', NULL, 3, 'active', NULL, NULL, NULL, '2022-09-16 15:02:37', '2022-09-16 15:02:37', NULL),
-	('da8248ec-1414-43f4-95c0-eb944cb7b168', 'administrator', 'administrator@gmail.com', '2022-08-16 06:30:06', '$2y$10$udTA67.cx3vrWG4DCe8qr.3gkUo4iqxwSBgcZzUdkQCmogEhemcl.', NULL, 1, 'active', NULL, 'XOE3nVIc3TeSErOyBdwlrqYWIRBKxft16IHl', '2022-08-24 11:44:19', '2022-08-16 06:26:11', '2022-08-23 11:44:19', NULL),
-	('e03fa048-7025-4412-aed9-b31a57bdd434', 'Indra', 'indra@gmail.com', NULL, '$2y$10$Diyr0aETQFbKJ7hlQXlgpuesmqO9ug0vJHEp.fuUGw56Tnqj5rqd.', NULL, 3, 'active', NULL, 'a9pHK8UZeH5B8eCPYtqMdVQiNM0HYIunOuGl', '2022-09-15 16:31:10', '2022-08-19 09:40:32', '2022-09-14 16:31:10', NULL),
-	('id', 'Amelya', 'amelya@gmail.com', NULL, '$2y$10$ajJfFTTZDTqCSarvKEtZIujZHoVL0XSimEIb9muW.haFDmKMaFN8a', NULL, 6, 'block', NULL, 'faCazyBB4Gi1nYOtmRVzLsrhOUJbGS5yfNX3', NULL, '2022-09-13 11:21:09', '2022-09-13 11:21:09', NULL);
+	('c35f0559-3516-4245-97fd-160055ef8827', 'euis nurhiliya', 'euis.nurhiliya@gmail.com', '2022-09-21 14:21:10', '$2y$10$BnJWI.HnCYRZWp03BH67KOaJFAxZuGs2h5ftI8S7N3JK6DFKJQ7CW', NULL, 6, 'active', NULL, 'lJZGh0w6XHd4s1vNcGJiTtt4XYI3IqUsJJVw', '2022-09-22 14:22:20', '2022-09-21 14:20:33', '2022-10-04 13:59:47', NULL),
+	('c3a53035-a63a-426c-92d9-ada953a85034', 'mely', 'amelyasaputri0395@gmail.com', '2022-09-21 14:35:11', '$2y$10$vbYeGT4MdqrGw4jTRd.iYeHlzABGHNoQJvlw5iqgDd/g/XCInxCOS', NULL, 6, 'active', NULL, '808Teq2663jMYELggbqTq9zCfOMtrt817gnQ', '2022-09-22 14:35:17', '2022-09-21 14:34:56', '2022-09-21 14:35:17', NULL),
+	('d2de9686-804b-4d17-a36f-9df686fe3a65', 'rahmat_123', 'rahmat@gmail.com', NULL, '$2y$10$ZflwfpBPk7nTOt.YTvXQI.4Njk/s6mpcSm/UOKQocnjlf2TRlkIT2', NULL, 3, 'active', NULL, 'FwEdY4iPUyD6qQUSonFQtBEN0blB6F1FVBwy', '2022-11-16 13:53:24', '2022-10-04 14:42:02', '2022-11-09 13:53:24', NULL),
+	('d5643b0f-29f4-4b56-a917-5f3c5514b62c', 'mely', 'amelyasaputri10@gmail.com', NULL, '$2y$10$bhYGCPRWDlOKv9Hx3qAKPOOJA2hRIE9.6HrksX7OngfKO528t32/.', NULL, 6, 'active', NULL, 'WpuQpbzxh9BqdoLorVSaOrSsMx8LzwT2tWTn', NULL, '2022-09-30 11:34:26', '2022-09-30 14:29:46', NULL),
+	('d5db238d-e24a-44f5-9c91-ee6f114a2865', 'sekdis', 'sekdis@gmail.com', '2022-09-27 16:08:49', '$2y$10$qwQCQ2yZd3QsxITXROg0wOhUd9k3O4AfNQx1/11VUk.XGOJDjMCmG', NULL, 4, 'active', NULL, 'f3933cdbac139ea32ed1f77a9fb679f8cd2eb44016665d7b5fa023ffaddf1629', NULL, '2022-09-27 16:08:49', '2022-09-27 16:08:49', NULL),
+	('da8248ec-1414-43f4-95c0-eb944cb7b168', 'administrator', 'administrator@gmail.com', '2022-08-16 06:30:06', '$2y$10$udTA67.cx3vrWG4DCe8qr.3gkUo4iqxwSBgcZzUdkQCmogEhemcl.', NULL, 1, 'active', '1664954133.jpg', 'XOE3nVIc3TeSErOyBdwlrqYWIRBKxft16IHl', '2022-08-24 11:44:19', '2022-08-16 06:26:11', '2022-10-05 15:15:33', NULL),
+	('e03fa048-7025-4412-aed9-b31a57bdd434', 'Indra62', 'indra@gmail.com', NULL, '$2y$10$rRGkpDCYEEX2.aabLaIvk.PKVlVg7fdXmQozywoFduAA/fMM.twqq', NULL, 3, 'active', '1664956134.png', 'Xs612GJKYgC8LclBGbIEG7QZqGkiLPkkHxL0', '2022-11-16 15:23:53', '2022-08-19 09:40:32', '2022-11-09 15:23:53', NULL),
+	('e1214a6d-aa83-4ac5-9be5-350543fad1dd', 'Andy Musly Afriyanto', 'andy.musly@gmail.com', '2022-09-21 14:15:43', '$2y$10$dUwz11NHf.x1QLAHErx8GuJN6SVLX9Yu28zALNeU2ew2so05eb5T6', NULL, 6, 'active', NULL, '3JVVzbOExySKZmP7UV5s55gdoXLfbyYJjrKU', NULL, '2022-09-21 12:15:35', '2022-09-21 14:15:43', NULL),
+	('efbc1902-9694-4074-b039-26b1af174c1b', 'indra', 'indra027@gmail.com', NULL, '$2y$10$PfnjUGgHaN/M.LOiX.l08.GzLmgpJ0WlISMOCS3gVOY48CIBA.DqW', NULL, 6, 'active', NULL, 'LNGloJFZb29eCek4iDxcBVfqvon1huuPtGjQ', '2022-09-27 18:33:21', '2022-09-23 10:31:23', '2022-11-03 19:59:55', '2022-11-03 19:59:55');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- membuang struktur untuk table projectkoding_psc.villages
+-- membuang struktur untuk table db_psc_119.villages
 CREATE TABLE IF NOT EXISTS `villages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2122,9 +2534,9 @@ CREATE TABLE IF NOT EXISTS `villages` (
   PRIMARY KEY (`id`),
   KEY `villages_subdistrict_id_foreign` (`subdistrict_id`),
   CONSTRAINT `villages_subdistrict_id_foreign` FOREIGN KEY (`subdistrict_id`) REFERENCES `subdistricts` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel projectkoding_psc.villages: ~42 rows (lebih kurang)
+-- Membuang data untuk tabel db_psc_119.villages: ~43 rows (lebih kurang)
 /*!40000 ALTER TABLE `villages` DISABLE KEYS */;
 INSERT INTO `villages` (`id`, `name`, `subdistrict_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Katobengke', 2, '2022-08-24 08:26:30', '2022-09-07 18:10:26'),
@@ -2171,6 +2583,22 @@ INSERT INTO `villages` (`id`, `name`, `subdistrict_id`, `created_at`, `updated_a
 	(43, 'Wale', 5, '2022-09-12 08:43:21', '2022-09-12 08:43:21'),
 	(44, 'Tomba', 5, '2022-09-12 08:43:29', '2022-09-12 08:43:29');
 /*!40000 ALTER TABLE `villages` ENABLE KEYS */;
+
+-- membuang struktur untuk table db_psc_119.websockets_statistics_entries
+CREATE TABLE IF NOT EXISTS `websockets_statistics_entries` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `peak_connection_count` int(11) NOT NULL,
+  `websocket_message_count` int(11) NOT NULL,
+  `api_message_count` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Membuang data untuk tabel db_psc_119.websockets_statistics_entries: ~0 rows (lebih kurang)
+/*!40000 ALTER TABLE `websockets_statistics_entries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `websockets_statistics_entries` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
