@@ -176,6 +176,7 @@ Route::middleware(['user_access'])->group(function () {
     Route::get('/unit/edit/{unit}', [UnitController::class, 'edit']);
     Route::put('/unit/edit/{unit}', [UnitController::class, 'update']);
     Route::get('/unit/hapus/{unit}',[UnitController::class, 'delete']);
+    Route::post('/unit/import', [UnitController::class, 'import']);
 
     ## Petugas
     Route::get('/officer', [OfficerController::class, 'index']);

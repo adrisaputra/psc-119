@@ -17,7 +17,8 @@ class CategoryController extends BaseController
                         array("key"=> "hospital", "name"=> "Rumah Sakit"),
                         array("key"=> "health center", "name"=> "Puskesmas"),
                         array("key"=> "clinic", "name"=> "Klinik"),
-                        array("key"=> "drugstore", "name"=> "Apotek")
+                        array("key"=> "drugstore", "name"=> "Apotek"),
+                        array("key"=> "practicing doctor", "name"=> "Dokter Praktek")
                     );
 
         return $this->sendResponse($category, 'Data Category', $request->lang);

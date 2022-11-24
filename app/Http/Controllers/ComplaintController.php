@@ -358,6 +358,11 @@ class ComplaintController extends Controller
         $complaint->reason = $request->reason;
     	$complaint->save();
 		
+        $notification = new Notification();
+        $notification->email = $complaint->user->email;
+        $notification->message = "Aduan anda ditolak Petugas ( ".$request->reason." )";
+        $notification->save();
+
         activity()->log('Ubah Data Aduan dengan ID = '.$complaint->id);
 		return redirect('/incoming_complaint')->with('status', 'Data Berhasil Ditolak');
     }

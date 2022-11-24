@@ -17,7 +17,7 @@ class UnitController extends BaseController
         $unit = DB::table('units')
                     ->select('units.id as id','units.name as name','address','coordinate','category','image','time_operation'
                             ,'subdistricts.name as subdistrict_name','units.created_at as created_at','units.updated_at as updated_at')
-                    ->join('subdistricts', 'subdistricts.id', '=', 'units.subdistrict_id')
+                    ->leftjoin('subdistricts', 'subdistricts.id', '=', 'units.subdistrict_id')
                     ->where(function ($query) use ($search){
                         $query->where('units.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('units.address', 'LIKE', '%'.$search.'%')

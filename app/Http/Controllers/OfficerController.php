@@ -37,7 +37,7 @@ class OfficerController extends Controller
     {
         $title = "Officer";
         $officer = $request->get('search');
-        $officer = Officer::where('officer_name', 'LIKE', '%'.$officer.'%')
+        $officer = Officer::where('name', 'LIKE', '%'.$officer.'%')
                 ->orderBy('id','DESC')->paginate(25)->onEachSide(1);
         
         return view('admin.officer.index',compact('title','officer'));

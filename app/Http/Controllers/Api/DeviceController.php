@@ -35,10 +35,12 @@ class DeviceController extends BaseController
     {
         $user = User::where('api_token', $request->header('token'))->first();   
 
-        $officer = Officer::select('name','device_id','updated_at')->where('user_id',$user->id)->first();
+        $officer = Officer::where('user_id',$user->id)->first();
         $officer->device_id = $request->device_id;
         $officer->save();
-        return $this->sendResponse($officer, 'Device ID', $request->lang);
+
+        $officer2 = Officer::select('name','device_id','updated_at')->where('user_id',$user->id)->first();
+        return $this->sendResponse($officer2, 'Device ID', $request->lang);
 
     }
     

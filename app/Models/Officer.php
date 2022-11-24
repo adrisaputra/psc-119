@@ -13,6 +13,7 @@ class Officer extends Model
         'phone_number',
         'address',
         'status',
+        'device_id',
         'unit_id',
         'user_id'
     ];

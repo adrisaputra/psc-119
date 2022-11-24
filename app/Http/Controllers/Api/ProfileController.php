@@ -181,7 +181,7 @@ class ProfileController extends BaseController
     {
         $user = User::where('api_token', $request->header('token'))->first(); 
          
-        $user = User::select('users.id','users.name','email','email_verified_at','phone_number','users.status','group_id','photo','api_token','api_expired','users.created_at','users.updated_at')
+        $user = User::select('users.id','users.name','email','email_verified_at','phone_number','users.status','group_id','photo','api_token','api_expired','device_id','users.created_at','users.updated_at')
                 ->join('officers', 'officers.user_id', '=', 'users.id')
                 ->where('email' , $user->email)->where('api_token', $request->header('token'))
                 ->first();    
@@ -197,6 +197,7 @@ class ProfileController extends BaseController
             'photo'=>url('/').'/upload/photo/'.$user->photo,
             'api_token'=>$user->api_token,
             'api_expired'=>$user->api_expired,
+            'device_id'=>$user->device_id,
             'created_at'=>$user->created_at,
             'updated_at'=>$user->updated_at,
             'profile_photo_url'=>$user->profile_photo_url

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;   //nama model
 use App\Models\Subdistrict;   //nama model
+use App\Imports\UnitImport;     // Import data Pegawai
+use Maatwebsite\Excel\Facades\Excel; // Excel Library
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //untuk membuat query di controller
@@ -161,4 +163,21 @@ class UnitController extends Controller
         activity()->log('Hapus Data Unit dengan ID = '.$unit->id);
         return redirect('/unit')->with('status', 'Data Berhasil Dihapus');
     }
+
+    
+    ## Import Data
+    public function import(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		$file = $request->file('file');
+		$nama_file = rand().$file->getClientOriginalName();
+		$file->move('public/file_unit',$nama_file);
+		Excel::import(new UnitImport, public_path('/file_unit/'.$nama_file));
+ 
+        return redirect('/unit')->with('status', 'Data Berhasil Diimport');
+	}
 }

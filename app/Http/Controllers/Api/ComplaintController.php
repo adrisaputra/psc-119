@@ -53,9 +53,9 @@ class ComplaintController extends BaseController
         }elseif($complaint->status=="process"){
             $status = "Sedang Konfirmasi ke Petugas Lapangan";
         }elseif($complaint->status=="dispatch"){
-            $status = "Dialihkan petugas sebelumnya,akan diteruskan ke petugas lain";
+            $status = "Sedang Konfirmasi ke Petugas Lapangan";
         }elseif($complaint->status=="accept"){
-            $status = "Aduan Diterima Petugas & Menuju Ke Lokasi Anda";
+            $status = "Petugas menuju Ke Lokasi Anda";
         }elseif($complaint->status=="reject"){
             $status = "Aduan Ditolak";
         }elseif($complaint->status=="done"){

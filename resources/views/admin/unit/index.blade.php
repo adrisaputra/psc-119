@@ -76,7 +76,7 @@
 											<td>{{ ($unit ->currentpage()-1) * $unit ->perpage() + $loop->index + 1 }}</td>
 											<td>{{ $v->name }}</td>
 											<td>{{ $v->address }}</td>
-											<td>{{ $v->subdistrict->name }}</td>
+											<td>@if($v->subdistrict){{ $v->subdistrict->name }}@endif</td>
 											<td>
 												<a class="mb-12 btn waves-effect waves-light cyan darken-1 btn-small" href="{{ url('/unit_service/'.Crypt::encrypt($v->id) ) }}">Layanan</a>
 												@can('ubah-data')
@@ -100,7 +100,26 @@
 					</div>
 				</div>
 			</div>
+			<div id="modal1" class="modal">
+				
+			<form method="post" action="{{ url('/'.Request::segment(1).'/import') }}" enctype="multipart/form-data">
+			{{ csrf_field() }}
+                  <div class="modal-content">
+                    <h4>Import data</h4>
+                    <label>Pilih file excel</label>
+									<div class="form-group">
+										<input type="file" name="file" required="required">
+									</div>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Disagree</a>
+                    <button type="submit" class="waves-effect waves-green btn-flat ">Agree</button>
+                  </div>
+						</form>
+                </div>
+
 			<div style="bottom: 90px; right: 19px;" class="fixed-action-btn direction-top">
+				{{--<a href="#modal1" class="btn-floating btn-large waves-effect waves-light blue darken-2 modal-trigger"><i class="material-icons">file_upload</i></a>--}}
 				@can('tambah-data')
 					<a href="{{ url('/'.Request::segment(1).'/create') }}" class="btn-floating btn-large waves-effect waves-light green darken-2"><i class="material-icons">add</i></a>
 				@endcan

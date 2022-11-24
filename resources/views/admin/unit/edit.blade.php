@@ -72,6 +72,7 @@
 												<option value="health center" @if($unit->category=="health center") selected @endif>Puskesmas</option>
 												<option value="clinic" @if($unit->category=="clinic") selected @endif>Klinik</option>
 												<option value="drugstore" @if($unit->category=="drugstore") selected @endif>Apotek</option>
+												<option value="practicing doctor" @if($unit->category=="practicing doctor") selected @endif>Dokter Praktek</option>
 											</select>
 											@if ($errors->has('category'))<small><div class="error">{{ $errors->first('category') }}</div></small>@endif
 										</div>
